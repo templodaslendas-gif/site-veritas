@@ -1,0 +1,179 @@
+/* ==========================================================================
+   VERITAS METAL — Design System Tokens
+   Fonte da verdade para todas as decisões visuais do projeto.
+   Nunca usar valores hardcoded fora deste arquivo.
+   ========================================================================== */
+
+:root {
+  /* --------------------------------------------------------------------------
+     CORES — Base industrial dark
+     -------------------------------------------------------------------------- */
+
+  /* Fundos */
+  --vm-black:         #080808;
+  --vm-charcoal:      #111111;
+  --vm-surface:       #181818;
+  --vm-elevated:      #212121;
+
+  /* Bordas */
+  --vm-border:        #2C2C2C;
+  --vm-border-strong: #404040;
+
+  /* Texto */
+  --vm-text-primary:   #F5F2ED;
+  --vm-text-secondary: #A09A93;
+  --vm-text-muted:     #5C5650;
+
+  /* Cobre — acento premium */
+  --vm-copper-light: #DBA87A;
+  --vm-copper:       #C4803E;
+  --vm-copper-dark:  #9A5E1E;
+
+  /* Neutros extras */
+  --vm-stone-200: #D9D4CC;
+  --vm-stone-400: #968D84;
+  --vm-stone-600: #5A534C;
+
+  /* Feedback */
+  --vm-success: #4DB87A;
+  --vm-warning: #D4913A;
+  --vm-error:   #C85444;
+  --vm-info:    #4A8FBF;
+
+  /* --------------------------------------------------------------------------
+     TIPOGRAFIA
+     -------------------------------------------------------------------------- */
+
+  /* Famílias — substituídas por next/font via CSS variables no html */
+  --vm-font-display: 'Bebas Neue', Impact, 'Arial Narrow', system-ui;
+  --vm-font-heading: 'Bricolage Grotesque', 'Georgia', serif;
+  --vm-font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --vm-font-mono:    'Geist Mono', 'Consolas', 'Menlo', monospace;
+
+  /* Escala display (Bebas Neue) */
+  --vm-display-2xl: 9rem;
+  --vm-display-xl:  6rem;
+  --vm-display-lg:  4.5rem;
+  --vm-display-md:  3rem;
+  --vm-display-sm:  2rem;
+
+  /* Escala heading (Bricolage Grotesque) */
+  --vm-h1: 2.5rem;
+  --vm-h2: 2rem;
+  --vm-h3: 1.5rem;
+  --vm-h4: 1.25rem;
+  --vm-h5: 1.125rem;
+
+  /* Escala body (Inter) */
+  --vm-text-xl:   1.25rem;
+  --vm-text-lg:   1.125rem;
+  --vm-text-base: 1rem;
+  --vm-text-sm:   0.875rem;
+  --vm-text-xs:   0.75rem;
+
+  /* Line heights */
+  --vm-leading-tight:   1.05;
+  --vm-leading-snug:    1.2;
+  --vm-leading-normal:  1.5;
+  --vm-leading-relaxed: 1.7;
+
+  /* Letter spacing */
+  --vm-tracking-display: -0.03em;
+  --vm-tracking-heading: -0.02em;
+  --vm-tracking-body:     0em;
+  --vm-tracking-label:    0.08em;
+  --vm-tracking-mono:     0.02em;
+
+  /* --------------------------------------------------------------------------
+     ESPAÇAMENTO — base 4px
+     -------------------------------------------------------------------------- */
+
+  --vm-space-1:  0.25rem;
+  --vm-space-2:  0.5rem;
+  --vm-space-3:  0.75rem;
+  --vm-space-4:  1rem;
+  --vm-space-5:  1.25rem;
+  --vm-space-6:  1.5rem;
+  --vm-space-8:  2rem;
+  --vm-space-10: 2.5rem;
+  --vm-space-12: 3rem;
+  --vm-space-16: 4rem;
+  --vm-space-20: 5rem;
+  --vm-space-24: 6rem;
+  --vm-space-32: 8rem;
+  --vm-space-40: 10rem;
+  --vm-space-48: 12rem;
+
+  /* --------------------------------------------------------------------------
+     GRID E CONTAINERS
+     -------------------------------------------------------------------------- */
+
+  --vm-container-sm:  640px;
+  --vm-container-md:  768px;
+  --vm-container-lg:  1024px;
+  --vm-container-xl:  1280px;
+  --vm-container-2xl: 1440px;
+
+  --vm-cols:      12;
+  --vm-gap:       1.5rem;
+  --vm-gutter:    1.5rem;
+
+  /* --------------------------------------------------------------------------
+     BREAKPOINTS (referência — usar via Tailwind ou media queries)
+     -------------------------------------------------------------------------- */
+
+  --vm-bp-sm:  480px;
+  --vm-bp-md:  768px;
+  --vm-bp-lg:  1024px;
+  --vm-bp-xl:  1280px;
+  --vm-bp-2xl: 1440px;
+
+  /* --------------------------------------------------------------------------
+     MOTION — durações e easings
+     -------------------------------------------------------------------------- */
+
+  --vm-dur-instant:    80ms;
+  --vm-dur-fast:       150ms;
+  --vm-dur-normal:     300ms;
+  --vm-dur-medium:     500ms;
+  --vm-dur-slow:       800ms;
+  --vm-dur-cinematic:  1200ms;
+  --vm-dur-intro:      3500ms;
+
+  --vm-ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --vm-ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --vm-ease-inout:  cubic-bezier(0.4, 0, 0.2, 1);
+  --vm-ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --vm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --------------------------------------------------------------------------
+     BORDAS E RAIOS
+     -------------------------------------------------------------------------- */
+
+  --vm-radius-sm:   4px;
+  --vm-radius-md:   8px;
+  --vm-radius-lg:   12px;
+  --vm-radius-xl:   16px;
+  --vm-radius-full: 9999px;
+
+  /* --------------------------------------------------------------------------
+     SOMBRAS
+     -------------------------------------------------------------------------- */
+
+  --vm-shadow-sm:  0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --vm-shadow-md:  0 4px 12px 0 rgba(0, 0, 0, 0.5);
+  --vm-shadow-lg:  0 8px 24px 0 rgba(0, 0, 0, 0.6);
+  --vm-shadow-xl:  0 16px 48px 0 rgba(0, 0, 0, 0.7);
+
+  /* --------------------------------------------------------------------------
+     Z-INDEX
+     -------------------------------------------------------------------------- */
+
+  --vm-z-base:    0;
+  --vm-z-raised:  10;
+  --vm-z-overlay: 40;
+  --vm-z-header:  50;
+  --vm-z-modal:   60;
+  --vm-z-toast:   70;
+  --vm-z-intro:   100;
+}

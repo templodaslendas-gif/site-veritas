@@ -1,0 +1,158 @@
+/* Tailwind CSS v4 */
+@import "tailwindcss";
+
+/* Design System Tokens */
+@import "../styles/tokens.css";
+
+/* Expor tokens como utilities Tailwind v4 */
+@theme inline {
+  /* Cores */
+  --color-vm-black:         var(--vm-black);
+  --color-vm-charcoal:      var(--vm-charcoal);
+  --color-vm-surface:       var(--vm-surface);
+  --color-vm-elevated:      var(--vm-elevated);
+  --color-vm-border:        var(--vm-border);
+  --color-vm-border-strong: var(--vm-border-strong);
+  --color-vm-text-primary:  var(--vm-text-primary);
+  --color-vm-text-secondary:var(--vm-text-secondary);
+  --color-vm-text-muted:    var(--vm-text-muted);
+  --color-vm-copper-light:  var(--vm-copper-light);
+  --color-vm-copper:        var(--vm-copper);
+  --color-vm-copper-dark:   var(--vm-copper-dark);
+  --color-vm-stone-200:     var(--vm-stone-200);
+  --color-vm-stone-400:     var(--vm-stone-400);
+  --color-vm-stone-600:     var(--vm-stone-600);
+  --color-vm-success:       var(--vm-success);
+  --color-vm-warning:       var(--vm-warning);
+  --color-vm-error:         var(--vm-error);
+  --color-vm-info:          var(--vm-info);
+
+  /* Fontes */
+  --font-display: var(--vm-font-display);
+  --font-heading: var(--vm-font-heading);
+  --font-body:    var(--vm-font-body);
+  --font-mono:    var(--vm-font-mono);
+
+  /* Breakpoints */
+  --breakpoint-sm:  480px;
+  --breakpoint-md:  768px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1280px;
+  --breakpoint-2xl: 1440px;
+}
+
+/* --------------------------------------------------------------------------
+   BASE STYLES
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto; /* Lenis controla o scroll suave */
+}
+
+body {
+  background-color: var(--vm-charcoal);
+  color: var(--vm-text-primary);
+  font-family: var(--vm-font-body);
+  font-size: var(--vm-text-base);
+  line-height: var(--vm-leading-normal);
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+/* Link base */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Imagens responsivas por padrão */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Focus ring consistente */
+:focus-visible {
+  outline: 2px solid var(--vm-copper);
+  outline-offset: 3px;
+  border-radius: var(--vm-radius-sm);
+}
+
+/* Skip link acessibilidade */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus {
+  position: fixed;
+  top: var(--vm-space-4);
+  left: var(--vm-space-4);
+  z-index: var(--vm-z-toast);
+  width: auto;
+  height: auto;
+  padding: var(--vm-space-3) var(--vm-space-6);
+  clip: auto;
+  white-space: normal;
+  background: var(--vm-copper);
+  color: var(--vm-black);
+  font-weight: 600;
+  border-radius: var(--vm-radius-md);
+}
+
+/* Respeitar preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Seleção de texto */
+::selection {
+  background-color: var(--vm-copper);
+  color: var(--vm-black);
+}
+
+/* Scrollbar personalizada — apenas webkit */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vm-charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vm-border-strong);
+  border-radius: var(--vm-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vm-stone-400);
+}
