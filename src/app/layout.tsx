@@ -2,6 +2,11 @@ import type { Metadata, Viewport } from 'next'
 import { Bebas_Neue, Bricolage_Grotesque, Inter } from 'next/font/google'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
+import { Providers } from '@/components/Providers'
+import { Header } from '@/components/layout/Header/Header'
+import { Footer } from '@/components/layout/Footer/Footer'
+import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat/WhatsAppFloat'
+import { JsonLd } from '@/components/shared/JsonLd'
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -87,21 +92,42 @@ export const viewport: Viewport = {
   themeColor: '#111111',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://veritasmetal.com.br/#organization',
+  name: 'Veritas Metal',
+  description:
+    'Empresa especialista em construção com Steel Frame, Drywall e Estruturas Metálicas em Marechal Cândido Rondon e Oeste do Paraná.',
+  url: 'https://veritasmetal.com.br',
+  telephone: '+55-45-9200-2510',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Marechal Cândido Rondon',
+    addressRegion: 'PR',
+    addressCountry: 'BR',
+  },
+  sameAs: ['https://instagram.com/veritas_metal'],
+  knowsAbout: ['Steel Frame', 'Drywall', 'Estruturas Metálicas', 'Construção Civil'],
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="pt-BR"
       className={`${bebasNeue.variable} ${bricolageGrotesque.variable} ${inter.variable} ${GeistMono.variable}`}
     >
       <body>
+        <JsonLd schema={organizationSchema} />
         <a href="#main-content" className="sr-only">
           Pular para o conteúdo principal
         </a>
-        {children}
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+          <WhatsAppFloat />
+        </Providers>
       </body>
     </html>
   )

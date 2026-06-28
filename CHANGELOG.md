@@ -8,11 +8,125 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 ## [Não Lançado]
 
 ### A implementar
-- Fase 1A: Header, Footer, WhatsAppFloat, SectionWrapper
-- Fase 1B: Animações de layout e comportamento de scroll
-- Fases 2–10: Seções da Home (S01–S16)
+- Fase 2B: Intro Cinematográfica
+- Fases 3–10: Seções da Home (S04–S16)
 - Fase 11: LGPD cookie consent, GA4, Content-Security-Policy
 - Fase 12: Deploy em produção
+
+---
+
+## [0.4.0] — 2026-06-27 — Fase 2A: Hero Cinematográfica
+
+### Adicionado
+
+- `src/components/sections/HeroSection/HeroSection.tsx`
+  - Seção fullscreen `100dvh` com `minHeight: 600px`
+  - Vídeo background via `VideoPlayer` com array `sources` (webm → mp4) + poster webp
+  - Config `HERO_VIDEO` isolada no topo do arquivo — troca de vídeo sem tocar no componente
+  - Dois overlays: gradiente direcional `160deg` (92%→45%) + vinheta inferior
+  - Eyebrow copper uppercase: "Marechal Cândido Rondon · Oeste do Paraná"
+  - Headline Bebas Neue: `clamp(2.25rem, 7vw, 5rem)` — "Construção Inteligente. / Engenharia Moderna."
+  - Subheadline Inter: `clamp(1rem, 1.5vw + 0.5rem, 1.25rem)` — serviços e região
+  - Reforço: "Do projeto à entrega..." em `--vm-text-muted`
+  - CTA primário: copper filled → WhatsApp com `WA_MESSAGES.hero`
+  - CTA secundário: ghost/outline → `#steel-frame`
+  - Stagger Framer Motion (12 delay entre filhos, 350ms inicial); desativado com `prefers-reduced-motion`
+  - Mobile-first: `text-center lg:text-left`, CTAs `flex-col sm:flex-row`, botões `w-full sm:w-auto`
+
+- `src/components/sections/HeroSection/HeroScrollIndicator.tsx`
+  - Seta SVG bouncing (`y: [0, 7, 0]` loop 1.8s) em copper
+  - Link acessível `aria-label` para `#steel-frame`
+  - Hover/focus: opacidade 0.55 → 1
+
+### Modificado
+
+- `src/components/shared/VideoPlayer/index.tsx`
+  - Adicionada interface `VideoSource { src: string; type: string }`
+  - Nova prop `sources?: VideoSource[]` para múltiplos formatos (webm + mp4)
+  - `src` prop torna-se opcional quando `sources` é fornecido
+  - Compatibilidade retroativa mantida
+
+- `src/components/shared/SectionWrapper/index.tsx`
+  - Adicionada prop `style?: React.CSSProperties`
+  - Compatibilidade retroativa mantida
+
+- `src/app/page.tsx`
+  - Removido placeholder; agora renderiza `<HeroSection />` + `<div id="steel-frame" />`
+  - `<main id="main-content">` mantido para skip-link funcionar
+
+### Validações do Checkpoint CP-005
+
+```
+npm run build       → ✅ Compilado sem erros (8/8 páginas estáticas)
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+```
+
+---
+
+## [0.3.0] — 2026-06-27 — Fase 1B: Animações de Layout
+
+### Modificado
+
+- `src/components/layout/Header/Header.tsx`
+  - Altura reduz de 72px → 64px ao fazer scroll (transição suave)
+  - Background muda para `rgba(17,17,17,0.92)` + `backdrop-filter: blur(12px)` — efeito glass
+  - Logo reduz de 1.5rem → 1.375rem ao scrollar
+  - `paddingInline` agora responsivo via Tailwind: `px-4 lg:px-6`
+  - Transição CSS cobre: height, background-color, backdrop-filter, border-color
+
+- `src/components/layout/Header/NavDesktop.tsx`
+  - Extraídas funções `activateLink`/`deactivateLink` reutilizadas em mouse E foco
+  - Adicionados `onFocus`/`onBlur` para paridade de comportamento com teclado
+  - Underline copper agora anima também ao navegar por teclado (Tab)
+  - `data-underline` para seleção precisa do elemento span
+
+- `src/components/layout/WhatsAppFloat/WhatsAppFloat.tsx`
+  - Importados `motion` e `useReducedMotion` do Framer Motion
+  - Wrapper `motion.div` com entrance: `{ opacity: 0, y: 20, scale: 0.85 }` → visível após delay de 1.8s
+  - `useReducedMotion`: sem animação de entrada quando preferência ativa
+  - CSS `.wa-btn:focus-visible` com `border-radius: 9999px` para anel de foco circular
+
+### Validações do Checkpoint CP-004
+
+```
+npm run build       → ✅ Compilado sem erros (8/8 páginas estáticas)
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+```
+
+---
+
+## [0.2.0] — 2026-06-27 — Fase 1A: Layout Base
+
+### Adicionado
+
+**Componentes de Layout**
+- `src/components/layout/Header/Header.tsx` — Header sticky, scroll-aware: transparente no topo → fundo dark + borda após 80px de scroll
+- `src/components/layout/Header/NavDesktop.tsx` — Navegação desktop com 6 âncoras (Steel Frame, Projetos, Drywall, Estruturas, FAQ, Contato). Exporta `NAV_ITEMS` reutilizável
+- `src/components/layout/Header/NavMobile.tsx` — Hamburger com animação CSS de 3 barras → X. Drawer com AnimatePresence Framer Motion (slide from right). Fecha ao clicar no overlay
+- `src/components/layout/Header/HeaderCTA.tsx` — Botão "Solicitar Orçamento" com link UTM para WhatsApp. Hover: translateY(-1px) + copper-light
+- `src/components/layout/Footer/Footer.tsx` — Footer completo: logo, tagline, localização, 4 colunas de links (Serviços, Contato, Legal), copyright dinâmico
+- `src/components/layout/Footer/FooterLinks.tsx` — Grupo de links com hover copper-light
+- `src/components/layout/WhatsAppFloat/WhatsAppFloat.tsx` — Botão fixo bottom-right com ícone SVG WhatsApp, pulse ring animation, hover scale
+
+**Componentes Shared**
+- `src/components/shared/JsonLd/index.tsx` — Renderiza `<script type="application/ld+json">` com qualquer schema.org
+- `src/components/shared/SectionWrapper/index.tsx` — Wrapper semântico (section/div/article) com id e className
+- `src/components/shared/ScrollReveal/index.tsx` — Animação de entrada on scroll via Framer Motion. Suporta 4 direções, delay, amount. Respeita `prefers-reduced-motion`
+- `src/components/shared/VideoPlayer/index.tsx` — Player de vídeo (autoPlay, loop, muted, playsInline) com fallback placeholder quando src ausente
+
+**Modificações**
+- `src/app/layout.tsx` — Integrado: Providers, Header, Footer, WhatsAppFloat, JsonLd com Organization schema (LocalBusiness)
+- `src/app/page.tsx` — Placeholder visual com paddingTop:72px para compensar header fixo
+
+### Validações do Checkpoint CP-003
+
+```
+npm run build       → ✅ Compilado (23.6s, 8/8 páginas estáticas)
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+```
 
 ---
 

@@ -2,196 +2,105 @@
 
 ## Estado Atual
 
-- **Fase:** Fase 0 — Fundação (CONCLUÍDA)
-- **Subfase:** 0C — Validação e Checkpoint
-- **Checkpoint:** CP-001 — Fundação Completa
-- **Status:** ✅ Aguardando aprovação para iniciar Fase 1
+- **Fase:** Fase 2A — Hero Cinematográfica (CONCLUÍDA)
+- **Próxima:** Fase 2B — Intro Cinematográfica
+- **Checkpoint:** CP-005 ✅
 - **Última atualização:** 2026-06-27
 
 ---
 
-## Validações do Checkpoint CP-001
+## Checkpoints
 
-| Validação | Resultado |
-|-----------|-----------|
-| `npm run build` | ✅ Compilado sem erros (Next.js 15.5.19) |
-| `npm run typecheck` | ✅ Zero erros TypeScript |
-| `npm run lint` | ✅ Zero erros ESLint |
-| Rotas geradas | ✅ `/`, `/politica-privacidade`, `/robots.txt`, `/sitemap.xml`, `/icon` |
-
----
-
-## Arquivos Criados — Fase 0 (cumulativo)
-
-### Configuração
-| Arquivo | Descrição |
-|---------|-----------|
-| `package.json` | Dependências e scripts npm |
-| `tsconfig.json` | TypeScript strict + paths @/* |
-| `next.config.ts` | Headers de segurança, imagens, fontes |
-| `postcss.config.mjs` | Tailwind CSS v4 plugin |
-| `.eslintrc.json` | next/core-web-vitals |
-| `.prettierrc` | Formatter com prettier-plugin-tailwindcss |
-| `.prettierignore` | Exclusões do Prettier |
-| `.gitignore` | Exclusões git incluindo .env* |
-
-### App (Next.js 15 App Router)
-| Arquivo | Descrição |
-|---------|-----------|
-| `src/app/layout.tsx` | Root layout: fonts, metadata, viewport |
-| `src/app/page.tsx` | Placeholder home |
-| `src/app/globals.css` | @import tokens + @theme inline + base styles |
-| `src/app/robots.ts` | robots.txt automático |
-| `src/app/sitemap.ts` | sitemap.xml automático |
-| `src/app/icon.tsx` | Favicon gerado dinamicamente |
-| `src/app/politica-privacidade/page.tsx` | Página de política de privacidade |
-
-### Design System
-| Arquivo | Descrição |
-|---------|-----------|
-| `src/styles/tokens.css` | Todos tokens --vm-*: cores, tipografia, espaçamento, grid, motion, z-index |
-
-### Motion Infrastructure
-| Arquivo | Descrição |
-|---------|-----------|
-| `src/lib/gsap/register.ts` | Registro do ScrollTrigger |
-| `src/lib/gsap/presets.ts` | fadeUp, fadeIn, revealLine, staggerFadeUp, scaleIn |
-| `src/lib/lenis/LenisProvider.tsx` | Provider com RAF loop integrado ao GSAP |
-| `src/components/Providers.tsx` | Wrapper de providers (LenisProvider) |
-
-### Hooks
-| Arquivo | Descrição |
-|---------|-----------|
-| `src/hooks/useReducedMotion.ts` | prefers-reduced-motion SSR-safe |
-| `src/hooks/useMediaQuery.ts` | Breakpoints + useIsMobile/Tablet/Desktop |
-| `src/hooks/useIntersection.ts` | IntersectionObserver com triggerOnce |
-| `src/hooks/useGSAP.ts` | gsap.context() com cleanup automático |
-| `src/hooks/useLenis.ts` | Acesso ao contexto do Lenis |
-| `src/hooks/useScrollProgress.ts` | Progresso de scroll 0–1 |
-| `src/hooks/useWhatsApp.ts` | Geração de URL wa.me com UTM |
-
-### Lib / Utilities
-| Arquivo | Descrição |
-|---------|-----------|
-| `src/lib/cn.ts` | clsx + tailwind-merge |
-| `src/lib/messages.ts` | Mensagens WhatsApp pré-preenchidas por seção |
-| `src/lib/events.ts` | Eventos GA4 tipados |
-| `src/lib/utils/format.ts` | formatArea, formatCurrency, formatPhone, slugify |
-| `src/lib/projects/data.ts` | Dados estáticos dos projetos |
-
-### Types
-| Arquivo | Descrição |
-|---------|-----------|
-| `src/types/index.ts` | Section, Breakpoint, AnimationVariant, tipos de negócio |
-| `src/types/motion.ts` | MotionVariant, FRAMER_VARIANTS, MOTION_DURATION_MS |
-
-### Governança
-| Arquivo | Descrição |
-|---------|-----------|
-| `README.md` | Documentação do projeto |
-| `CLAUDE.md` | Regras projeto-específicas para Claude Code |
-| `AGENTS.md` | Agentes e protocolo de comunicação |
-| `SITE-RULES.md` | Regras não-negociáveis do site |
-| `SECURITY-CHECKLIST.md` | Checklist de segurança por fase |
-| `PROJECT-STATE.md` | Este arquivo |
-| `CHANGELOG.md` | Histórico de mudanças |
-| `docs/LGPD.md` | Conformidade LGPD |
-| `docs/PRIVACY-POLICY.md` | Política de privacidade |
-| `docs/COOKIE-POLICY.md` | Política de cookies |
-
-### Agentes
-| Arquivo | Responsabilidade |
-|---------|-----------------|
-| `agents/coordinator.md` | Orquestração do pipeline |
-| `agents/researcher.md` | Análise de codebase |
-| `agents/architect.md` | Decisões de componentes |
-| `agents/coder.md` | Implementação |
-| `agents/reviewer.md` | Revisão de qualidade |
-| `agents/security-auditor.md` | Segurança e LGPD |
+| CP | Fase | Build | Typecheck | Lint | Status |
+|----|------|-------|-----------|------|--------|
+| CP-001 | Fase 0 — Fundação | ✅ | ✅ | ✅ | Entregue |
+| CP-002 | Fase 0 — Push GitHub | ✅ | ✅ | ✅ | Entregue |
+| CP-003 | Fase 1A — Layout Base | ✅ | ✅ | ✅ | Aprovado |
+| CP-004 | Fase 1B — Animações de Layout | ✅ | ✅ | ✅ | Aprovado |
+| CP-005 | Fase 2A — Hero Cinematográfica | ✅ | ✅ | ✅ | Aguardando aprovação |
 
 ---
 
-## Arquivos Modificados na Fase 0
+## Inventário — src/ (cumulativo até CP-005)
 
-| Arquivo | Mudança |
-|---------|---------|
-| `.prettierrc` | Removido `tailwindConfig` (arquivo não existe em Tailwind v4) |
-| `src/lib/lenis/LenisProvider.tsx` | Corrigido bug de cleanup no RAF (referência de função) |
-| `src/hooks/useGSAP.ts` | Corrigido tipo do callback: `() => void` em vez de `(context) => void` |
-| `FFR-PLATFORM-v2.0.md` | Atualizado para v2.1 com 13 novas seções (Checkpoints, SESSION, etc.) |
+### app/
+- `layout.tsx` — Root layout com fontes, metadata, Providers, Header, Footer, WhatsAppFloat, JsonLd
+- `page.tsx` — HeroSection + âncora `#steel-frame`
+- `globals.css` — Tailwind v4 + @theme inline + reset + sr-only + focus ring + scrollbar
+- `robots.ts` · `sitemap.ts` · `icon.tsx` · `politica-privacidade/page.tsx`
+
+### styles/
+- `tokens.css` — Todos os tokens `--vm-*` (cores, tipo, espaço, grid, motion, z-index)
+
+### components/layout/
+- `Header/Header.tsx` — Sticky, scroll-aware (transparente → dark + border após 80px)
+- `Header/NavDesktop.tsx` — 6 âncoras + exporta `NAV_ITEMS`
+- `Header/NavMobile.tsx` — Hamburger + drawer com AnimatePresence
+- `Header/HeaderCTA.tsx` — "Solicitar Orçamento" → WhatsApp
+- `Footer/Footer.tsx` — 4 colunas: logo/tagline, Serviços, Contato, Legal
+- `Footer/FooterLinks.tsx` — Grupo de links com hover copper
+- `WhatsAppFloat/WhatsAppFloat.tsx` — Botão fixo + pulse ring CSS
+
+### components/shared/
+- `JsonLd/index.tsx` — `<script type="application/ld+json">`
+- `SectionWrapper/index.tsx` — Wrapper semântico section/div/article + prop `style`
+- `ScrollReveal/index.tsx` — Reveal on scroll via Framer Motion + reduced-motion
+- `VideoPlayer/index.tsx` — Player com fallback; suporta array `sources` (webm+mp4)
+
+### components/sections/
+- `HeroSection/HeroSection.tsx` — Hero cinematográfica fullscreen (100dvh): vídeo background, 2 overlays, eyebrow copper, headline Bebas Neue clamp, subheadline, reforço, CTA primário WhatsApp, CTA secundário ghost, stagger entrance Framer Motion
+- `HeroSection/HeroScrollIndicator.tsx` — Seta bounce animada para `#steel-frame`
+
+### components/
+- `Providers.tsx` — LenisProvider wrapper
+
+### lib/
+- `gsap/register.ts` · `gsap/presets.ts`
+- `lenis/LenisProvider.tsx`
+- `cn.ts` · `messages.ts` · `events.ts`
+- `utils/format.ts` · `projects/data.ts`
+
+### hooks/
+- `useReducedMotion.ts` · `useMediaQuery.ts` · `useIntersection.ts`
+- `useGSAP.ts` · `useLenis.ts` · `useScrollProgress.ts` · `useWhatsApp.ts`
+
+### types/
+- `index.ts` · `motion.ts`
 
 ---
 
-## Tarefas Concluídas — Fase 0
+## Pendências
 
-- [x] Estrutura Next.js 15 com App Router
-- [x] TypeScript strict com path alias @/*
-- [x] Tailwind CSS v4 (CSS-first, @theme inline)
-- [x] ESLint + Prettier configurados
-- [x] Design System: tokens.css com todos --vm-* tokens
-- [x] Motion infrastructure: GSAP + Lenis + presets
-- [x] Hooks: 7 hooks criados e validados
-- [x] Lib utilities: cn, messages, events, format, projects/data
-- [x] Types: index.ts e motion.ts
-- [x] SEO base: metadata, robots.ts, sitemap.ts, icon.tsx
-- [x] Rota /politica-privacidade
-- [x] Governança: README, CLAUDE.md, AGENTS.md, SITE-RULES.md, SECURITY-CHECKLIST.md
-- [x] Docs: LGPD.md, PRIVACY-POLICY.md, COOKIE-POLICY.md
-- [x] Agentes: coordinator, researcher, architect, coder, reviewer, security-auditor
-- [x] Build limpo validado
-- [x] PROJECT-STATE.md criado
-- [x] CHANGELOG.md criado
+| Tarefa | Fase |
+|--------|------|
+| Intro Cinematográfica (S02) | 2B |
+| Seções S04–S16 | 3–10 |
+| Formulário de contato (RHF + Zod) | 10 |
+| GA4 + cookie consent | 11 |
+| Content-Security-Policy | 11 |
+| Deploy produção | 12 |
 
 ---
 
-## Tarefas Pendentes
+## Decisões Arquiteturais
 
-| Tarefa | Fase | Motivo |
-|--------|------|--------|
-| Header + NavDesktop + NavMobile | 1A | Fase 1 ainda não iniciada |
-| Footer + FooterLinks | 1A | Fase 1 ainda não iniciada |
-| WhatsAppFloat | 1A | Fase 1 ainda não iniciada |
-| SectionWrapper, ScrollReveal, JsonLd | 1A | Componentes shared |
-| Todos os componentes de seção (S01-S16) | 2–10 | Fase 2+ ainda não iniciada |
-| Formulário de contato (RHF + Zod) | 10 | Dependências a instalar |
-| GA4 + cookie consent | 11 | Fase 11 ainda não iniciada |
-| Content-Security-Policy header | 11 | Requer lista de origens definitiva |
-| Deploy em produção | 12 | Após todas as seções |
+| Decisão | Motivo |
+|---------|--------|
+| Tailwind v4 CSS-first | Blueprint; sem tailwind.config.ts |
+| Tokens `--vm-*` em CSS vars | GSAP acessa valores em JS |
+| Lenis + gsap.ticker | Sincronização garantida |
+| Header/Footer no layout.tsx | Aparece em todas as rotas |
+| z-index como número no style prop | TypeScript não aceita CSS vars em zIndex |
+| ScrollReveal via Framer Motion | Motion trinity: FM = componente mount/exit |
+| WhatsApp pulse via CSS keyframes | CSS suficiente; evita overhead JS |
 
 ---
 
-## Riscos Conhecidos
+## Riscos
 
 | Risco | Impacto | Mitigação |
 |-------|---------|-----------|
-| Three.js lazy loading em mobile low-end | Alto | Fallback vídeo MP4 obrigatório |
-| LCP > 1.8s se hero image não otimizada | Alto | fetchpriority="high" + WebP < 80KB |
-| Lenis conflito com scroll nativo em iOS | Médio | Testar em dispositivo real na Fase 2 |
-| GSAP ScrollTrigger refresh após resize | Médio | ScrollTrigger.refresh() no resize handler |
-| npm audit: 2 vulnerabilidades moderadas | Baixo | Monitorar; não afetam produção |
-
----
-
-## Decisões Arquiteturais Registradas
-
-| Decisão | Alternativa Descartada | Motivo |
-|---------|----------------------|--------|
-| Tailwind v4 CSS-first | tailwind.config.ts | Alinhado com Blueprint; menos boilerplate |
-| Tokens --vm-* em CSS vars | Só Tailwind utilities | GSAP precisa acessar os valores em JS |
-| LenisProvider com gsap.ticker | requestAnimationFrame manual | Sincronização garantida pelo ticker do GSAP |
-| types/index.ts consolidado | Arquivo por tipo | Fase 0 não justifica granularidade; refatorar na Fase 1 se necessário |
-| Governance em .md na raiz | /docs apenas | Mais visível para Claude Code em novas sessões |
-
----
-
-## Próximos Passos — Fase 1
-
-### Fase 1A — Layout Base (Estrutura)
-Criar: `src/components/layout/Header/`, `src/components/layout/Footer/`, `src/components/layout/WhatsAppFloat/`, `src/components/shared/SectionWrapper/`, `src/components/shared/JsonLd/`
-
-### Fase 1B — Layout Animações e Interação
-Adicionar comportamento de scroll ao Header, animação de entrada do Footer, botão flutuante do WhatsApp com animação de entrada.
-
-**Estimativa:** Fase 1A e 1B — complexidade média — ~15 arquivos ao total.
-
-**Aguardando aprovação para iniciar Fase 1A.**
+| Three.js em mobile low-end | Alto | Fallback MP4 obrigatório (Fase 2) |
+| LCP > 1.8s sem hero otimizado | Alto | fetchpriority="high" + WebP < 80KB (Fase 2) |
+| Lenis vs. scroll nativo iOS | Médio | Testar em dispositivo real (Fase 2) |
+| npm audit: 2 vulns moderadas | Baixo | Monitorar |
