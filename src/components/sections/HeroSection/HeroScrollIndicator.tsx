@@ -7,8 +7,8 @@ export function HeroScrollIndicator() {
 
   return (
     <a
-      href="#steel-frame"
-      aria-label="Rolar para a seção Steel Frame"
+      href="#futuro"
+      aria-label="Rolar para a próxima seção"
       style={{
         position: 'absolute',
         bottom: '2rem',
