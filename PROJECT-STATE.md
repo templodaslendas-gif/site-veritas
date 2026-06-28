@@ -2,10 +2,10 @@
 
 ## Estado Atual
 
-- **Fase:** Fase 2A — Hero Cinematográfica (CONCLUÍDA)
-- **Próxima:** Fase 2B — Intro Cinematográfica
-- **Checkpoint:** CP-005 ✅
-- **Última atualização:** 2026-06-27
+- **Fase:** Macrofase 2 — Primeira Experiência (CONCLUÍDA + CORRIGIDA)
+- **Próxima:** Macrofase 3 — Comparativo, Benefícios, Projetos
+- **Checkpoint:** CP-007 ✅
+- **Última atualização:** 2026-06-28
 
 ---
 
@@ -17,16 +17,18 @@
 | CP-002 | Fase 0 — Push GitHub | ✅ | ✅ | ✅ | Entregue |
 | CP-003 | Fase 1A — Layout Base | ✅ | ✅ | ✅ | Aprovado |
 | CP-004 | Fase 1B — Animações de Layout | ✅ | ✅ | ✅ | Aprovado |
-| CP-005 | Fase 2A — Hero Cinematográfica | ✅ | ✅ | ✅ | Aguardando aprovação |
+| CP-005 | Fase 2A — Hero Cinematográfica | ✅ | ✅ | ✅ | Aprovado |
+| CP-006 | Macrofase 2 — Deploy completo | ✅ | ✅ | ✅ | Entregue |
+| CP-007 | Macrofase 2 — Fix visual crítico | ✅ | ✅ | ✅ | Aguardando aprovação |
 
 ---
 
-## Inventário — src/ (cumulativo até CP-005)
+## Inventário — src/ (cumulativo até CP-007)
 
 ### app/
 - `layout.tsx` — Root layout com fontes, metadata, Providers, Header, Footer, WhatsAppFloat, JsonLd
-- `page.tsx` — HeroSection + âncora `#steel-frame`
-- `globals.css` — Tailwind v4 + @theme inline + reset + sr-only + focus ring + scrollbar
+- `page.tsx` — IntroSection + HeroSection + FutureSection + SteelFrameSection + HowItWorksSection
+- `globals.css` — Tailwind v4 + @theme inline + reset + sr-only + focus ring
 - `robots.ts` · `sitemap.ts` · `icon.tsx` · `politica-privacidade/page.tsx`
 
 ### styles/
@@ -44,19 +46,23 @@
 ### components/shared/
 - `JsonLd/index.tsx` — `<script type="application/ld+json">`
 - `SectionWrapper/index.tsx` — Wrapper semântico section/div/article + prop `style`
-- `ScrollReveal/index.tsx` — Reveal on scroll via Framer Motion + reduced-motion
-- `VideoPlayer/index.tsx` — Player com fallback; suporta array `sources` (webm+mp4)
+- `ScrollReveal/index.tsx` — **Reescrito em CP-007**: usa `useInView` hook (amount=0, margin=-40px) em vez de `whileInView` para garantir disparo confiável com Lenis
+- `VideoPlayer/index.tsx` — Player com fallback; suporta array `sources`
 
 ### components/sections/
-- `HeroSection/HeroSection.tsx` — Hero cinematográfica fullscreen (100dvh): vídeo background, 2 overlays, eyebrow copper, headline Bebas Neue clamp, subheadline, reforço, CTA primário WhatsApp, CTA secundário ghost, stagger entrance Framer Motion
-- `HeroSection/HeroScrollIndicator.tsx` — Seta bounce animada para `#steel-frame`
+- `IntroSection/IntroSection.tsx` — Intro cinematográfica: cobre a tela (z:200), barra de progresso 2400ms, skip, AnimatePresence exit slideUp. Mostrada 1× por sessão (sessionStorage)
+- `HeroSection/HeroSection.tsx` — Hero fullscreen 100dvh: 1 source mp4 (sem webm inexistente), 2 overlays reforçados (95%→55%), text-shadow para contraste, stagger reduzido (delayChildren 0.35→0.1), mx-auto mobile
+- `HeroSection/HeroScrollIndicator.tsx` — Seta bounce animada → `#futuro`
+- `FutureSection/FutureSection.tsx` — 3 cards (60% mais rápido, Estrutura de aço, 90% menos entulho), hover copper via onMouseEnter, ScrollReveal por bloco
+- `SteelFrameSection/SteelFrameSection.tsx` — Grid 2 colunas: copy + 6 benefícios + CTAs | VideoPlaceholder 16:9; background `--vm-black`
+- `HowItWorksSection/HowItWorksSection.tsx` — 6 passos em timeline: badge número + conector + content. Conector corrigido (amount:0.8→0.2). CTA WhatsApp ao final
 
 ### components/
 - `Providers.tsx` — LenisProvider wrapper
 
 ### lib/
 - `gsap/register.ts` · `gsap/presets.ts`
-- `lenis/LenisProvider.tsx`
+- `lenis/LenisProvider.tsx` — Lenis 1.3.25, integrado via gsap.ticker
 - `cn.ts` · `messages.ts` · `events.ts`
 - `utils/format.ts` · `projects/data.ts`
 
@@ -69,16 +75,21 @@
 
 ---
 
-## Pendências
+## Pendências (pós-Macrofase 2)
 
-| Tarefa | Fase |
-|--------|------|
-| Intro Cinematográfica (S02) | 2B |
-| Seções S04–S16 | 3–10 |
-| Formulário de contato (RHF + Zod) | 10 |
-| GA4 + cookie consent | 11 |
-| Content-Security-Policy | 11 |
-| Deploy produção | 12 |
+| Tarefa | Macrofase |
+|--------|-----------|
+| Comparativo Steel Frame × Alvenaria | 3 |
+| Seção Benefícios | 3 |
+| Seção Projetos (galeria) | 3 |
+| Seção Drywall | 4 |
+| Seção Estruturas Metálicas | 4 |
+| FAQ | 5 |
+| Formulário de Contato (RHF + Zod) | 5 |
+| CTA Final | 5 |
+| GA4 + cookie consent (LGPD) | 6 |
+| Content-Security-Policy | 6 |
+| Deploy produção | 6 |
 
 ---
 
@@ -91,8 +102,11 @@
 | Lenis + gsap.ticker | Sincronização garantida |
 | Header/Footer no layout.tsx | Aparece em todas as rotas |
 | z-index como número no style prop | TypeScript não aceita CSS vars em zIndex |
-| ScrollReveal via Framer Motion | Motion trinity: FM = componente mount/exit |
+| ScrollReveal via `useInView` (não `whileInView`) | `whileInView` pode não disparar se o usuário rola antes da hidratação do React; `useInView` com `amount:0` garante disparo ao primeiro pixel visível |
+| Source de vídeo: só .mp4 | .webm inexistente causava 404 antes de carregar o .mp4; removido até o arquivo existir |
+| Poster do vídeo: undefined | `/images/hero-poster.webp` não existe; sem poster o browser carrega o vídeo direto |
 | WhatsApp pulse via CSS keyframes | CSS suficiente; evita overhead JS |
+| Overlay hero reforçado (95%→55%) | Garante contraste do texto mesmo com vídeo de soldagem brilhante |
 
 ---
 
@@ -100,7 +114,7 @@
 
 | Risco | Impacto | Mitigação |
 |-------|---------|-----------|
-| Three.js em mobile low-end | Alto | Fallback MP4 obrigatório (Fase 2) |
-| LCP > 1.8s sem hero otimizado | Alto | fetchpriority="high" + WebP < 80KB (Fase 2) |
-| Lenis vs. scroll nativo iOS | Médio | Testar em dispositivo real (Fase 2) |
+| Hero sem poster: flash preto durante load | Baixo | Criar `hero-poster.webp` quando vídeo final for definido |
+| LCP > 1.8s sem hero otimizado | Alto | fetchpriority="high" + poster WebP < 80KB (Macrofase 6) |
+| Lenis vs. scroll nativo iOS | Médio | Testar em dispositivo real antes do deploy |
 | npm audit: 2 vulns moderadas | Baixo | Monitorar |

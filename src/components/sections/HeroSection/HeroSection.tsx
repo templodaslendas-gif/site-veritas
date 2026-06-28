@@ -7,11 +7,8 @@ import { HeroScrollIndicator } from './HeroScrollIndicator'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
 
 const HERO_VIDEO = {
-  sources: [
-    { src: '/videos/hero-veritas.webm', type: 'video/webm' },
-    { src: '/videos/hero-veritas.mp4', type: 'video/mp4' },
-  ],
-  poster: '/images/hero-poster.webp',
+  sources: [{ src: '/videos/hero-veritas.mp4', type: 'video/mp4' }],
+  poster: undefined,
 }
 
 const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_MESSAGES.hero)}`
@@ -19,7 +16,7 @@ const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_MES
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.35 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
   },
 }
 
@@ -57,7 +54,7 @@ export function HeroSection() {
           inset: 0,
           zIndex: 1,
           background:
-            'linear-gradient(160deg, rgba(8,8,8,0.93) 0%, rgba(8,8,8,0.70) 50%, rgba(8,8,8,0.45) 100%)',
+            'linear-gradient(160deg, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.78) 50%, rgba(8,8,8,0.55) 100%)',
         }}
       />
 
@@ -121,6 +118,7 @@ export function HeroSection() {
                 color: 'var(--vm-text-primary)',
                 textTransform: 'uppercase',
                 marginBottom: 'var(--vm-space-6)',
+                textShadow: '0 2px 24px rgba(0,0,0,0.7)',
               }}
             >
               Construção Inteligente.
@@ -138,6 +136,7 @@ export function HeroSection() {
                 color: 'var(--vm-text-secondary)',
                 marginBottom: 'var(--vm-space-3)',
                 maxWidth: '560px',
+                textShadow: '0 1px 12px rgba(0,0,0,0.6)',
               }}
             >
               Steel Frame, Drywall e Estruturas Metálicas para Marechal Rondon e região.
@@ -146,6 +145,7 @@ export function HeroSection() {
             {/* Reinforcement */}
             <motion.p
               variants={shouldReduceMotion ? undefined : itemVariants}
+              className="mx-auto lg:mx-0"
               style={{
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'var(--vm-text-sm)',
@@ -153,6 +153,7 @@ export function HeroSection() {
                 color: 'var(--vm-text-muted)',
                 marginBottom: 'var(--vm-space-10)',
                 maxWidth: '500px',
+                textShadow: '0 1px 8px rgba(0,0,0,0.5)',
               }}
             >
               Do projeto à entrega, com acompanhamento técnico, equipe qualificada e garantia.

@@ -154,7 +154,7 @@ export function HowItWorksSection() {
                     <motion.div
                       initial={{ scaleY: 0 }}
                       whileInView={{ scaleY: 1 }}
-                      viewport={{ once: true, amount: 0.8 }}
+                      viewport={{ once: true, amount: 0.2 }}
                       transition={{ duration: 0.5, ease: [0, 0, 0.2, 1], delay: 0.2 }}
                       style={{
                         width: '1px',

@@ -8,10 +8,88 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 ## [Não Lançado]
 
 ### A implementar
-- Fase 2B: Intro Cinematográfica
-- Fases 3–10: Seções da Home (S04–S16)
-- Fase 11: LGPD cookie consent, GA4, Content-Security-Policy
-- Fase 12: Deploy em produção
+- Macrofase 3: Comparativo, Benefícios, Projetos
+- Macrofase 4: Drywall, Estruturas Metálicas
+- Macrofase 5: FAQ, Contato, CTA Final, Formulário
+- Macrofase 6: GA4, cookie consent (LGPD), CSP, Deploy produção
+
+---
+
+## [0.5.1] — 2026-06-28 — CP-007: Fix Visual Crítico Macrofase 2
+
+### Corrigido
+
+**ScrollReveal (`src/components/shared/ScrollReveal/index.tsx`)**
+- Reescrito de `whileInView` para `useInView` hook + `animate` explícito
+- `amount` reduzido de `0.2` para `0` — dispara ao primeiro pixel visível
+- `margin: '0px 0px -40px 0px'` — pré-dispara 40px antes de entrar no viewport
+- Com `whileInView`, se o usuário rolava antes da hidratação do React, `once: true` registrava o elemento como "fora do viewport" e nunca mais tentava → conteúdo permanecia em `opacity: 0`
+
+**HeroSection (`src/components/sections/HeroSection/HeroSection.tsx`)**
+- Removida source `.webm` inexistente — causava 404 silencioso antes de tentar o `.mp4`, atrasando load do vídeo
+- Removido `poster: '/images/hero-poster.webp'` — arquivo não existe; `undefined` é seguro (sem atributo no DOM)
+- Overlay reforçado: `rgba(8,8,8,0.93/0.70/0.45)` → `rgba(8,8,8,0.95/0.78/0.55)` para contraste garantido com conteúdo brilhante do vídeo
+- `textShadow` adicionado ao `<h1>` e `<p>` do subheadline: `0 2px 24px rgba(0,0,0,0.7)` — legibilidade independente do frame do vídeo
+- `delayChildren` reduzido de `0.35s` para `0.1s` — texto visível mais rapidamente após hidratação
+- `mx-auto lg:mx-0` adicionado ao parágrafo de reforço para centralização correta em mobile
+
+**HowItWorksSection (`src/components/sections/HowItWorksSection/HowItWorksSection.tsx`)**
+- Conectores da timeline: `viewport={{ amount: 0.8 }}` → `amount: 0.2` — threshold de 80% nunca disparava em elementos finos
+
+### Validações do Checkpoint CP-007
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+npm run build       → ✅ Build limpo (8/8 páginas estáticas)
+```
+
+---
+
+## [0.5.0] — 2026-06-28 — CP-006: Macrofase 2 Completa
+
+### Adicionado
+
+**IntroSection (`src/components/sections/IntroSection/IntroSection.tsx`)**
+- Intro cinematográfica fullscreen (z-index: 200), cobre toda a tela na primeira visita
+- Controle via `sessionStorage('vm_intro_shown')` — exibida 1× por sessão
+- Barra de progresso cobre 2400ms; botão "Skip" disponível a qualquer momento
+- Linha copper em sweep lateral + reveal do nome da marca via clipPath
+- Tagline fade-in + saída: `AnimatePresence` com `exit={{ y: '-100%' }}`
+
+**FutureSection (`src/components/sections/FutureSection/FutureSection.tsx`)**
+- ID: `#futuro` | Background: `--vm-charcoal`
+- 3 cards com ícones SVG inline: "60% mais rápido", "Estrutura de aço", "90% menos entulho"
+- Hover nos cards via `onMouseEnter`/`onMouseLeave`: border copper + translateY(-4px)
+- ScrollReveal por bloco (header + cada card + CTA)
+- CTA de ancoragem → `#steel-frame`
+
+**SteelFrameSection (`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`)**
+- ID: `#steel-frame` | Background: `--vm-black`
+- Layout 2 colunas (desktop): copy + VideoPlaceholder 16:9
+- Copy: eyebrow, headline Bebas Neue, parágrafo descritivo
+- 6 benefícios em lista com CheckIcon copper
+- 2 CTAs: WhatsApp (copper) + âncora "Veja como funciona" (ghost)
+- VideoPlaceholder com radial-gradient copper + play button
+
+**HowItWorksSection (`src/components/sections/HowItWorksSection/HowItWorksSection.tsx`)**
+- ID: `#como-funciona` | Background: `--vm-charcoal`
+- 6 passos em timeline: 01 Projeto → 02 Fundação → 03 Estrutura → 04 Fechamento → 05 Instalações → 06 Acabamento
+- Badge circular copper por número + conector animado (`scaleY: 0 → 1`)
+- Grid 2 colunas no desktop (`lg:grid-cols-2`)
+- CTA WhatsApp ao final com "Solicitar orçamento"
+
+**Modificações**
+- `src/app/page.tsx` — Adicionadas IntroSection, FutureSection, SteelFrameSection, HowItWorksSection
+- `HeroScrollIndicator` — âncora atualizada de `#steel-frame` para `#futuro`
+
+### Validações do Checkpoint CP-006
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+npm run build       → ✅ Build limpo (8/8 páginas estáticas)
+```
 
 ---
 
