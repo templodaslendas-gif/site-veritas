@@ -4,7 +4,7 @@
 
 - **Fase:** Macrofase 2 — Primeira Experiência (CONCLUÍDA + CORRIGIDA)
 - **Próxima:** Macrofase 3 — Comparativo, Benefícios, Projetos
-- **Checkpoint:** CP-007 ✅
+- **Checkpoint:** CP-008 ✅
 - **Última atualização:** 2026-06-28
 
 ---
@@ -19,7 +19,8 @@
 | CP-004 | Fase 1B — Animações de Layout | ✅ | ✅ | ✅ | Aprovado |
 | CP-005 | Fase 2A — Hero Cinematográfica | ✅ | ✅ | ✅ | Aprovado |
 | CP-006 | Macrofase 2 — Deploy completo | ✅ | ✅ | ✅ | Entregue |
-| CP-007 | Macrofase 2 — Fix visual crítico | ✅ | ✅ | ✅ | Aguardando aprovação |
+| CP-007 | Macrofase 2 — Fix visual crítico | ✅ | ✅ | ✅ | Entregue |
+| CP-008 | Macrofase 2 — Fix SSR visibility (renderização definitiva) | ✅ | — | ✅ | Aguardando aprovação |
 
 ---
 
@@ -46,12 +47,12 @@
 ### components/shared/
 - `JsonLd/index.tsx` — `<script type="application/ld+json">`
 - `SectionWrapper/index.tsx` — Wrapper semântico section/div/article + prop `style`
-- `ScrollReveal/index.tsx` — **Reescrito em CP-007**: usa `useInView` hook (amount=0, margin=-40px) em vez de `whileInView` para garantir disparo confiável com Lenis
+- `ScrollReveal/index.tsx` — **Reescrito em CP-008**: sem Framer Motion; máquina de estado `idle|waiting|entered`; SSR renderiza conteúdo visível (nenhum opacity:0 no HTML); animação CSS pura como enhancement opcional
 - `VideoPlayer/index.tsx` — Player com fallback; suporta array `sources`
 
 ### components/sections/
 - `IntroSection/IntroSection.tsx` — Intro cinematográfica: cobre a tela (z:200), barra de progresso 2400ms, skip, AnimatePresence exit slideUp. Mostrada 1× por sessão (sessionStorage)
-- `HeroSection/HeroSection.tsx` — Hero fullscreen 100dvh: 1 source mp4 (sem webm inexistente), 2 overlays reforçados (95%→55%), text-shadow para contraste, stagger reduzido (delayChildren 0.35→0.1), mx-auto mobile
+- `HeroSection/HeroSection.tsx` — Hero fullscreen 100dvh: 1 source mp4, 2 overlays reforçados (95%→55%), text-shadow para contraste. **CP-008**: `itemVariants.hidden` sem opacity (apenas y:16) — SSR renderiza copy sempre visível; animação apenas desloca Y
 - `HeroSection/HeroScrollIndicator.tsx` — Seta bounce animada → `#futuro`
 - `FutureSection/FutureSection.tsx` — 3 cards (60% mais rápido, Estrutura de aço, 90% menos entulho), hover copper via onMouseEnter, ScrollReveal por bloco
 - `SteelFrameSection/SteelFrameSection.tsx` — Grid 2 colunas: copy + 6 benefícios + CTAs | VideoPlaceholder 16:9; background `--vm-black`
@@ -102,7 +103,8 @@
 | Lenis + gsap.ticker | Sincronização garantida |
 | Header/Footer no layout.tsx | Aparece em todas as rotas |
 | z-index como número no style prop | TypeScript não aceita CSS vars em zIndex |
-| ScrollReveal via `useInView` (não `whileInView`) | `whileInView` pode não disparar se o usuário rola antes da hidratação do React; `useInView` com `amount:0` garante disparo ao primeiro pixel visível |
+| ScrollReveal sem Framer Motion (CP-008) | Framer Motion escrevia `opacity:0` inline no SSR HTML via `initial`; conteúdo ficava invisível se animação falhasse. Solução: `idle`=sem inline style → visível por padrão; animação CSS pura como enhancement |
+| HeroSection hidden sem opacity (CP-008) | `initial={{ opacity:0 }}` no SSR tornava toda a copy invisível até JS animar. `hidden: { y: 16 }` mantém conteúdo visível mesmo sem animação |
 | Source de vídeo: só .mp4 | .webm inexistente causava 404 antes de carregar o .mp4; removido até o arquivo existir |
 | Poster do vídeo: undefined | `/images/hero-poster.webp` não existe; sem poster o browser carrega o vídeo direto |
 | WhatsApp pulse via CSS keyframes | CSS suficiente; evita overhead JS |

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import { HeroScrollIndicator } from './HeroScrollIndicator'
@@ -13,24 +13,19 @@ const HERO_VIDEO = {
 
 const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_MESSAGES.hero)}`
 
+// No opacity in hidden state — content always visible in SSR HTML.
+// Animation only shifts Y position; if JS fails, content stays visible at y:16.
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-  },
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.75, ease: [0, 0, 0.2, 1] },
-  },
+  hidden: { y: 16 },
+  visible: { y: 0, transition: { duration: 0.6, ease: [0, 0, 0.2, 1] } },
 }
 
 export function HeroSection() {
-  const shouldReduceMotion = useReducedMotion()
 
   return (
     <SectionWrapper
@@ -87,14 +82,14 @@ export function HeroSection() {
       >
         <div style={{ maxWidth: '740px' }}>
           <motion.div
-            variants={shouldReduceMotion ? undefined : containerVariants}
-            initial={shouldReduceMotion ? false : 'hidden'}
+            variants={containerVariants}
+            initial="hidden"
             animate="visible"
             className="text-center lg:text-left"
           >
             {/* Eyebrow */}
             <motion.p
-              variants={shouldReduceMotion ? undefined : itemVariants}
+              variants={itemVariants}
               style={{
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'var(--vm-text-xs)',
@@ -109,7 +104,7 @@ export function HeroSection() {
 
             {/* Headline */}
             <motion.h1
-              variants={shouldReduceMotion ? undefined : itemVariants}
+              variants={itemVariants}
               style={{
                 fontFamily: 'var(--vm-font-display)',
                 fontSize: 'clamp(2.25rem, 7vw, 5rem)',
@@ -128,7 +123,7 @@ export function HeroSection() {
 
             {/* Subheadline */}
             <motion.p
-              variants={shouldReduceMotion ? undefined : itemVariants}
+              variants={itemVariants}
               style={{
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'clamp(1rem, 1.5vw + 0.5rem, 1.25rem)',
@@ -144,7 +139,7 @@ export function HeroSection() {
 
             {/* Reinforcement */}
             <motion.p
-              variants={shouldReduceMotion ? undefined : itemVariants}
+              variants={itemVariants}
               className="mx-auto lg:mx-0"
               style={{
                 fontFamily: 'var(--vm-font-body)',
@@ -161,7 +156,7 @@ export function HeroSection() {
 
             {/* CTAs */}
             <motion.div
-              variants={shouldReduceMotion ? undefined : itemVariants}
+              variants={itemVariants}
               className="flex flex-col items-center gap-3 sm:flex-row lg:items-start"
             >
               {/* Primary CTA — WhatsApp */}

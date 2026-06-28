@@ -15,6 +15,37 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.5.2] — 2026-06-28 — CP-008: Fix Renderização Visual (SSR Visibility)
+
+### Corrigido
+
+**ScrollReveal (`src/components/shared/ScrollReveal/index.tsx`)**
+- Reescrito completamente: eliminada dependência de Framer Motion
+- **Causa raiz resolvida:** Framer Motion escrevia `style="opacity:0"` no HTML do SSR via `initial={{ opacity: 0 }}` — conteúdo ficava invisível se a animação não rodasse
+- Nova implementação com máquina de estado `idle | waiting | entered`:
+  - `idle` (SSR + estado padrão): nenhum inline style → browser renderiza `opacity: 1` por padrão → conteúdo sempre visível
+  - `waiting` (JS rodou, elemento abaixo da dobra): `opacity: 0` aplicado apenas client-side via `useEffect`
+  - `entered` (IntersectionObserver disparou): `opacity: 1` com CSS transition suave
+- Válvula de segurança: `setTimeout` de 3s força `entered` se IntersectionObserver não disparar
+- Elementos acima da dobra na carga inicial ficam em `idle` — nunca animados, sempre visíveis
+- `prefers-reduced-motion`: retorno antecipado mantém `idle` permanentemente
+
+**HeroSection (`src/components/sections/HeroSection/HeroSection.tsx`)**
+- **Causa raiz resolvida:** `itemVariants.hidden = { opacity: 0, y: 28 }` fazia SSR renderizar todo o texto com `style="opacity:0"` — copy e CTAs invisíveis até JS animar
+- `hidden` alterado para `{ y: 16 }` — sem opacity; SSR renderiza texto visível, apenas deslocado 16px
+- Se JS/animação falhar: texto permanece visível em `y: 16` (deslocamento mínimo, legível)
+- Removido `useReducedMotion` e toda lógica condicional de `initial`/`variants` — CSS `prefers-reduced-motion` (globals.css) já cuida do caso reduced motion
+- Simplificado: sempre usa `initial="hidden" animate="visible"` com as variants
+
+### Validações do Checkpoint CP-008
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run build       → ✅ Build limpo (8/8 páginas estáticas)
+```
+
+---
+
 ## [0.5.1] — 2026-06-28 — CP-007: Fix Visual Crítico Macrofase 2
 
 ### Corrigido

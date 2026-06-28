@@ -1,7 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
 import { cn } from '@/lib/cn'
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none'
@@ -12,48 +11,82 @@ interface ScrollRevealProps {
   delay?: number
   direction?: Direction
   once?: boolean
-  amount?: number
 }
 
-const offsets: Record<Direction, { x: number; y: number }> = {
-  up:    { x: 0, y: 40 },
-  down:  { x: 0, y: -40 },
-  left:  { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
-  none:  { x: 0, y: 0 },
+const offsets: Record<Direction, string> = {
+  up:    'translateY(20px)',
+  down:  'translateY(-20px)',
+  left:  'translateX(20px)',
+  right: 'translateX(-20px)',
+  none:  'none',
 }
 
+// SSR: renders visible. Client: optional entrance animation below the fold.
+// Content is NEVER opacity:0 in server-rendered HTML.
+// If JS/IO fails, content remains visible at its natural position.
 export function ScrollReveal({
   children,
   className,
   delay = 0,
   direction = 'up',
   once = true,
-  amount = 0,
 }: ScrollRevealProps) {
-  const shouldReduceMotion = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, {
-    once,
-    amount,
-    margin: '0px 0px -40px 0px',
-  })
+  // 'idle' = SSR / not yet checked (no inline styles → content visible)
+  // 'waiting' = below fold, JS running (opacity:0 client-side only)
+  // 'entered' = in viewport (opacity:1 with transition)
+  const [phase, setPhase] = useState<'idle' | 'waiting' | 'entered'>('idle')
 
-  if (shouldReduceMotion) {
-    return <div className={cn(className)}>{children}</div>
-  }
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
 
-  const { x, y } = offsets[direction]
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) return // leave as 'idle' = visible
+
+    const rect = el.getBoundingClientRect()
+    const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0
+
+    if (alreadyVisible) return // above/at fold — no animation needed
+
+    // Below fold: set up entrance animation
+    setPhase('waiting')
+
+    // Safety: force visible after 3s even if observer never fires
+    const fallback = setTimeout(() => setPhase('entered'), 3000)
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          clearTimeout(fallback)
+          setPhase('entered')
+          if (once) observer.disconnect()
+        }
+      },
+      { threshold: 0, rootMargin: '0px 0px -20px 0px' }
+    )
+
+    observer.observe(el)
+    return () => {
+      clearTimeout(fallback)
+      observer.disconnect()
+    }
+  }, [once])
+
+  const style: React.CSSProperties =
+    phase === 'waiting'
+      ? { opacity: 0, transform: offsets[direction], transition: 'none' }
+      : phase === 'entered'
+        ? {
+            opacity: 1,
+            transform: 'none',
+            transition: `opacity 0.55s ${delay}s ease-out, transform 0.55s ${delay}s ease-out`,
+          }
+        : {} // 'idle' → no inline styles → browser default opacity:1
 
   return (
-    <motion.div
-      ref={ref}
-      className={cn(className)}
-      initial={{ opacity: 0, x, y }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x, y }}
-      transition={{ duration: 0.6, delay, ease: [0, 0, 0.2, 1] }}
-    >
+    <div ref={ref} className={cn(className)} style={style}>
       {children}
-    </motion.div>
+    </div>
   )
 }
