@@ -15,6 +15,26 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.4.1] — 2026-06-27 — Asset: Vídeo da Hero
+
+### Adicionado
+
+- `public/videos/hero-veritas.mp4` — vídeo background da Hero (2.5 MB)
+  - Arquivo renomeado de `hero-veritas.mp4.mp4` para o caminho correto
+  - HeroSection aponta corretamente para `/videos/hero-veritas.mp4`
+  - Source `.webm` mantida no componente como fallback futuro (seguro: browser ignora se ausente)
+  - Poster ausente é seguro: overlay escuro cobre o vídeo durante o carregamento
+
+### Validações
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+npm run build       → ✅ Compilado sem erros (8/8 páginas estáticas)
+```
+
+---
+
 ## [0.4.0] — 2026-06-27 — Fase 2A: Hero Cinematográfica
 
 ### Adicionado
