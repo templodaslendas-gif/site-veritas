@@ -2,10 +2,10 @@
 
 ## Estado Atual
 
-- **Fase:** Macrofase 2 — Primeira Experiência (CONCLUÍDA + CORRIGIDA)
+- **Fase:** Macrofase 2 — Vídeo Steel Frame integrado
 - **Próxima:** Macrofase 3 — Comparativo, Benefícios, Projetos
-- **Checkpoint:** CP-008 ✅
-- **Última atualização:** 2026-06-28
+- **Checkpoint:** CP-009 ✅
+- **Última atualização:** 2026-06-29
 
 ---
 
@@ -20,7 +20,8 @@
 | CP-005 | Fase 2A — Hero Cinematográfica | ✅ | ✅ | ✅ | Aprovado |
 | CP-006 | Macrofase 2 — Deploy completo | ✅ | ✅ | ✅ | Entregue |
 | CP-007 | Macrofase 2 — Fix visual crítico | ✅ | ✅ | ✅ | Entregue |
-| CP-008 | Macrofase 2 — Fix SSR visibility (renderização definitiva) | ✅ | — | ✅ | Aguardando aprovação |
+| CP-008 | Macrofase 2 — Fix SSR visibility (renderização definitiva) | ✅ | — | ✅ | Aprovado |
+| CP-009 | SteelFrameSection — vídeo real integrado (construcao-completa.mp4) | ✅ | ✅ | ✅ | Entregue |
 
 ---
 

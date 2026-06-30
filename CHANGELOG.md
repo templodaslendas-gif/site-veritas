@@ -15,6 +15,30 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.5.3] — 2026-06-29 — CP-009: Vídeo Steel Frame integrado
+
+### Modificado
+
+**SteelFrameSection (`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`)**
+- `VideoPlaceholder` removido — substituído pelo `VideoPlayer` real
+- Vídeo: `public/videos/steel-frame/construcao-completa.mp4`
+- Configuração: `autoPlay`, `muted`, `loop`, `playsInline`, `preload="metadata"`, `object-fit: cover`
+- Container com aspect ratio 16:9 via `paddingBottom: 56.25%`, bordas do Design System (`--vm-radius-lg`, `--vm-border-strong`), `overflow: hidden`
+- Overlay discreto: gradiente `transparent 55% → rgba(8,8,8,0.35) 100%` — polimento visual sem esconder o conteúdo
+- Fallback automático via `VideoPlayer` (exibe "Vídeo em breve" se src falhar)
+- Colunas reordenadas: vídeo agora é o **primeiro elemento no DOM** (esquerda no desktop, topo no mobile) — destaque visual principal da seção
+- Conteúdo (copy + benefícios + CTAs) permanece intacto na coluna direita/abaixo
+
+### Validações do Checkpoint CP-009
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+npm run build       → ✅ Build limpo (8/8 páginas estáticas)
+```
+
+---
+
 ## [0.5.2] — 2026-06-28 — CP-008: Fix Renderização Visual (SSR Visibility)
 
 ### Corrigido

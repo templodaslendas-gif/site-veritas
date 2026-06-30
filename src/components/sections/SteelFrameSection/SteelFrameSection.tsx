@@ -1,5 +1,6 @@
 'use client'
 
+import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
@@ -41,77 +42,47 @@ function CheckIcon() {
   )
 }
 
-function VideoPlaceholder() {
-  return (
-    <div
-      style={{
-        position: 'relative',
-        paddingBottom: '56.25%',
-        background: 'var(--vm-surface)',
-        borderRadius: 'var(--vm-radius-lg)',
-        border: '1px solid var(--vm-border)',
-        overflow: 'hidden',
-      }}
-      aria-label="Vídeo em produção"
-      role="img"
-    >
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 'var(--vm-space-4)',
-          background:
-            'radial-gradient(ellipse at center, rgba(196,128,62,0.06) 0%, transparent 70%)',
-        }}
-      >
-        {/* Play button */}
-        <div
-          style={{
-            width: '60px',
-            height: '60px',
-            borderRadius: '50%',
-            border: '1px solid var(--vm-border-strong)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="var(--vm-copper)"
-            width={20}
-            height={20}
-            aria-hidden="true"
-          >
-            <polygon points="6,4 20,12 6,20" />
-          </svg>
-        </div>
-        <p
-          style={{
-            fontFamily: 'var(--vm-font-body)',
-            fontSize: 'var(--vm-text-xs)',
-            letterSpacing: 'var(--vm-tracking-label)',
-            color: 'var(--vm-text-muted)',
-            textTransform: 'uppercase',
-          }}
-        >
-          Vídeo em breve
-        </p>
-      </div>
-    </div>
-  )
-}
-
 export function SteelFrameSection() {
   return (
     <SectionWrapper id="steel-frame" style={{ background: 'var(--vm-black)' }}>
       <div style={CONTAINER}>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-          {/* Left: content */}
+          {/* Left / top: vídeo — destaque principal */}
+          <ScrollReveal delay={0.05}>
+            <div
+              style={{
+                position: 'relative',
+                paddingBottom: '56.25%',
+                borderRadius: 'var(--vm-radius-lg)',
+                border: '1px solid var(--vm-border-strong)',
+                overflow: 'hidden',
+              }}
+            >
+              <div style={{ position: 'absolute', inset: 0 }}>
+                <VideoPlayer
+                  src="/videos/steel-frame/construcao-completa.mp4"
+                  autoPlay={true}
+                  loop={true}
+                  muted={true}
+                  preload="metadata"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              {/* Overlay discreto — gradiente inferior para legibilidade */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'linear-gradient(to bottom, transparent 55%, rgba(8,8,8,0.35) 100%)',
+                  pointerEvents: 'none',
+                }}
+              />
+            </div>
+          </ScrollReveal>
+
+          {/* Right / below: conteúdo */}
           <div>
             <ScrollReveal>
               <p
@@ -265,11 +236,6 @@ export function SteelFrameSection() {
               </div>
             </ScrollReveal>
           </div>
-
-          {/* Right: visual */}
-          <ScrollReveal direction="left" delay={0.15}>
-            <VideoPlaceholder />
-          </ScrollReveal>
         </div>
       </div>
     </SectionWrapper>
