@@ -4,8 +4,8 @@
 
 - **Fase:** Macrofase 2 — Vídeo Steel Frame integrado
 - **Próxima:** Macrofase 3 — Comparativo, Benefícios, Projetos
-- **Checkpoint:** CP-009 ✅
-- **Última atualização:** 2026-06-29
+- **Checkpoint:** CP-010 ✅
+- **Última atualização:** 2026-06-30
 
 ---
 
@@ -21,7 +21,8 @@
 | CP-006 | Macrofase 2 — Deploy completo | ✅ | ✅ | ✅ | Entregue |
 | CP-007 | Macrofase 2 — Fix visual crítico | ✅ | ✅ | ✅ | Entregue |
 | CP-008 | Macrofase 2 — Fix SSR visibility (renderização definitiva) | ✅ | — | ✅ | Aprovado |
-| CP-009 | SteelFrameSection — vídeo real integrado (construcao-completa.mp4) | ✅ | ✅ | ✅ | Entregue |
+| CP-009 | SteelFrameSection — vídeo real integrado (construcao-completa.mp4) | ✅ | ✅ | ✅ | Aprovado |
+| CP-010 | Auditoria de assets — extensões corrigidas, caminhos validados | ✅ | ✅ | ✅ | Entregue |
 
 ---
 

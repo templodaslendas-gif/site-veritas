@@ -15,6 +15,37 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.5.4] — 2026-06-30 — CP-010: Auditoria de assets / fix de caminhos
+
+### Corrigido
+
+**Assets `public/steel-frame/`**
+- `construcao-completa.mp4.mp4` renomeado para `construcao-completa.mp4` (extensão dupla removida)
+- `comparativo.mp4.mp4` renomeado para `comparativo.mp4` (extensão dupla removida)
+- `estrutura.mp4.jpeg` renomeado para `estrutura.jpg` — **este arquivo é uma imagem JPEG 1600×900, não um vídeo**; renomeado com extensão correta
+
+**SteelFrameSection (`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`)**
+- Caminho corrigido: `/videos/steel-frame/construcao-completa.mp4` → `/steel-frame/construcao-completa.mp4`
+  - `/public/videos/steel-frame/` nunca existiu; o diretório real é `/public/steel-frame/`
+
+**Inventário final de assets em `public/`**
+| Arquivo | Tipo | URL pública |
+|---------|------|-------------|
+| `steel-frame/construcao-completa.mp4` | MP4 vídeo | `/steel-frame/construcao-completa.mp4` ✅ |
+| `steel-frame/comparativo.mp4` | MP4 vídeo | `/steel-frame/comparativo.mp4` ✅ |
+| `steel-frame/estrutura.jpg` | JPEG 1600×900 | `/steel-frame/estrutura.jpg` ✅ |
+| `videos/hero-veritas.mp4` | MP4 vídeo | `/videos/hero-veritas.mp4` ✅ |
+
+### Validações do Checkpoint CP-010
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+npm run build       → ✅ Build limpo (8/8 páginas estáticas)
+```
+
+---
+
 ## [0.5.3] — 2026-06-29 — CP-009: Vídeo Steel Frame integrado
 
 ### Modificado

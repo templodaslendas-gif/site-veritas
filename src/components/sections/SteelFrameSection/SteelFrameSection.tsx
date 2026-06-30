@@ -60,7 +60,7 @@ export function SteelFrameSection() {
             >
               <div style={{ position: 'absolute', inset: 0 }}>
                 <VideoPlayer
-                  src="/videos/steel-frame/construcao-completa.mp4"
+                  src="/steel-frame/construcao-completa.mp4"
                   autoPlay={true}
                   loop={true}
                   muted={true}
