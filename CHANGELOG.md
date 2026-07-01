@@ -7,11 +7,54 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ## [Não Lançado]
 
-### A implementar
-- Macrofase 3: Comparativo, Benefícios, Projetos
-- Macrofase 4: Drywall, Estruturas Metálicas
-- Macrofase 5: FAQ, Contato, CTA Final, Formulário
-- Macrofase 6: GA4, cookie consent (LGPD), CSP, Deploy produção
+### A implementar — Narrativa em 6 Atos
+- **Ato 3 (Macrofase 3):** Comparativo, Benefícios, Conheça a Estrutura
+- **Ato 4 (Macrofase 3):** Projetos, Diferenciais
+- **Ato 5 (Macrofase 4):** Drywall, Estruturas Metálicas
+- **Ato 6 (Macrofase 5):** FAQ, CTA Final, Contato + Formulário
+- **Infraestrutura (Macrofase 6):** GA4, cookie consent (LGPD), CSP, Deploy produção
+
+---
+
+## [0.6.0] — 2026-06-30 — CP-011: Reestruturação Narrativa da Home
+
+### Modificado
+
+**`src/app/page.tsx`**
+- Home reestruturada em 6 Atos narrativos com blocos de comentário identificando cada capítulo
+- Atos 1–2 mantêm componentes implementados (IntroSection, HeroSection, FutureSection, SteelFrameSection, HowItWorksSection) — sem alteração
+- Atos 3–6: adicionadas 10 anchor sections com IDs e `aria-label` corretos — sem altura, sem conteúdo visual (prontas para receber os componentes nas próximas macrofases)
+
+**Anchors adicionados por Ato:**
+| Ato | ID | Fundo planejado |
+|-----|----|-----------------|
+| ATO 3 | `#comparativo` | Escuro |
+| ATO 3 | `#beneficios` | Claro |
+| ATO 3 | `#conheca-estrutura` | Claro |
+| ATO 4 | `#projetos` | Escuro |
+| ATO 4 | `#diferenciais` | Claro |
+| ATO 5 | `#drywall` | Claro |
+| ATO 5 | `#estruturas` | Claro |
+| ATO 6 | `#faq` | Claro |
+| ATO 6 | `#cta-final` | Escuro |
+| ATO 6 | `#contato` | Claro |
+
+**Navegação**
+- `NAV_ITEMS` verificado — os 6 itens existentes (`#steel-frame`, `#projetos`, `#drywall`, `#estruturas`, `#faq`, `#contato`) já apontam para os IDs corretos da nova estrutura; sem alteração necessária
+
+### Regras da reestruturação
+- Depoimentos removidos do roadmap
+- Steel Frame permanece protagonista (Atos 1–2 completos)
+- Drywall e Estruturas Metálicas como serviços complementares (Ato 5)
+- Todas as seções preparadas para receber vídeos reais
+
+### Validações do Checkpoint CP-011
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+npm run build       → ✅ Build limpo
+```
 
 ---
 

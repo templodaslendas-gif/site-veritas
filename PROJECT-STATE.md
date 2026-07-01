@@ -2,9 +2,9 @@
 
 ## Estado Atual
 
-- **Fase:** Macrofase 2 — Vídeo Steel Frame integrado
-- **Próxima:** Macrofase 3 — Comparativo, Benefícios, Projetos
-- **Checkpoint:** CP-010 ✅
+- **Fase:** Reestruturação Narrativa — Arquitetura da Home em 6 Atos aprovada
+- **Próxima:** Macrofase 3 — Ato 3 (Comparativo, Benefícios, Conheça a Estrutura)
+- **Checkpoint:** CP-011 ✅
 - **Última atualização:** 2026-06-30
 
 ---
@@ -23,14 +23,15 @@
 | CP-008 | Macrofase 2 — Fix SSR visibility (renderização definitiva) | ✅ | — | ✅ | Aprovado |
 | CP-009 | SteelFrameSection — vídeo real integrado (construcao-completa.mp4) | ✅ | ✅ | ✅ | Aprovado |
 | CP-010 | Auditoria de assets — extensões corrigidas, caminhos validados | ✅ | ✅ | ✅ | Entregue |
+| CP-011 | Reestruturação narrativa — Home em 6 Atos, navegação alinhada, anchors preparados | ✅ | ✅ | ✅ | Entregue |
 
 ---
 
-## Inventário — src/ (cumulativo até CP-007)
+## Inventário — src/ (cumulativo até CP-011)
 
 ### app/
 - `layout.tsx` — Root layout com fontes, metadata, Providers, Header, Footer, WhatsAppFloat, JsonLd
-- `page.tsx` — IntroSection + HeroSection + FutureSection + SteelFrameSection + HowItWorksSection
+- `page.tsx` — 6 Atos narrativos: Atos 1–2 implementados (Intro, Hero, Futuro, SteelFrame, HowItWorks); Atos 3–6 com anchor sections preparados (`#comparativo`, `#beneficios`, `#conheca-estrutura`, `#projetos`, `#diferenciais`, `#drywall`, `#estruturas`, `#faq`, `#cta-final`, `#contato`)
 - `globals.css` — Tailwind v4 + @theme inline + reset + sr-only + focus ring
 - `robots.ts` · `sitemap.ts` · `icon.tsx` · `politica-privacidade/page.tsx`
 
@@ -78,21 +79,23 @@
 
 ---
 
-## Pendências (pós-Macrofase 2)
+## Pendências — Narrativa em 6 Atos
 
-| Tarefa | Macrofase |
-|--------|-----------|
-| Comparativo Steel Frame × Alvenaria | 3 |
-| Seção Benefícios | 3 |
-| Seção Projetos (galeria) | 3 |
-| Seção Drywall | 4 |
-| Seção Estruturas Metálicas | 4 |
-| FAQ | 5 |
-| Formulário de Contato (RHF + Zod) | 5 |
-| CTA Final | 5 |
-| GA4 + cookie consent (LGPD) | 6 |
-| Content-Security-Policy | 6 |
-| Deploy produção | 6 |
+| Ato | Seção | Fundo | Status |
+|-----|-------|-------|--------|
+| ATO 3 | Comparativo Steel Frame × Construção Convencional (`#comparativo`) | Escuro | Anchor criado |
+| ATO 3 | Benefícios (`#beneficios`) | Claro | Anchor criado |
+| ATO 3 | Conheça a Estrutura (`#conheca-estrutura`) | Claro | Anchor criado |
+| ATO 4 | Projetos — galeria (`#projetos`) | Escuro | Anchor criado |
+| ATO 4 | Diferenciais (`#diferenciais`) | Claro | Anchor criado |
+| ATO 5 | Drywall (`#drywall`) | Claro | Anchor criado |
+| ATO 5 | Estruturas Metálicas (`#estruturas`) | Claro | Anchor criado |
+| ATO 6 | FAQ (`#faq`) | Claro | Anchor criado |
+| ATO 6 | CTA Final (`#cta-final`) | Escuro | Anchor criado |
+| ATO 6 | Contato + Formulário RHF/Zod (`#contato`) | Claro | Anchor criado |
+| — | GA4 + cookie consent (LGPD) | — | Pendente |
+| — | Content-Security-Policy | — | Pendente |
+| — | Deploy produção | — | Pendente |
 
 ---
 
