@@ -16,6 +16,23 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.9.3] — 2026-07-01 — CP-017: Separa videos Steel Frame por secao
+
+### Corrigido
+
+**`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`**
+- Removida referencia a `/steel-frame/construcao-completa.mp4` (video da obra completa nao pertence a esta secao)
+- `estrutura.mp4` nao existe no disco — usa temporariamente `next/image` com `/steel-frame/estrutura.jpg` ate o video correto ser adicionado
+- VideoPlayer removido desta secao
+
+**`src/components/sections/VideoReplaySection/VideoReplaySection.tsx`**
+- Mantido `/steel-frame/construcao-completa.mp4` (video completo da obra, correto para esta secao)
+
+**Regra de separacao:**
+- SteelFrameSection ("O que e Steel Frame") -> `estrutura.mp4` (ou `estrutura.jpg` como fallback)
+- VideoReplaySection (pos "Como Funciona") -> `construcao-completa.mp4`
+- `comparativo.mp4` reservado para Macrofase 3, nao utilizado ainda
+
 ## [0.9.2] — 2026-06-30 — CP-016: Renomeia arquivo de video com extensao dupla
 
 ### Corrigido

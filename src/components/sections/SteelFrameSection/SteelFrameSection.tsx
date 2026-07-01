@@ -1,6 +1,6 @@
 'use client'
 
-import { VideoPlayer } from '@/components/shared/VideoPlayer'
+import Image from 'next/image'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
@@ -116,13 +116,13 @@ export function SteelFrameSection() {
             }}
           >
             <div style={{ position: 'absolute', inset: 0 }}>
-              <VideoPlayer
-                src="/steel-frame/construcao-completa.mp4"
-                autoPlay={true}
-                loop={true}
-                muted={true}
-                preload="metadata"
+              <Image
+                src="/steel-frame/estrutura.jpg"
+                alt="Estrutura em perfis de aço galvanizado do sistema Steel Frame"
+                fill
+                sizes="(max-width: 1024px) 100vw, 85vw"
                 className="h-full w-full object-cover"
+                priority={false}
               />
             </div>
           </div>

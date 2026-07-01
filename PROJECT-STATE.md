@@ -2,10 +2,10 @@
 
 ## Estado Atual
 
-- **Fase:** Arquivo de vídeo renomeado (extensão dupla .mp4.mp4 -> .mp4); VideoPlayer com fallback dev
+- **Fase:** Vídeos do Steel Frame separados por seção (SteelFrameSection usa estrutura.jpg; VideoReplaySection usa construcao-completa.mp4)
 - **Próxima:** Macrofase 3 — Ato 3 (Comparativo, Benefícios, Conheça a Estrutura)
-- **Checkpoint:** CP-016 ✅
-- **Última atualização:** 2026-06-30
+- **Checkpoint:** CP-017 ✅
+- **Última atualização:** 2026-07-01
 
 ---
 
@@ -29,6 +29,7 @@
 | CP-014 | VideoPlayer com onError fallback; VideoReplaySection caminho correto; SteelFrame usa estrutura.jpg | ✅ | ✅ | ✅ | Entregue |
 | CP-015 | Restaura VideoPlayer em SteelFrameSection; corrige caminho VideoReplaySection para /steel-frame/ | ✅ | ✅ | ✅ | Entregue |
 | CP-016 | Renomeia construcao-completa.mp4.mp4 -> .mp4 (extensao dupla); VideoPlayer exibe path no fallback dev | ✅ | ✅ | ✅ | Entregue |
+| CP-017 | Separa videos por secao: SteelFrameSection usa estrutura.jpg (estrutura.mp4 nao existe); VideoReplaySection mantem construcao-completa.mp4 | ✅ | ✅ | ✅ | Entregue |
 
 ---
 
