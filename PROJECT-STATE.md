@@ -2,9 +2,9 @@
 
 ## Estado Atual
 
-- **Fase:** SteelFrameSection refatorada — vídeo protagonista + VideoReplaySection
+- **Fase:** VideoReplaySection — vídeo final em /videos/steel-frame/construcao-completa.mp4
 - **Próxima:** Macrofase 3 — Ato 3 (Comparativo, Benefícios, Conheça a Estrutura)
-- **Checkpoint:** CP-013 ✅
+- **Checkpoint:** CP-014 ✅
 - **Última atualização:** 2026-06-30
 
 ---
@@ -26,6 +26,7 @@
 | CP-011 | Reestruturação narrativa — Home em 6 Atos, navegação alinhada, anchors preparados | ✅ | ✅ | ✅ | Entregue |
 | CP-012 | Identidade visual — tema Engineering Premium (claro), tokens light, header glass branco | ✅ | ✅ | ✅ | Entregue |
 | CP-013 | SteelFrameSection refatorada (vídeo protagonista 85%) + VideoReplaySection criada | ✅ | ✅ | ✅ | Entregue |
+| CP-014 | VideoPlayer com onError fallback; VideoReplaySection caminho correto; SteelFrame usa estrutura.jpg | ✅ | ✅ | ✅ | Entregue |
 
 ---
 

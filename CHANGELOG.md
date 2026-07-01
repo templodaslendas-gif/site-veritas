@@ -16,6 +16,33 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.9.0] — 2026-06-30 — CP-014: VideoReplaySection caminho correto + fallback
+
+### Modificado
+
+**`src/components/shared/VideoPlayer/index.tsx`**
+- Adicionado `'use client'` + `useState` para controle de erro
+- `onError={() => setHasError(true)}` — exibe fallback "Vídeo em breve" se vídeo falhar no carregamento
+- Fallback extraído para componente `VideoFallback` interno
+
+**`src/components/sections/VideoReplaySection/VideoReplaySection.tsx`**
+- Caminho corrigido: `/steel-frame/construcao-completa.mp4` → `/videos/steel-frame/construcao-completa.mp4`
+- `preload="metadata"` (era `"none"`)
+- Sombra reforçada: `0 20px 60px rgba(0,0,0,0.12)` — mais impactante
+- Padding horizontal reduzido para vídeo mais largo na tela
+
+**`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`**
+- VideoPlayer removido — eliminada repetição do mesmo vídeo
+- Substituído por `next/image` com `/steel-frame/estrutura.jpg` (1600×900)
+- `fill` + `objectFit: cover` + `sizes` responsivo
+
+### Validações CP-014
+```
+npm run typecheck → ✅  |  npm run lint → ✅  |  npm run build → ✅
+```
+
+---
+
 ## [0.8.0] — 2026-06-30 — CP-013: SteelFrameSection refatorada + VideoReplaySection
 
 ### Modificado
