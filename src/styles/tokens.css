@@ -40,6 +40,22 @@
   --vm-error:   #C85444;
   --vm-info:    #4A8FBF;
 
+  /* Fundos claros — tema Engineering Premium */
+  --vm-bg-primary:   #F7F7F5;
+  --vm-bg-secondary: #FFFFFF;
+  --vm-card-bg:      #FFFFFF;
+  --vm-border-light: #E6E6E2;
+
+  /* Texto sobre fundos claros */
+  --vm-text-on-light:           #1A1A1A;
+  --vm-text-on-light-secondary: #555555;
+  --vm-text-on-light-muted:     #999999;
+
+  /* Sombras para fundos claros */
+  --vm-shadow-light-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --vm-shadow-light-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --vm-shadow-light-lg: 0 8px 32px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.06);
+
   /* --------------------------------------------------------------------------
      TIPOGRAFIA
      -------------------------------------------------------------------------- */

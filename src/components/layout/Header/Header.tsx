@@ -21,11 +21,11 @@ export function Header() {
       style={{
         height: scrolled ? '64px' : '72px',
         zIndex: 50,
-        backgroundColor: scrolled ? 'rgba(17, 17, 17, 0.92)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
+        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
         borderBottom: scrolled
-          ? '1px solid var(--vm-border)'
+          ? '1px solid var(--vm-border-light)'
           : '1px solid transparent',
         transition: [
           'height var(--vm-dur-normal) var(--vm-ease-out)',
@@ -45,7 +45,7 @@ export function Header() {
             fontFamily: 'var(--vm-font-display)',
             fontSize: scrolled ? '1.375rem' : '1.5rem',
             letterSpacing: 'var(--vm-tracking-display)',
-            color: 'var(--vm-text-primary)',
+            color: scrolled ? 'var(--vm-text-on-light)' : 'var(--vm-text-primary)',
             lineHeight: 1,
             userSelect: 'none',
             transition: 'font-size var(--vm-dur-normal) var(--vm-ease-out)',
@@ -55,13 +55,13 @@ export function Header() {
         </span>
       </Link>
 
-      <NavDesktop />
+      <NavDesktop scrolled={scrolled} />
 
       <div className="flex items-center gap-4">
         <div className="hidden lg:block">
           <HeaderCTA />
         </div>
-        <NavMobile />
+        <NavMobile scrolled={scrolled} />
       </div>
     </header>
   )

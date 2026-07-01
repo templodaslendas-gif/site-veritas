@@ -7,19 +7,19 @@ export const NAV_ITEMS = [
   { label: 'Contato', href: '#contato' },
 ] as const
 
-function activateLink(el: HTMLAnchorElement) {
-  el.style.color = 'var(--vm-text-primary)'
+function activateLink(el: HTMLAnchorElement, scrolled: boolean) {
+  el.style.color = scrolled ? 'var(--vm-text-on-light)' : 'var(--vm-text-primary)'
   const underline = el.querySelector<HTMLSpanElement>('[data-underline]')
   if (underline) underline.style.transform = 'scaleX(1)'
 }
 
-function deactivateLink(el: HTMLAnchorElement) {
-  el.style.color = 'var(--vm-text-secondary)'
+function deactivateLink(el: HTMLAnchorElement, scrolled: boolean) {
+  el.style.color = scrolled ? 'var(--vm-text-on-light-secondary)' : 'var(--vm-text-secondary)'
   const underline = el.querySelector<HTMLSpanElement>('[data-underline]')
   if (underline) underline.style.transform = 'scaleX(0)'
 }
 
-export function NavDesktop() {
+export function NavDesktop({ scrolled = false }: { scrolled?: boolean }) {
   return (
     <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
       {NAV_ITEMS.map((item) => (
@@ -31,16 +31,16 @@ export function NavDesktop() {
             fontFamily: 'var(--vm-font-body)',
             fontSize: 'var(--vm-text-xs)',
             letterSpacing: 'var(--vm-tracking-label)',
-            color: 'var(--vm-text-secondary)',
+            color: scrolled ? 'var(--vm-text-on-light-secondary)' : 'var(--vm-text-secondary)',
             textTransform: 'uppercase' as const,
             textDecoration: 'none',
             paddingBottom: '3px',
             transition: `color var(--vm-dur-fast) var(--vm-ease-out)`,
           }}
-          onMouseEnter={(e) => activateLink(e.currentTarget)}
-          onMouseLeave={(e) => deactivateLink(e.currentTarget)}
-          onFocus={(e) => activateLink(e.currentTarget)}
-          onBlur={(e) => deactivateLink(e.currentTarget)}
+          onMouseEnter={(e) => activateLink(e.currentTarget, scrolled)}
+          onMouseLeave={(e) => deactivateLink(e.currentTarget, scrolled)}
+          onFocus={(e) => activateLink(e.currentTarget, scrolled)}
+          onBlur={(e) => deactivateLink(e.currentTarget, scrolled)}
         >
           {item.label}
           <span

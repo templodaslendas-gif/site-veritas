@@ -16,6 +16,76 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.7.0] — 2026-06-30 — CP-012: Identidade Visual Engineering Premium
+
+### Mudança de Direção Artística
+
+O site migra de tema predominantemente escuro para **Engineering Premium** — fundos claros (off-white) com preto como elemento de contraste. Referências: Apple, Tesla, Norm Architects, BIG.
+
+### Adicionado
+
+**`src/styles/tokens.css`**
+- `--vm-bg-primary: #F7F7F5` — fundo off-white principal
+- `--vm-bg-secondary: #FFFFFF` — fundo branco secundário / cards
+- `--vm-card-bg: #FFFFFF` — fundo de cards
+- `--vm-border-light: #E6E6E2` — bordas sobre fundos claros
+- `--vm-text-on-light: #1A1A1A` — texto primário sobre fundo claro
+- `--vm-text-on-light-secondary: #555555` — texto secundário sobre fundo claro
+- `--vm-text-on-light-muted: #999999` — texto muted sobre fundo claro
+- `--vm-shadow-light-sm/md/lg` — sombras calibradas para fundo claro
+
+### Modificado
+
+**`src/components/layout/Header/Header.tsx`**
+- Fundo ao scrollar: `rgba(17,17,17,0.92)` → `rgba(255,255,255,0.95)` com `blur(16px)`
+- Borda ao scrollar: `--vm-border` → `--vm-border-light`
+- Logo: adapta cor — claro no topo (sobre Hero escura), escuro após scroll (sobre fundo branco)
+- Props `scrolled` passadas para `NavDesktop` e `NavMobile`
+
+**`src/components/layout/Header/NavDesktop.tsx`**
+- Aceita prop `scrolled?: boolean`
+- Links: `--vm-text-secondary` (topo) → `--vm-text-on-light-secondary` (após scroll)
+- Hover/focus: adapta cor final ao contexto
+
+**`src/components/layout/Header/NavMobile.tsx`**
+- Aceita prop `scrolled?: boolean`
+- Barras do hambúrguer: `--vm-text-primary` (topo) → `--vm-text-on-light` (após scroll)
+
+**`src/components/sections/FutureSection/FutureSection.tsx`**
+- Fundo: `--vm-charcoal` → `--vm-bg-primary`
+- Cards: `--vm-surface` → `--vm-card-bg` + borda `--vm-border-light` + `shadow-light-sm`
+- Hover de cards: sombra `shadow-light-md` + border copper
+- Textos: `--vm-text-primary/secondary` → `--vm-text-on-light/on-light-secondary`
+
+**`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`**
+- Fundo: `--vm-black` → `--vm-bg-secondary`
+- Container do vídeo: borda `--vm-border-strong` → `--vm-border-light` + `shadow-light-lg`
+- Textos: → `--vm-text-on-light/on-light-secondary`
+- Botão ghost: borda/cor adaptadas ao tema claro
+
+**`src/components/sections/HowItWorksSection/HowItWorksSection.tsx`**
+- Fundo: `--vm-charcoal` → `--vm-bg-primary`
+- Badges numerados: fundo `--vm-charcoal` → `--vm-bg-secondary` (branco com borda copper)
+- Conectores: `--vm-border` → `--vm-border-light`
+- Linha divisória CTA: `--vm-border` → `--vm-border-light`
+- Textos: → `--vm-text-on-light/on-light-secondary`
+
+### Imutável (permanece escuro por design)
+- `IntroSection` — intro cinematográfica escura
+- `HeroSection` — vídeo com overlay escuro; ponto de maior impacto
+- `Footer` — preto por especificação
+- Futuras seções escuras: Comparativo, Projetos, CTA Final
+
+### Validações do Checkpoint CP-012
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+npm run build       → ✅ Build limpo (8/8 páginas estáticas)
+```
+
+---
+
 ## [0.6.0] — 2026-06-30 — CP-011: Reestruturação Narrativa da Home
 
 ### Modificado

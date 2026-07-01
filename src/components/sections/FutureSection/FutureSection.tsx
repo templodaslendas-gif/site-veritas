@@ -71,7 +71,7 @@ const CONTAINER = {
 
 export function FutureSection() {
   return (
-    <SectionWrapper id="futuro" style={{ background: 'var(--vm-charcoal)' }}>
+    <SectionWrapper id="futuro" style={{ background: 'var(--vm-bg-primary)' }}>
       <div style={CONTAINER}>
         {/* Header */}
         <ScrollReveal>
@@ -93,7 +93,7 @@ export function FutureSection() {
                 fontFamily: 'var(--vm-font-display)',
                 fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                 letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-primary)',
+                color: 'var(--vm-text-on-light)',
                 textTransform: 'uppercase',
                 lineHeight: 'var(--vm-leading-tight)',
                 marginBottom: 'var(--vm-space-6)',
@@ -106,7 +106,7 @@ export function FutureSection() {
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'var(--vm-text-lg)',
                 lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-secondary)',
+                color: 'var(--vm-text-on-light-secondary)',
               }}
             >
               Steel Frame não é tendência. É a forma como as melhores construtoras do
@@ -122,23 +122,26 @@ export function FutureSection() {
             <ScrollReveal key={card.title} delay={i * 0.1} direction="up">
               <article
                 style={{
-                  background: 'var(--vm-surface)',
-                  border: '1px solid var(--vm-border)',
+                  background: 'var(--vm-card-bg)',
+                  border: '1px solid var(--vm-border-light)',
                   borderRadius: 'var(--vm-radius-lg)',
                   padding: 'var(--vm-space-8)',
                   height: '100%',
                   cursor: 'default',
-                  transition: `border-color var(--vm-dur-normal) var(--vm-ease-out), transform var(--vm-dur-normal) var(--vm-ease-out)`,
+                  boxShadow: 'var(--vm-shadow-light-sm)',
+                  transition: `border-color var(--vm-dur-normal) var(--vm-ease-out), transform var(--vm-dur-normal) var(--vm-ease-out), box-shadow var(--vm-dur-normal) var(--vm-ease-out)`,
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement
                   el.style.borderColor = 'var(--vm-copper)'
                   el.style.transform = 'translateY(-4px)'
+                  el.style.boxShadow = 'var(--vm-shadow-light-md)'
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = 'var(--vm-border)'
+                  el.style.borderColor = 'var(--vm-border-light)'
                   el.style.transform = 'translateY(0)'
+                  el.style.boxShadow = 'var(--vm-shadow-light-sm)'
                 }}
               >
                 <div
@@ -156,7 +159,7 @@ export function FutureSection() {
                     fontFamily: 'var(--vm-font-display)',
                     fontSize: 'var(--vm-display-sm)',
                     letterSpacing: 'var(--vm-tracking-display)',
-                    color: 'var(--vm-text-primary)',
+                    color: 'var(--vm-text-on-light)',
                     textTransform: 'uppercase',
                     lineHeight: 'var(--vm-leading-tight)',
                     marginBottom: 'var(--vm-space-3)',
@@ -169,7 +172,7 @@ export function FutureSection() {
                     fontFamily: 'var(--vm-font-body)',
                     fontSize: 'var(--vm-text-base)',
                     lineHeight: 'var(--vm-leading-relaxed)',
-                    color: 'var(--vm-text-secondary)',
+                    color: 'var(--vm-text-on-light-secondary)',
                   }}
                 >
                   {card.description}

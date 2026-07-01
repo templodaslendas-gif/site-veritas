@@ -55,7 +55,7 @@ const CONTAINER = {
 
 export function HowItWorksSection() {
   return (
-    <SectionWrapper id="como-funciona" style={{ background: 'var(--vm-charcoal)' }}>
+    <SectionWrapper id="como-funciona" style={{ background: 'var(--vm-bg-primary)' }}>
       <div style={CONTAINER}>
         {/* Header */}
         <ScrollReveal>
@@ -77,7 +77,7 @@ export function HowItWorksSection() {
                 fontFamily: 'var(--vm-font-display)',
                 fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                 letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-primary)',
+                color: 'var(--vm-text-on-light)',
                 textTransform: 'uppercase',
                 lineHeight: 'var(--vm-leading-tight)',
                 marginBottom: 'var(--vm-space-6)',
@@ -90,7 +90,7 @@ export function HowItWorksSection() {
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'var(--vm-text-lg)',
                 lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-secondary)',
+                color: 'var(--vm-text-on-light-secondary)',
               }}
             >
               Acompanhamento técnico em todas as fases, do projeto à entrega das chaves.
@@ -130,7 +130,7 @@ export function HowItWorksSection() {
                       height: '2.5rem',
                       borderRadius: '50%',
                       border: '1px solid var(--vm-copper)',
-                      background: 'var(--vm-charcoal)',
+                      background: 'var(--vm-bg-secondary)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -160,7 +160,7 @@ export function HowItWorksSection() {
                         width: '1px',
                         flex: 1,
                         minHeight: '2.5rem',
-                        background: 'var(--vm-border)',
+                        background: 'var(--vm-border-light)',
                         marginTop: 'var(--vm-space-2)',
                         transformOrigin: 'top',
                       }}
@@ -174,7 +174,7 @@ export function HowItWorksSection() {
                     style={{
                       fontFamily: 'var(--vm-font-heading)',
                       fontSize: 'var(--vm-h4)',
-                      color: 'var(--vm-text-primary)',
+                      color: 'var(--vm-text-on-light)',
                       marginBottom: 'var(--vm-space-2)',
                       lineHeight: 'var(--vm-leading-snug)',
                     }}
@@ -186,7 +186,7 @@ export function HowItWorksSection() {
                       fontFamily: 'var(--vm-font-body)',
                       fontSize: 'var(--vm-text-base)',
                       lineHeight: 'var(--vm-leading-relaxed)',
-                      color: 'var(--vm-text-secondary)',
+                      color: 'var(--vm-text-on-light-secondary)',
                     }}
                   >
                     {step.description}
@@ -203,7 +203,7 @@ export function HowItWorksSection() {
             style={{
               marginTop: 'var(--vm-space-8)',
               paddingTop: 'var(--vm-space-8)',
-              borderTop: '1px solid var(--vm-border)',
+              borderTop: '1px solid var(--vm-border-light)',
               display: 'flex',
               flexDirection: 'column',
               gap: 'var(--vm-space-4)',
@@ -214,7 +214,7 @@ export function HowItWorksSection() {
               style={{
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'var(--vm-text-base)',
-                color: 'var(--vm-text-secondary)',
+                color: 'var(--vm-text-on-light-secondary)',
                 lineHeight: 'var(--vm-leading-relaxed)',
                 maxWidth: '480px',
               }}

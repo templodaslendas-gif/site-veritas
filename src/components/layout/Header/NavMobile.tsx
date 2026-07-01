@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
 import { NAV_ITEMS } from './NavDesktop'
 
-export function NavMobile() {
+export function NavMobile({ scrolled = false }: { scrolled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export function NavMobile() {
             display: 'block',
             width: '22px',
             height: '2px',
-            background: 'var(--vm-text-primary)',
+            background: scrolled ? 'var(--vm-text-on-light)' : 'var(--vm-text-primary)',
             transition: `transform var(--vm-dur-normal) var(--vm-ease-out), opacity var(--vm-dur-normal) var(--vm-ease-out)`,
             transform: isOpen ? 'translateY(7px) rotate(45deg)' : 'none',
           }}
@@ -58,7 +58,7 @@ export function NavMobile() {
             display: 'block',
             width: '22px',
             height: '2px',
-            background: 'var(--vm-text-primary)',
+            background: scrolled ? 'var(--vm-text-on-light)' : 'var(--vm-text-primary)',
             transition: `opacity var(--vm-dur-normal) var(--vm-ease-out)`,
             opacity: isOpen ? 0 : 1,
           }}
@@ -68,7 +68,7 @@ export function NavMobile() {
             display: 'block',
             width: '22px',
             height: '2px',
-            background: 'var(--vm-text-primary)',
+            background: scrolled ? 'var(--vm-text-on-light)' : 'var(--vm-text-primary)',
             transition: `transform var(--vm-dur-normal) var(--vm-ease-out), opacity var(--vm-dur-normal) var(--vm-ease-out)`,
             transform: isOpen ? 'translateY(-7px) rotate(-45deg)' : 'none',
           }}

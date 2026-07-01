@@ -2,9 +2,9 @@
 
 ## Estado Atual
 
-- **Fase:** Reestruturação Narrativa — Arquitetura da Home em 6 Atos aprovada
+- **Fase:** Ajuste de Identidade Visual — Tema Engineering Premium (claro) aplicado
 - **Próxima:** Macrofase 3 — Ato 3 (Comparativo, Benefícios, Conheça a Estrutura)
-- **Checkpoint:** CP-011 ✅
+- **Checkpoint:** CP-012 ✅
 - **Última atualização:** 2026-06-30
 
 ---
@@ -24,6 +24,7 @@
 | CP-009 | SteelFrameSection — vídeo real integrado (construcao-completa.mp4) | ✅ | ✅ | ✅ | Aprovado |
 | CP-010 | Auditoria de assets — extensões corrigidas, caminhos validados | ✅ | ✅ | ✅ | Entregue |
 | CP-011 | Reestruturação narrativa — Home em 6 Atos, navegação alinhada, anchors preparados | ✅ | ✅ | ✅ | Entregue |
+| CP-012 | Identidade visual — tema Engineering Premium (claro), tokens light, header glass branco | ✅ | ✅ | ✅ | Entregue |
 
 ---
 
@@ -103,6 +104,10 @@
 
 | Decisão | Motivo |
 |---------|--------|
+| Tema claro (Engineering Premium) como padrão | Referências Apple/Tesla/BIG — sofisticação, precisão, arquitetura contemporânea |
+| Hero permanece escura | Contraste dramático: Hero escura → seções claras cria ritmo visual forte |
+| Header glass branco após scroll | Consistente com tema claro; transparente no topo mantém contraste sobre Hero |
+| Tokens `--vm-bg-*`, `--vm-text-on-light-*`, `--vm-shadow-light-*` | Separação semântica: tokens escuros (Intro/Footer) vs tokens claros (restante) |
 | Tailwind v4 CSS-first | Blueprint; sem tailwind.config.ts |
 | Tokens `--vm-*` em CSS vars | GSAP acessa valores em JS |
 | Lenis + gsap.ticker | Sincronização garantida |

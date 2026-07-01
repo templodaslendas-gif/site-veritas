@@ -44,7 +44,7 @@ function CheckIcon() {
 
 export function SteelFrameSection() {
   return (
-    <SectionWrapper id="steel-frame" style={{ background: 'var(--vm-black)' }}>
+    <SectionWrapper id="steel-frame" style={{ background: 'var(--vm-bg-secondary)' }}>
       <div style={CONTAINER}>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
           {/* Left / top: vídeo — destaque principal */}
@@ -54,8 +54,9 @@ export function SteelFrameSection() {
                 position: 'relative',
                 paddingBottom: '56.25%',
                 borderRadius: 'var(--vm-radius-lg)',
-                border: '1px solid var(--vm-border-strong)',
+                border: '1px solid var(--vm-border-light)',
                 overflow: 'hidden',
+                boxShadow: 'var(--vm-shadow-light-lg)',
               }}
             >
               <div style={{ position: 'absolute', inset: 0 }}>
@@ -102,7 +103,7 @@ export function SteelFrameSection() {
                   fontFamily: 'var(--vm-font-display)',
                   fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                   letterSpacing: 'var(--vm-tracking-display)',
-                  color: 'var(--vm-text-primary)',
+                  color: 'var(--vm-text-on-light)',
                   textTransform: 'uppercase',
                   lineHeight: 'var(--vm-leading-tight)',
                   marginBottom: 'var(--vm-space-6)',
@@ -117,7 +118,7 @@ export function SteelFrameSection() {
                   fontFamily: 'var(--vm-font-body)',
                   fontSize: 'var(--vm-text-lg)',
                   lineHeight: 'var(--vm-leading-relaxed)',
-                  color: 'var(--vm-text-secondary)',
+                  color: 'var(--vm-text-on-light-secondary)',
                   marginBottom: 'var(--vm-space-8)',
                 }}
               >
@@ -150,7 +151,7 @@ export function SteelFrameSection() {
                       fontFamily: 'var(--vm-font-body)',
                       fontSize: 'var(--vm-text-base)',
                       lineHeight: 'var(--vm-leading-normal)',
-                      color: 'var(--vm-text-secondary)',
+                      color: 'var(--vm-text-on-light-secondary)',
                     }}
                   >
                     <CheckIcon />
@@ -208,7 +209,7 @@ export function SteelFrameSection() {
                     paddingInline: '2rem',
                     paddingBlock: '0.9rem',
                     background: 'transparent',
-                    color: 'var(--vm-text-primary)',
+                    color: 'var(--vm-text-on-light)',
                     fontFamily: 'var(--vm-font-body)',
                     fontSize: 'var(--vm-text-sm)',
                     fontWeight: 500,
@@ -216,18 +217,18 @@ export function SteelFrameSection() {
                     textTransform: 'uppercase',
                     textDecoration: 'none',
                     borderRadius: 'var(--vm-radius-sm)',
-                    border: '1px solid var(--vm-border-strong)',
+                    border: '1px solid var(--vm-border-light)',
                     whiteSpace: 'nowrap',
                     transition: `border-color var(--vm-dur-fast) var(--vm-ease-out), color var(--vm-dur-fast) var(--vm-ease-out), transform var(--vm-dur-fast) var(--vm-ease-out)`,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = 'var(--vm-copper)'
-                    e.currentTarget.style.color = 'var(--vm-copper-light)'
+                    e.currentTarget.style.color = 'var(--vm-copper)'
                     e.currentTarget.style.transform = 'translateY(-1px)'
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--vm-border-strong)'
-                    e.currentTarget.style.color = 'var(--vm-text-primary)'
+                    e.currentTarget.style.borderColor = 'var(--vm-border-light)'
+                    e.currentTarget.style.color = 'var(--vm-text-on-light)'
                     e.currentTarget.style.transform = 'translateY(0)'
                   }}
                 >
