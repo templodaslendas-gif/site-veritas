@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/sections/HeroSection/HeroSection'
 import { FutureSection } from '@/components/sections/FutureSection/FutureSection'
 import { SteelFrameSection } from '@/components/sections/SteelFrameSection/SteelFrameSection'
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection/HowItWorksSection'
+import { VideoReplaySection } from '@/components/sections/VideoReplaySection/VideoReplaySection'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <FutureSection />
       <SteelFrameSection />
       <HowItWorksSection />
+      <VideoReplaySection />
 
       {/* ATO 3 — COMPROVAÇÃO */}
       <section id="comparativo" aria-label="Comparativo Steel Frame vs Construção Convencional" />

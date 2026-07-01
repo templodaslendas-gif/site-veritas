@@ -2,9 +2,9 @@
 
 ## Estado Atual
 
-- **Fase:** Ajuste de Identidade Visual — Tema Engineering Premium (claro) aplicado
+- **Fase:** SteelFrameSection refatorada — vídeo protagonista + VideoReplaySection
 - **Próxima:** Macrofase 3 — Ato 3 (Comparativo, Benefícios, Conheça a Estrutura)
-- **Checkpoint:** CP-012 ✅
+- **Checkpoint:** CP-013 ✅
 - **Última atualização:** 2026-06-30
 
 ---
@@ -25,14 +25,15 @@
 | CP-010 | Auditoria de assets — extensões corrigidas, caminhos validados | ✅ | ✅ | ✅ | Entregue |
 | CP-011 | Reestruturação narrativa — Home em 6 Atos, navegação alinhada, anchors preparados | ✅ | ✅ | ✅ | Entregue |
 | CP-012 | Identidade visual — tema Engineering Premium (claro), tokens light, header glass branco | ✅ | ✅ | ✅ | Entregue |
+| CP-013 | SteelFrameSection refatorada (vídeo protagonista 85%) + VideoReplaySection criada | ✅ | ✅ | ✅ | Entregue |
 
 ---
 
-## Inventário — src/ (cumulativo até CP-011)
+## Inventário — src/ (cumulativo até CP-013)
 
 ### app/
 - `layout.tsx` — Root layout com fontes, metadata, Providers, Header, Footer, WhatsAppFloat, JsonLd
-- `page.tsx` — 6 Atos narrativos: Atos 1–2 implementados (Intro, Hero, Futuro, SteelFrame, HowItWorks); Atos 3–6 com anchor sections preparados (`#comparativo`, `#beneficios`, `#conheca-estrutura`, `#projetos`, `#diferenciais`, `#drywall`, `#estruturas`, `#faq`, `#cta-final`, `#contato`)
+- `page.tsx` — 6 Atos; Ato 2: Intro, Hero, Futuro, SteelFrame, HowItWorks, VideoReplay; Atos 3–6: anchors preparados
 - `globals.css` — Tailwind v4 + @theme inline + reset + sr-only + focus ring
 - `robots.ts` · `sitemap.ts` · `icon.tsx` · `politica-privacidade/page.tsx`
 

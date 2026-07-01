@@ -16,6 +16,41 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.8.0] — 2026-06-30 — CP-013: SteelFrameSection refatorada + VideoReplaySection
+
+### Modificado
+
+**`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`** — refactor completo
+- Layout 2 colunas removido; novo layout vertical com vídeo como protagonista
+- Ordem: Eyebrow → Headline → Texto introdutório → Vídeo → Benefícios → CTA
+- Vídeo: `w-full` mobile → `lg:w-[85%]` desktop, centralizado; `paddingBottom: 56.25%` preserva proporção 16:9
+- Container do vídeo: `border-radius: --vm-radius-xl`, `box-shadow: --vm-shadow-light-lg`, `border: --vm-border-light`
+- Animação de entrada via `ScrollReveal delay={0.12}`
+- Carregamento: `preload="metadata"`, `autoPlay`, `loop`, `muted`, `object-fit: cover`
+- Benefícios: grid 2 colunas no desktop (`sm:grid-cols-2`), máximo 760px de largura
+- Eyebrow atualizado: "O que é Steel Frame"
+
+### Adicionado
+
+**`src/components/sections/VideoReplaySection/VideoReplaySection.tsx`** — novo
+- Reforço visual após HowItWorksSection (antes do Ato 3)
+- Mesmo vídeo `construcao-completa.mp4` em largura total do container
+- `preload="none"` — carregamento lazy por estar abaixo da dobra
+- Fundo `--vm-bg-primary`, bordas e sombra consistentes com design system
+
+**`src/app/page.tsx`**
+- Import e inserção de `VideoReplaySection` após `HowItWorksSection` no Ato 2
+
+### Validações do Checkpoint CP-013
+
+```
+npm run typecheck   → ✅ Zero erros TypeScript
+npm run lint        → ✅ Zero erros ESLint
+npm run build       → ✅ Build limpo (8/8 páginas estáticas)
+```
+
+---
+
 ## [0.7.0] — 2026-06-30 — CP-012: Identidade Visual Engineering Premium
 
 ### Mudança de Direção Artística
