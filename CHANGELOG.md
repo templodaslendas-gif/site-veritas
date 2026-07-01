@@ -16,6 +16,27 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.9.2] — 2026-06-30 — CP-016: Renomeia arquivo de video com extensao dupla
+
+### Corrigido
+
+**`public/steel-frame/construcao-completa.mp4`**
+- Arquivo estava nomeado `construcao-completa.mp4.mp4` (extensao dupla) no disco
+- Renomeado para `construcao-completa.mp4` — URL `/steel-frame/construcao-completa.mp4` agora resolve
+- Causa raiz: commit fix(assets) atualizou o rastreamento git mas nao renomeou o arquivo fisicamente
+
+**`src/components/shared/VideoPlayer/index.tsx`**
+- `VideoFallback` agora exibe o path que falhou em modo desenvolvimento
+- Em producao: exibe apenas "Video em breve" (sem informacao de path)
+- Facilita diagnostico de 404 em assets de video sem inspecionar DevTools manualmente
+
+### Validacoes CP-016
+```
+npm run typecheck -> OK  |  npm run lint -> OK  |  npm run build -> OK
+```
+
+---
+
 ## [0.9.1] — 2026-06-30 — CP-015: Restaura vídeo SteelFrameSection + corrige caminho VideoReplay
 
 ### Corrigido

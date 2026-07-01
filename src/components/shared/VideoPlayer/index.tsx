@@ -19,10 +19,11 @@ interface VideoPlayerProps {
   preload?: 'none' | 'metadata' | 'auto'
 }
 
-function VideoFallback({ className }: { className?: string }) {
+function VideoFallback({ className, failedSrc }: { className?: string; failedSrc?: string }) {
+  const isDev = process.env.NODE_ENV === 'development'
   return (
     <div
-      className={cn('flex min-h-[400px] items-center justify-center', className)}
+      className={cn('flex min-h-[400px] flex-col items-center justify-center gap-2', className)}
       style={{ background: 'var(--vm-surface)' }}
       aria-label="Vídeo em breve"
       role="img"
@@ -36,6 +37,18 @@ function VideoFallback({ className }: { className?: string }) {
       >
         Vídeo em breve
       </span>
+      {isDev && failedSrc && (
+        <span
+          style={{
+            color: '#ef4444',
+            fontSize: '0.7rem',
+            fontFamily: 'monospace',
+            opacity: 0.8,
+          }}
+        >
+          [DEV] falhou: {failedSrc}
+        </span>
+      )}
     </div>
   )
 }
@@ -53,9 +66,10 @@ export function VideoPlayer({
   const [hasError, setHasError] = useState(false)
 
   const hasSrc = src || (sources && sources.length > 0)
+  const failedSrc = src ?? sources?.[0]?.src
 
   if (!hasSrc || hasError) {
-    return <VideoFallback className={className} />
+    return <VideoFallback className={className} failedSrc={hasError ? failedSrc : undefined} />
   }
 
   return (
