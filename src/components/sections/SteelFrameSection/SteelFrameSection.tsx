@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
@@ -101,13 +101,13 @@ export function SteelFrameSection() {
           </p>
         </ScrollReveal>
 
-        {/* Imagem da estrutura em aço */}
+        {/* Vídeo protagonista — 85% da largura no desktop */}
         <ScrollReveal delay={0.12}>
           <div
             className="mx-auto w-full lg:w-[85%]"
             style={{
               position: 'relative',
-              aspectRatio: '16 / 9',
+              paddingBottom: '56.25%',
               borderRadius: 'var(--vm-radius-xl)',
               overflow: 'hidden',
               boxShadow: 'var(--vm-shadow-light-lg)',
@@ -115,14 +115,16 @@ export function SteelFrameSection() {
               marginBottom: 'var(--vm-space-16)',
             }}
           >
-            <Image
-              src="/steel-frame/estrutura.jpg"
-              alt="Estrutura em perfis de aço galvanizado — Veritas Metal"
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="(max-width: 1024px) 100vw, 85vw"
-              priority={false}
-            />
+            <div style={{ position: 'absolute', inset: 0 }}>
+              <VideoPlayer
+                src="/steel-frame/construcao-completa.mp4"
+                autoPlay={true}
+                loop={true}
+                muted={true}
+                preload="metadata"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </ScrollReveal>
 

@@ -16,6 +16,26 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.9.1] — 2026-06-30 — CP-015: Restaura vídeo SteelFrameSection + corrige caminho VideoReplay
+
+### Corrigido
+
+**`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`**
+- Importacao de `next/image` removida; `VideoPlayer` restaurado
+- Bloco Image (estrutura.jpg) substituido pelo VideoPlayer com 16:9 e largura 85%
+- Caminho: `/steel-frame/construcao-completa.mp4`
+
+**`src/components/sections/VideoReplaySection/VideoReplaySection.tsx`**
+- Caminho corrigido: `/videos/steel-frame/construcao-completa.mp4` -> `/steel-frame/construcao-completa.mp4`
+- Zero ocorrencias de `/videos/steel-frame/` no projeto (grep confirmado)
+
+### Validacoes CP-015
+```
+npm run typecheck -> OK  |  npm run lint -> OK  |  npm run build -> OK
+```
+
+---
+
 ## [0.9.0] — 2026-06-30 — CP-014: VideoReplaySection caminho correto + fallback
 
 ### Modificado
