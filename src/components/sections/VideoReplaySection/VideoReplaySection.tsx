@@ -18,6 +18,33 @@ export function VideoReplaySection() {
     >
       <div style={CONTAINER}>
         <ScrollReveal>
+          <div style={{ marginBottom: 'var(--vm-space-10)', maxWidth: '720px' }}>
+            <h2
+              style={{
+                fontFamily: 'var(--vm-font-display)',
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                letterSpacing: 'var(--vm-tracking-display)',
+                color: 'var(--vm-text-on-light)',
+                textTransform: 'uppercase',
+                lineHeight: 'var(--vm-leading-tight)',
+                marginBottom: 'var(--vm-space-4)',
+              }}
+            >
+              Veja uma construção em Steel Frame nascer do zero.
+            </h2>
+            <p
+              style={{
+                fontFamily: 'var(--vm-font-body)',
+                fontSize: 'var(--vm-text-lg)',
+                lineHeight: 'var(--vm-leading-relaxed)',
+                color: 'var(--vm-text-on-light-secondary)',
+              }}
+            >
+              Do projeto à estrutura, do fechamento ao acabamento final.
+            </p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal delay={0.1}>
           <div
             style={{
               position: 'relative',

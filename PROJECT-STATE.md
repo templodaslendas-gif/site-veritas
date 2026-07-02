@@ -2,9 +2,9 @@
 
 ## Estado Atual
 
-- **Fase:** Vídeos do Steel Frame separados por seção (SteelFrameSection usa estrutura.jpg; VideoReplaySection usa construcao-completa.mp4)
+- **Fase:** Arquitetura visual da SteelFrameSection corrigida (texto-protagonista + imagem técnica lateral); VideoReplaySection com título/subtítulo + vídeo grande após timeline
 - **Próxima:** Macrofase 3 — Ato 3 (Comparativo, Benefícios, Conheça a Estrutura)
-- **Checkpoint:** CP-017 ✅
+- **Checkpoint:** CP-018 ✅
 - **Última atualização:** 2026-07-01
 
 ---
@@ -30,6 +30,7 @@
 | CP-015 | Restaura VideoPlayer em SteelFrameSection; corrige caminho VideoReplaySection para /steel-frame/ | ✅ | ✅ | ✅ | Entregue |
 | CP-016 | Renomeia construcao-completa.mp4.mp4 -> .mp4 (extensao dupla); VideoPlayer exibe path no fallback dev | ✅ | ✅ | ✅ | Entregue |
 | CP-017 | Separa videos por secao: SteelFrameSection usa estrutura.jpg (estrutura.mp4 nao existe); VideoReplaySection mantem construcao-completa.mp4 | ✅ | ✅ | ✅ | Entregue |
+| CP-018 | Corrige arquitetura visual: SteelFrameSection vira secao educativa texto+imagem tecnica lateral (nao mais video/imagem protagonista); VideoReplaySection ganha titulo/subtitulo; comparativo.mp4.mp4 -> comparativo.mp4 | ✅ | ✅ | ✅ | Entregue |
 
 ---
 

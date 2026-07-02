@@ -16,6 +16,26 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.9.4] — 2026-07-01 — CP-018: Corrige arquitetura visual das secoes de video
+
+### Corrigido
+
+**`src/components/sections/SteelFrameSection/SteelFrameSection.tsx`**
+- Secao reestruturada: de "video/imagem protagonista de largura total" para layout educativo texto+imagem
+- Coluna de texto (eyebrow, headline, intro, beneficios, CTA) agora e o elemento principal
+- `estrutura.jpg` rebaixada para imagem tecnica lateral (360px, sticky no desktop), com legenda
+- Grid `1fr 360px` no desktop; empilha em coluna unica no mobile
+
+**`src/components/sections/VideoReplaySection/VideoReplaySection.tsx`**
+- Adicionado titulo "Veja uma construção em Steel Frame nascer do zero." e subtitulo "Do projeto à estrutura, do fechamento ao acabamento final." antes do video
+- Video grande (`construcao-completa.mp4`) mantido: autoplay, muted, loop, playsInline, preload="metadata", object-cover, bordas arredondadas, sombra premium
+
+**`public/steel-frame/`**
+- `comparativo.mp4.mp4` renomeado para `comparativo.mp4` (extensao dupla corrigida) — arquivo reservado, nao utilizado na Home ainda
+
+**Ordem de secoes em `src/app/page.tsx`** (auditada, sem alteracao necessaria):
+IntroSection -> HeroSection -> FutureSection -> SteelFrameSection -> HowItWorksSection -> VideoReplaySection -> anchors futuros
+
 ## [0.9.3] — 2026-07-01 — CP-017: Separa videos Steel Frame por secao
 
 ### Corrigido
