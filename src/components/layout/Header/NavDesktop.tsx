@@ -1,6 +1,6 @@
 export const NAV_ITEMS = [
   { label: 'Steel Frame', href: '#steel-frame' },
-  { label: 'Projetos', href: '#projetos' },
+  { label: 'Diferenciais', href: '#diferenciais' },
   { label: 'Drywall', href: '#drywall' },
   { label: 'Estruturas', href: '#estruturas' },
   { label: 'FAQ', href: '#faq' },

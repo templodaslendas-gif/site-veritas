@@ -37,22 +37,32 @@ export function DrywallSection() {
           {/* Copy */}
           <div>
             <ScrollReveal>
+              <div
+                aria-hidden="true"
+                style={{
+                  width: '32px',
+                  height: '2px',
+                  background: 'var(--vm-copper)',
+                  marginBottom: 'var(--vm-space-4)',
+                }}
+              />
               <p
                 style={{
                   fontFamily: 'var(--vm-font-body)',
-                  fontSize: 'var(--vm-text-xs)',
+                  fontSize: 'var(--vm-text-sm)',
+                  fontWeight: 600,
                   letterSpacing: 'var(--vm-tracking-label)',
                   color: 'var(--vm-copper)',
                   textTransform: 'uppercase',
                   marginBottom: 'var(--vm-space-4)',
                 }}
               >
-                Solução complementar
+                Drywall de alto padrão
               </p>
               <h2
                 style={{
                   fontFamily: 'var(--vm-font-display)',
-                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                  fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)',
                   letterSpacing: 'var(--vm-tracking-display)',
                   color: 'var(--vm-text-on-light)',
                   textTransform: 'uppercase',
@@ -60,7 +70,7 @@ export function DrywallSection() {
                   marginBottom: 'var(--vm-space-6)',
                 }}
               >
-                Drywall: interiores rápidos e impecáveis.
+                Drywall para interiores rápidos, limpos e impecáveis.
               </h2>
               <p
                 style={{

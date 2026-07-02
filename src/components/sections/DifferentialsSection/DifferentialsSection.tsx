@@ -99,23 +99,33 @@ export function DifferentialsSection() {
       <div style={CONTAINER}>
         {/* Header */}
         <ScrollReveal>
-          <div style={{ marginBottom: 'var(--vm-space-16)', maxWidth: '640px' }}>
+          <div style={{ marginBottom: 'clamp(2.5rem, 6vw, 4rem)', maxWidth: '680px' }}>
+            <div
+              aria-hidden="true"
+              style={{
+                width: '32px',
+                height: '2px',
+                background: 'var(--vm-copper)',
+                marginBottom: 'var(--vm-space-4)',
+              }}
+            />
             <p
               style={{
                 fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-xs)',
+                fontSize: 'var(--vm-text-sm)',
+                fontWeight: 600,
                 letterSpacing: 'var(--vm-tracking-label)',
                 color: 'var(--vm-copper)',
                 textTransform: 'uppercase',
                 marginBottom: 'var(--vm-space-4)',
               }}
             >
-              Por que a Veritas Metal
+              Por que escolher a Veritas Metal
             </p>
             <h2
               style={{
                 fontFamily: 'var(--vm-font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                fontSize: 'clamp(2.25rem, 6vw, 4rem)',
                 letterSpacing: 'var(--vm-tracking-display)',
                 color: 'var(--vm-text-on-light)',
                 textTransform: 'uppercase',
@@ -123,12 +133,12 @@ export function DifferentialsSection() {
                 marginBottom: 'var(--vm-space-6)',
               }}
             >
-              Engenharia que você acompanha de perto.
+              Engenharia, equipe qualificada e garantia do início ao fim.
             </h2>
             <p
               style={{
                 fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-lg)',
+                fontSize: 'var(--vm-text-xl)',
                 lineHeight: 'var(--vm-leading-relaxed)',
                 color: 'var(--vm-text-on-light-secondary)',
               }}
@@ -140,47 +150,53 @@ export function DifferentialsSection() {
         </ScrollReveal>
 
         {/* Grid de diferenciais */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {DIFFERENTIALS.map((item, i) => (
             <ScrollReveal key={item.title} delay={Math.min(i * 0.08, 0.4)} direction="up">
               <article
                 style={{
                   background: 'var(--vm-card-bg)',
                   border: '1px solid var(--vm-border-light)',
-                  borderRadius: 'var(--vm-radius-lg)',
-                  padding: 'var(--vm-space-8)',
+                  borderRadius: 'var(--vm-radius-xl)',
+                  padding: 'var(--vm-space-8) var(--vm-space-8) var(--vm-space-10)',
                   height: '100%',
                   cursor: 'default',
-                  boxShadow: 'var(--vm-shadow-light-sm)',
+                  boxShadow: 'var(--vm-shadow-light-md)',
                   transition: `border-color var(--vm-dur-normal) var(--vm-ease-out), transform var(--vm-dur-normal) var(--vm-ease-out), box-shadow var(--vm-dur-normal) var(--vm-ease-out)`,
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement
                   el.style.borderColor = 'var(--vm-copper)'
-                  el.style.transform = 'translateY(-4px)'
-                  el.style.boxShadow = 'var(--vm-shadow-light-md)'
+                  el.style.transform = 'translateY(-6px)'
+                  el.style.boxShadow = 'var(--vm-shadow-light-lg)'
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLElement
                   el.style.borderColor = 'var(--vm-border-light)'
                   el.style.transform = 'translateY(0)'
-                  el.style.boxShadow = 'var(--vm-shadow-light-sm)'
+                  el.style.boxShadow = 'var(--vm-shadow-light-md)'
                 }}
               >
                 <div
                   style={{
-                    width: '40px',
-                    height: '40px',
+                    width: '56px',
+                    height: '56px',
+                    borderRadius: '50%',
+                    background: 'rgba(196,128,62,0.08)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     color: 'var(--vm-copper)',
-                    marginBottom: 'var(--vm-space-5)',
+                    marginBottom: 'var(--vm-space-6)',
                   }}
                 >
-                  {item.icon}
+                  <div style={{ width: '26px', height: '26px' }}>{item.icon}</div>
                 </div>
                 <h3
                   style={{
                     fontFamily: 'var(--vm-font-heading)',
                     fontSize: 'var(--vm-h4)',
+                    fontWeight: 700,
                     color: 'var(--vm-text-on-light)',
                     lineHeight: 'var(--vm-leading-snug)',
                     marginBottom: 'var(--vm-space-3)',
@@ -191,7 +207,7 @@ export function DifferentialsSection() {
                 <p
                   style={{
                     fontFamily: 'var(--vm-font-body)',
-                    fontSize: 'var(--vm-text-sm)',
+                    fontSize: 'var(--vm-text-base)',
                     lineHeight: 'var(--vm-leading-relaxed)',
                     color: 'var(--vm-text-on-light-secondary)',
                   }}

@@ -71,7 +71,7 @@ export function ContactSection() {
       <div style={CONTAINER}>
         {/* Header */}
         <ScrollReveal>
-          <div style={{ marginBottom: 'var(--vm-space-16)', maxWidth: '640px' }}>
+          <div style={{ marginBottom: 'clamp(2.5rem, 6vw, 4rem)', maxWidth: '640px' }}>
             <p
               style={{
                 fontFamily: 'var(--vm-font-body)',

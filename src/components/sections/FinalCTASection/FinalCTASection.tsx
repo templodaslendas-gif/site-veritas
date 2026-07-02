@@ -77,9 +77,11 @@ export function FinalCTASection() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
+            className="w-full sm:w-auto"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: 'var(--vm-space-3)',
               paddingInline: '2.75rem',
               paddingBlock: '1.1rem',

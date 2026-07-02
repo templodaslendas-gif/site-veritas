@@ -7,7 +7,6 @@ import { VideoReplaySection } from '@/components/sections/VideoReplaySection/Vid
 import { ComparisonSection } from '@/components/sections/ComparisonSection/ComparisonSection'
 import { BenefitsSection } from '@/components/sections/BenefitsSection/BenefitsSection'
 import { StructureSection } from '@/components/sections/StructureSection/StructureSection'
-import { ProjectsSection } from '@/components/sections/ProjectsSection/ProjectsSection'
 import { DifferentialsSection } from '@/components/sections/DifferentialsSection/DifferentialsSection'
 import { DrywallSection } from '@/components/sections/DrywallSection/DrywallSection'
 import { MetalStructuresSection } from '@/components/sections/MetalStructuresSection/MetalStructuresSection'
@@ -33,8 +32,7 @@ export default function Home() {
       <BenefitsSection />
       <StructureSection />
 
-      {/* ATO 4 — PORTFÓLIO */}
-      <ProjectsSection />
+      {/* ATO 4 — DIFERENCIAIS */}
       <DifferentialsSection />
 
       {/* ATO 5 — SOLUÇÃO COMPLETA */}

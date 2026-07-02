@@ -92,7 +92,7 @@ export function FAQSection() {
       <div style={CONTAINER}>
         {/* Header */}
         <ScrollReveal>
-          <div style={{ marginBottom: 'var(--vm-space-12)', maxWidth: '640px' }}>
+          <div style={{ marginBottom: 'clamp(2rem, 5vw, 3rem)', maxWidth: '640px' }}>
             <p
               style={{
                 fontFamily: 'var(--vm-font-body)',

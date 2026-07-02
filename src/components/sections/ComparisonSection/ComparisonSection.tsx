@@ -81,7 +81,7 @@ export function ComparisonSection() {
       <div style={CONTAINER}>
         {/* Header */}
         <ScrollReveal>
-          <div style={{ marginBottom: 'var(--vm-space-12)', maxWidth: '680px' }}>
+          <div style={{ marginBottom: 'clamp(2rem, 5vw, 3rem)', maxWidth: '680px' }}>
             <p
               style={{
                 fontFamily: 'var(--vm-font-body)',
@@ -121,28 +121,37 @@ export function ComparisonSection() {
           </div>
         </ScrollReveal>
 
-        {/* Vídeo comparativo — destaque principal */}
+        {/* Vídeo comparativo — destaque principal. Fonte é vertical (9:16);
+            enquadrado no próprio formato nativo para nunca cortar a imagem. */}
         <ScrollReveal delay={0.1}>
           <div
             style={{
-              position: 'relative',
-              paddingBottom: '56.25%',
-              borderRadius: 'var(--vm-radius-xl)',
-              overflow: 'hidden',
-              border: '1px solid var(--vm-border)',
-              boxShadow: 'var(--vm-shadow-xl)',
-              marginBottom: 'var(--vm-space-16)',
+              maxWidth: 'clamp(260px, 60vw, 420px)',
+              marginInline: 'auto',
+              marginBottom: 'clamp(2.5rem, 6vw, 4rem)',
             }}
           >
-            <div style={{ position: 'absolute', inset: 0 }}>
-              <VideoPlayer
-                src="/steel-frame/comparativo.mp4"
-                autoPlay
-                loop
-                muted
-                preload="none"
-                className="h-full w-full object-cover"
-              />
+            <div
+              style={{
+                position: 'relative',
+                aspectRatio: '9 / 16',
+                borderRadius: 'var(--vm-radius-xl)',
+                overflow: 'hidden',
+                border: '1px solid var(--vm-border)',
+                boxShadow: 'var(--vm-shadow-xl)',
+                background: 'var(--vm-black)',
+              }}
+            >
+              <div style={{ position: 'absolute', inset: 0 }}>
+                <VideoPlayer
+                  src="/steel-frame/comparativo.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  preload="none"
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
             </div>
           </div>
         </ScrollReveal>
@@ -150,7 +159,7 @@ export function ComparisonSection() {
         {/* Stats animados */}
         <div
           className="grid grid-cols-1 gap-8 sm:grid-cols-3"
-          style={{ marginBottom: 'var(--vm-space-16)' }}
+          style={{ marginBottom: 'clamp(2.5rem, 6vw, 4rem)' }}
         >
           {STATS.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={i * 0.1}>
@@ -193,7 +202,7 @@ export function ComparisonSection() {
           <ScrollReveal>
             <div
               role="row"
-              className="hidden sm:grid sm:grid-cols-[1.1fr_1fr_1fr]"
+              className="hidden lg:grid lg:grid-cols-[1.1fr_1fr_1fr]"
               style={{
                 gap: 'var(--vm-space-4)',
                 paddingInline: 'var(--vm-space-6)',
@@ -243,7 +252,7 @@ export function ComparisonSection() {
             <ScrollReveal key={row.criterion} delay={Math.min(i * 0.05, 0.3)}>
               <div
                 role="row"
-                className="grid grid-cols-1 gap-2 sm:grid-cols-[1.1fr_1fr_1fr] sm:gap-4"
+                className="grid grid-cols-1 gap-2 lg:grid-cols-[1.1fr_1fr_1fr] lg:gap-4"
                 style={{
                   background: 'var(--vm-surface)',
                   border: '1px solid var(--vm-border)',
@@ -271,13 +280,13 @@ export function ComparisonSection() {
                   {row.criterion}
                 </span>
                 <span role="cell" style={{ ...CELL_TEXT, color: 'var(--vm-copper-light)' }}>
-                  <span className="sm:hidden" style={{ color: 'var(--vm-text-muted)' }}>
+                  <span className="lg:hidden" style={{ color: 'var(--vm-text-muted)' }}>
                     Steel Frame:{' '}
                   </span>
                   {row.steelFrame}
                 </span>
                 <span role="cell" style={{ ...CELL_TEXT, color: 'var(--vm-text-muted)' }}>
-                  <span className="sm:hidden">Convencional: </span>
+                  <span className="lg:hidden">Convencional: </span>
                   {row.conventional}
                 </span>
               </div>
@@ -295,20 +304,12 @@ export function ComparisonSection() {
             height: '1px',
             background: 'linear-gradient(90deg, var(--vm-copper) 0%, transparent 100%)',
             transformOrigin: 'left',
-            marginTop: 'var(--vm-space-12)',
+            marginTop: 'clamp(2rem, 5vw, 3rem)',
             marginBottom: 'var(--vm-space-8)',
           }}
         />
         <ScrollReveal>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 'var(--vm-space-6)',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-          >
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <p
               style={{
                 fontFamily: 'var(--vm-font-body)',
@@ -325,6 +326,7 @@ export function ComparisonSection() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="w-full sm:w-auto"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -342,6 +344,7 @@ export function ComparisonSection() {
                 borderRadius: 'var(--vm-radius-sm)',
                 border: '1px solid var(--vm-copper)',
                 whiteSpace: 'nowrap',
+                flexShrink: 0,
                 transition: `background-color var(--vm-dur-fast) var(--vm-ease-out), transform var(--vm-dur-fast) var(--vm-ease-out)`,
               }}
               onMouseEnter={(e) => {

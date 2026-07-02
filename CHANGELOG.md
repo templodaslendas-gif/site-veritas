@@ -8,9 +8,54 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 ## [Não Lançado]
 
 ### A implementar
-- **Conteúdo:** fotos reais dos Projetos, /drywall/drywall.mp4, /estruturas/estrutura-metalica.mp4, /steel-frame/estrutura.mp4, mapa interativo no Contato
+- **Conteúdo:** fotos reais de projetos executados (galeria a recriar quando houver material), /drywall/drywall.mp4, /estruturas/estrutura-metalica.mp4, /steel-frame/estrutura.mp4, mapa interativo no Contato
 - **Formulário de contato:** RHF/Zod (opcional)
 - **Infraestrutura (Macrofase 6):** GA4, cookie consent (LGPD), CSP, Deploy produção
+
+---
+
+## [0.10.1] — 2026-07-01 — CP-020: Ajuste visual final e responsividade mobile
+
+### Causa raiz corrigida — vídeos quebrados
+- `public/steel-frame/comparativo.mp4` e `construcao-completa.mp4` haviam sido substituídos por novos arquivos salvos com extensão dupla (`.mp4.mp4`) — os caminhos usados pelo código (`/steel-frame/comparativo.mp4`, `/steel-frame/construcao-completa.mp4`) resultavam em 404. Renomeados para o nome correto (mesmo problema recorrente de CP-010/CP-016).
+- Investigação com `ffprobe` revelou que `comparativo.mp4` é um vídeo **retrato** (576×1024, proporção 9:16) — a seção Comparativo o exibia dentro de uma caixa forçada em 16:9 com `object-cover`, causando corte severo (zoom extremo, quase todo o quadro cortado). `construcao-completa.mp4` é 1024×576 (16:9), compatível com o container existente — nenhuma alteração necessária ali.
+
+### Removido
+- `src/components/sections/ProjectsSection/` (componente completo) — seção "Projetos que saíram do papel" removida da Home (`src/app/page.tsx`) por não agregar valor sem fotos reais
+- Item de navegação "Projetos" (`#projetos`) removido de `NavDesktop.tsx` (`NAV_ITEMS`) e `Footer.tsx` (`NAV_LINKS`) — substituído por "Diferenciais" (`#diferenciais`), evitando link morto
+
+### Corrigido
+**`src/components/sections/ComparisonSection/ComparisonSection.tsx`**
+- Vídeo comparativo reenquadrado no próprio formato nativo (9:16): card centralizado com `maxWidth: clamp(260px, 60vw, 420px)` e `aspectRatio: 9/16`, em vez da caixa 16:9 de largura total — elimina o corte por completo, em qualquer dispositivo
+- Tabela comparativa: breakpoint de colunas movido de `sm` (480px) para `lg` (1024px) — eliminava uma "zona de aperto" em telas de 480–1023px onde 3 colunas ficavam espremidas; agora permanece empilhada com rótulos inline até desktop
+- CTA final convertido para `flex-col sm:flex-row` com botão `w-full sm:w-auto` — nunca mais overflow em telas estreitas
+- Margens fixas de 64px (`var(--vm-space-16)`) convertidas para `clamp()` responsivo — reduz espaçamento vertical excessivo no mobile sem alterar o desktop
+
+**Espaçamento responsivo (mesmo padrão `clamp()` aplicado)**
+- `BenefitsSection`, `StructureSection`, `FAQSection`, `ContactSection`: `marginBottom` do bloco de cabeçalho convertido de fixo para `clamp()`
+
+**`src/components/sections/FinalCTASection/FinalCTASection.tsx`**
+- Botão principal ganhou `className="w-full sm:w-auto"` — garante que nunca quebre em telas muito estreitas (280–320px)
+
+### Modificado — mais presença visual
+**`src/components/sections/DrywallSection/DrywallSection.tsx`**
+- Eyebrow: "Solução complementar" → "Drywall de alto padrão" (+ linha copper de destaque, fonte maior)
+- Headline: "Drywall: interiores rápidos e impecáveis." → "Drywall para interiores rápidos, limpos e impecáveis." (clamp máximo aumentado)
+
+**`src/components/sections/MetalStructuresSection/MetalStructuresSection.tsx`**
+- Eyebrow: "Solução complementar" → "Estruturas metálicas" (+ linha copper de destaque, fonte maior)
+- Headline: "Estruturas metálicas sob medida." → "Estruturas metálicas sob medida para obras fortes e precisas."
+
+**`src/components/sections/DifferentialsSection/DifferentialsSection.tsx`** — reforço completo de hierarquia
+- Eyebrow: "Por que a Veritas Metal" → "Por que escolher a Veritas Metal", com linha copper de destaque, fonte maior (`text-sm`)
+- Headline: "Engenharia que você acompanha de perto." → "Engenharia, equipe qualificada e garantia do início ao fim.", clamp aumentado para até 4rem
+- Parágrafo de apoio: `text-lg` → `text-xl`
+- Cards: ícone dentro de círculo copper-tint (56px), padding maior, `border-radius` xl, `gap` maior no grid, hover mais pronunciado (translateY -6px, shadow lg), título com `font-weight: 700`, descrição em `text-base` (era `text-sm`) para melhor legibilidade no mobile
+
+### Validações CP-020
+```
+npm run typecheck -> OK  |  npm run lint -> OK  |  npm run build -> OK (8/8 páginas estáticas)
+```
 
 ---
 

@@ -4,7 +4,7 @@ import { FooterLinkGroup } from './FooterLinks'
 
 const NAV_LINKS = [
   { label: 'Steel Frame', href: '#steel-frame' },
-  { label: 'Projetos', href: '#projetos' },
+  { label: 'Diferenciais', href: '#diferenciais' },
   { label: 'Drywall', href: '#drywall' },
   { label: 'Estruturas Metálicas', href: '#estruturas' },
   { label: 'FAQ', href: '#faq' },

@@ -69,22 +69,32 @@ export function MetalStructuresSection() {
           {/* Copy */}
           <div className="order-1 lg:order-2">
             <ScrollReveal>
+              <div
+                aria-hidden="true"
+                style={{
+                  width: '32px',
+                  height: '2px',
+                  background: 'var(--vm-copper)',
+                  marginBottom: 'var(--vm-space-4)',
+                }}
+              />
               <p
                 style={{
                   fontFamily: 'var(--vm-font-body)',
-                  fontSize: 'var(--vm-text-xs)',
+                  fontSize: 'var(--vm-text-sm)',
+                  fontWeight: 600,
                   letterSpacing: 'var(--vm-tracking-label)',
                   color: 'var(--vm-copper)',
                   textTransform: 'uppercase',
                   marginBottom: 'var(--vm-space-4)',
                 }}
               >
-                Solução complementar
+                Estruturas metálicas
               </p>
               <h2
                 style={{
                   fontFamily: 'var(--vm-font-display)',
-                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                  fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)',
                   letterSpacing: 'var(--vm-tracking-display)',
                   color: 'var(--vm-text-on-light)',
                   textTransform: 'uppercase',
@@ -92,7 +102,7 @@ export function MetalStructuresSection() {
                   marginBottom: 'var(--vm-space-6)',
                 }}
               >
-                Estruturas metálicas sob medida.
+                Estruturas metálicas sob medida para obras fortes e precisas.
               </h2>
               <p
                 style={{
