@@ -4,6 +4,16 @@ import { FutureSection } from '@/components/sections/FutureSection/FutureSection
 import { SteelFrameSection } from '@/components/sections/SteelFrameSection/SteelFrameSection'
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection/HowItWorksSection'
 import { VideoReplaySection } from '@/components/sections/VideoReplaySection/VideoReplaySection'
+import { ComparisonSection } from '@/components/sections/ComparisonSection/ComparisonSection'
+import { BenefitsSection } from '@/components/sections/BenefitsSection/BenefitsSection'
+import { StructureSection } from '@/components/sections/StructureSection/StructureSection'
+import { ProjectsSection } from '@/components/sections/ProjectsSection/ProjectsSection'
+import { DifferentialsSection } from '@/components/sections/DifferentialsSection/DifferentialsSection'
+import { DrywallSection } from '@/components/sections/DrywallSection/DrywallSection'
+import { MetalStructuresSection } from '@/components/sections/MetalStructuresSection/MetalStructuresSection'
+import { FAQSection } from '@/components/sections/FAQSection/FAQSection'
+import { FinalCTASection } from '@/components/sections/FinalCTASection/FinalCTASection'
+import { ContactSection } from '@/components/sections/ContactSection/ContactSection'
 
 export default function Home() {
   return (
@@ -19,22 +29,22 @@ export default function Home() {
       <VideoReplaySection />
 
       {/* ATO 3 — COMPROVAÇÃO */}
-      <section id="comparativo" aria-label="Comparativo Steel Frame vs Construção Convencional" />
-      <section id="beneficios" aria-label="Benefícios do Steel Frame" />
-      <section id="conheca-estrutura" aria-label="Conheça a Estrutura" />
+      <ComparisonSection />
+      <BenefitsSection />
+      <StructureSection />
 
       {/* ATO 4 — PORTFÓLIO */}
-      <section id="projetos" aria-label="Projetos Realizados" />
-      <section id="diferenciais" aria-label="Diferenciais Veritas Metal" />
+      <ProjectsSection />
+      <DifferentialsSection />
 
       {/* ATO 5 — SOLUÇÃO COMPLETA */}
-      <section id="drywall" aria-label="Drywall" />
-      <section id="estruturas" aria-label="Estruturas Metálicas" />
+      <DrywallSection />
+      <MetalStructuresSection />
 
       {/* ATO 6 — CONVERSÃO */}
-      <section id="faq" aria-label="Perguntas Frequentes" />
-      <section id="cta-final" aria-label="Solicite seu Orçamento" />
-      <section id="contato" aria-label="Entre em Contato" />
+      <FAQSection />
+      <FinalCTASection />
+      <ContactSection />
     </main>
   )
 }

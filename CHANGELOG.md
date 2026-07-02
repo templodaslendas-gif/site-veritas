@@ -7,12 +7,55 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ## [Não Lançado]
 
-### A implementar — Narrativa em 6 Atos
-- **Ato 3 (Macrofase 3):** Comparativo, Benefícios, Conheça a Estrutura
-- **Ato 4 (Macrofase 3):** Projetos, Diferenciais
-- **Ato 5 (Macrofase 4):** Drywall, Estruturas Metálicas
-- **Ato 6 (Macrofase 5):** FAQ, CTA Final, Contato + Formulário
+### A implementar
+- **Conteúdo:** fotos reais dos Projetos, /drywall/drywall.mp4, /estruturas/estrutura-metalica.mp4, /steel-frame/estrutura.mp4, mapa interativo no Contato
+- **Formulário de contato:** RHF/Zod (opcional)
 - **Infraestrutura (Macrofase 6):** GA4, cookie consent (LGPD), CSP, Deploy produção
+
+---
+
+## [0.10.0] — 2026-07-01 — CP-019: Home completa com cinematic motion
+
+### Adicionado
+
+**Shared**
+- `src/components/shared/AnimatedNumber/index.tsx` — contador animado 0→valor ao entrar no viewport; SSR renderiza o valor final (conteúdo nunca invisível); respeita `prefers-reduced-motion`
+- `src/components/shared/MediaPlaceholder/index.tsx` — placeholder premium para mídia inexistente: gradiente sutil, malha técnica, ícone copper; variantes light/dark; nunca referencia arquivo ausente
+
+**ATO 3 — Comprovação**
+- `ComparisonSection` (`#comparativo`, fundo preto) — vídeo `/steel-frame/comparativo.mp4` como destaque principal (preload="none"), 3 stats animados (60% mais rápido, 90% menos resíduos, 5x mais leve), tabela comparativa premium com 8 critérios (tempo, desperdício, peso, precisão, limpeza, isolamento, manutenção, sustentabilidade), linha copper animada (scaleX) e CTA WhatsApp
+- `BenefitsSection` (`#beneficios`, off-white) — 8 cards premium com ícones SVG, stagger reveal e hover copper com profundidade
+- `StructureSection` (`#conheca-estrutura`, branco) — `/steel-frame/estrutura.jpg` sticky com parallax leve (useScroll/useTransform, desativado com reduced-motion) + 6 camadas explicadas com badges numerados e conectores animados (aço galvanizado, OSB, membrana, isolamento, drywall, acabamento); preparada para futuro `estrutura.mp4`
+
+**ATO 4 — Portfólio**
+- `ProjectsSection` (`#projetos`, charcoal) — galeria com 6 cards placeholder elegantes (malha técnica, gradiente, categoria copper, badge "Fotos em breve"); interface `ProjectItem.media?` pronta para fotos/vídeos reais; CTA WhatsApp
+- `DifferentialsSection` (`#diferenciais`, off-white) — 6 cards: acompanhamento com engenheiro, equipe qualificada, garantia real, planejamento, execução do início ao fim, padrão técnico
+
+**ATO 5 — Solução Completa**
+- `DrywallSection` (`#drywall`, branco) — copy + 4 destaques + MediaPlaceholder premium; const `DRYWALL_VIDEO` pronta para receber `/drywall/drywall.mp4`; CTA WhatsApp
+- `MetalStructuresSection` (`#estruturas`, off-white) — mídia à esquerda para alternar ritmo visual; const `METAL_VIDEO` pronta para `/estruturas/estrutura-metalica.mp4`; CTA WhatsApp
+
+**ATO 6 — Conversão**
+- `FAQSection` (`#faq`, branco) — accordion premium com 10 perguntas reais sobre Steel Frame; AnimatePresence com animação de altura, `aria-expanded`/`aria-controls`, duração zero com reduced-motion
+- `FinalCTASection` (`#cta-final`, preto) — linha copper animada, headline display grande, botão WhatsApp com ícone e glow copper no hover, nota de região
+- `ContactSection` (`#contato`, off-white) — cards de canais (WhatsApp, Instagram, horário de atendimento) + mapa placeholder com pin copper pronto para embed real
+
+### Modificado
+- `src/app/page.tsx` — 10 anchors vazios substituídos pelos componentes reais; estrutura em 6 Atos completa
+- `src/lib/messages.ts` — novas mensagens WhatsApp: `drywall`, `estruturas`, `contato`
+- `src/components/shared/SectionWrapper/index.tsx` — prop `aria-label` adicionada (aditiva, retrocompatível)
+- `src/components/layout/Footer/Footer.tsx` — removido `id="contato"` duplicado (o ID agora pertence à ContactSection; âncoras da navegação continuam funcionando)
+
+### Regras respeitadas
+- Nenhum caminho de asset inexistente referenciado (drywall/estruturas usam placeholder premium)
+- Nenhum vídeo duplicado: hero-veritas.mp4 → Hero; construcao-completa.mp4 → VideoReplaySection; comparativo.mp4 → ComparisonSection
+- Hero, Intro, Header, Footer, VideoReplaySection e Design System intocados (exceto fix pontual do id duplicado no Footer)
+- Todas as animações via `transform`/`opacity`, com `prefers-reduced-motion` e conteúdo visível no SSR (padrão ScrollReveal idle)
+
+### Validações CP-019
+```
+npm run typecheck -> OK  |  npm run lint -> OK  |  npm run build -> OK (8/8 páginas estáticas)
+```
 
 ---
 

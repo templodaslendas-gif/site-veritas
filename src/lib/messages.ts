@@ -9,6 +9,11 @@ export const WA_MESSAGES = {
   projetos:
     'Olá! Vi os projetos da Veritas Metal e gostaria de discutir meu projeto.',
   faq: 'Olá! Tenho algumas perguntas sobre Steel Frame e gostaria de esclarecer.',
+  drywall: 'Olá! Gostaria de saber mais sobre instalação de Drywall.',
+  estruturas:
+    'Olá! Gostaria de saber mais sobre estruturas metálicas (galpões, mezaninos, coberturas).',
+  contato:
+    'Olá! Vim pelo site da Veritas Metal e gostaria de conversar sobre meu projeto.',
   footer:
     'Olá! Encontrei o site da Veritas Metal e gostaria de mais informações.',
 } as const

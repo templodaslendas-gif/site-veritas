@@ -34,7 +34,6 @@ export function Footer() {
 
   return (
     <footer
-      id="contato"
       style={{
         background: 'var(--vm-black)',
         borderTop: '1px solid var(--vm-border)',

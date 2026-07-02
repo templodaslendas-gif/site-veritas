@@ -8,6 +8,7 @@ interface SectionWrapperProps {
   style?: React.CSSProperties
   children: React.ReactNode
   as?: TagName
+  'aria-label'?: string
 }
 
 export function SectionWrapper({
@@ -16,9 +17,10 @@ export function SectionWrapper({
   style,
   children,
   as: Tag = 'section',
+  'aria-label': ariaLabel,
 }: SectionWrapperProps) {
   return (
-    <Tag id={id} className={cn('relative w-full', className)} style={style}>
+    <Tag id={id} className={cn('relative w-full', className)} style={style} aria-label={ariaLabel}>
       {children}
     </Tag>
   )

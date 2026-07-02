@@ -2,9 +2,9 @@
 
 ## Estado Atual
 
-- **Fase:** Arquitetura visual da SteelFrameSection corrigida (texto-protagonista + imagem técnica lateral); VideoReplaySection com título/subtítulo + vídeo grande após timeline
-- **Próxima:** Macrofase 3 — Ato 3 (Comparativo, Benefícios, Conheça a Estrutura)
-- **Checkpoint:** CP-018 ✅
+- **Fase:** Home completa — Atos 1–6 implementados (Comparativo, Benefícios, Estrutura, Projetos, Diferenciais, Drywall, Estruturas Metálicas, FAQ, CTA Final, Contato)
+- **Próxima:** Macrofase 6 — Infraestrutura (GA4, cookie consent LGPD, CSP, deploy produção) + formulário de contato RHF/Zod (opcional)
+- **Checkpoint:** CP-019 ✅
 - **Última atualização:** 2026-07-01
 
 ---
@@ -31,6 +31,7 @@
 | CP-016 | Renomeia construcao-completa.mp4.mp4 -> .mp4 (extensao dupla); VideoPlayer exibe path no fallback dev | ✅ | ✅ | ✅ | Entregue |
 | CP-017 | Separa videos por secao: SteelFrameSection usa estrutura.jpg (estrutura.mp4 nao existe); VideoReplaySection mantem construcao-completa.mp4 | ✅ | ✅ | ✅ | Entregue |
 | CP-018 | Corrige arquitetura visual: SteelFrameSection vira secao educativa texto+imagem tecnica lateral (nao mais video/imagem protagonista); VideoReplaySection ganha titulo/subtitulo; comparativo.mp4.mp4 -> comparativo.mp4 | ✅ | ✅ | ✅ | Entregue |
+| CP-019 | Home completa — 10 seções dos Atos 3–6 implementadas com cinematic motion (Comparativo com comparativo.mp4, Benefícios, Estrutura, Projetos, Diferenciais, Drywall, Estruturas Metálicas, FAQ, CTA Final, Contato) | ✅ | ✅ | ✅ | Entregue |
 
 ---
 
@@ -56,7 +57,9 @@
 
 ### components/shared/
 - `JsonLd/index.tsx` — `<script type="application/ld+json">`
-- `SectionWrapper/index.tsx` — Wrapper semântico section/div/article + prop `style`
+- `SectionWrapper/index.tsx` — Wrapper semântico section/div/article + props `style` e `aria-label`
+- `AnimatedNumber/index.tsx` — **CP-019**: contador animado 0→valor no viewport; SSR renderiza o valor final (nunca invisível); respeita reduced-motion
+- `MediaPlaceholder/index.tsx` — **CP-019**: placeholder premium (malha técnica + ícone copper) para mídia inexistente; variantes light/dark; nunca referencia arquivo ausente
 - `ScrollReveal/index.tsx` — **Reescrito em CP-008**: sem Framer Motion; máquina de estado `idle|waiting|entered`; SSR renderiza conteúdo visível (nenhum opacity:0 no HTML); animação CSS pura como enhancement opcional
 - `VideoPlayer/index.tsx` — Player com fallback; suporta array `sources`
 
@@ -67,6 +70,16 @@
 - `FutureSection/FutureSection.tsx` — 3 cards (60% mais rápido, Estrutura de aço, 90% menos entulho), hover copper via onMouseEnter, ScrollReveal por bloco
 - `SteelFrameSection/SteelFrameSection.tsx` — Grid 2 colunas: copy + 6 benefícios + CTAs | VideoPlaceholder 16:9; background `--vm-black`
 - `HowItWorksSection/HowItWorksSection.tsx` — 6 passos em timeline: badge número + conector + content. Conector corrigido (amount:0.8→0.2). CTA WhatsApp ao final
+- `ComparisonSection/ComparisonSection.tsx` — **CP-019** (`#comparativo`, escuro): vídeo comparativo.mp4 em destaque, 3 stats com AnimatedNumber, tabela premium 8 critérios (Steel Frame × Convencional), linha copper animada, CTA WhatsApp
+- `BenefitsSection/BenefitsSection.tsx` — **CP-019** (`#beneficios`, claro): 8 cards premium (velocidade, economia, térmico, acústico, sustentabilidade, limpeza, resistência, valorização) com stagger + hover copper
+- `StructureSection/StructureSection.tsx` — **CP-019** (`#conheca-estrutura`, branco): estrutura.jpg sticky com parallax leve (useScroll/useTransform) + 6 camadas numeradas com conectores animados; preparada para futuro estrutura.mp4
+- `ProjectsSection/ProjectsSection.tsx` — **CP-019** (`#projetos`, escuro): galeria 6 cards placeholder com malha técnica + badge "Fotos em breve"; interface `ProjectItem.media?` pronta para mídia real; CTA WhatsApp
+- `DifferentialsSection/DifferentialsSection.tsx` — **CP-019** (`#diferenciais`, claro): 6 cards (engenheiro, equipe, garantia, planejamento, execução completa, padrão técnico)
+- `DrywallSection/DrywallSection.tsx` — **CP-019** (`#drywall`, branco): copy + 4 bullets + MediaPlaceholder; const `DRYWALL_VIDEO` pronta para /drywall/drywall.mp4; CTA WhatsApp drywall
+- `MetalStructuresSection/MetalStructuresSection.tsx` — **CP-019** (`#estruturas`, claro): mídia à esquerda (ritmo alternado), 4 bullets; const `METAL_VIDEO` pronta para /estruturas/estrutura-metalica.mp4; CTA WhatsApp estruturas
+- `FAQSection/FAQSection.tsx` — **CP-019** (`#faq`, branco): accordion premium com 10 perguntas reais; AnimatePresence height, aria-expanded/aria-controls, reduced-motion via useReducedMotion
+- `FinalCTASection/FinalCTASection.tsx` — **CP-019** (`#cta-final`, preto): headline display grande, linha copper scaleX, botão WhatsApp com glow copper no hover
+- `ContactSection/ContactSection.tsx` — **CP-019** (`#contato`, claro): cards WhatsApp/Instagram/atendimento + mapa placeholder (pin copper, pronto para embed real)
 
 ### components/
 - `Providers.tsx` — LenisProvider wrapper
@@ -90,16 +103,17 @@
 
 | Ato | Seção | Fundo | Status |
 |-----|-------|-------|--------|
-| ATO 3 | Comparativo Steel Frame × Construção Convencional (`#comparativo`) | Escuro | Anchor criado |
-| ATO 3 | Benefícios (`#beneficios`) | Claro | Anchor criado |
-| ATO 3 | Conheça a Estrutura (`#conheca-estrutura`) | Claro | Anchor criado |
-| ATO 4 | Projetos — galeria (`#projetos`) | Escuro | Anchor criado |
-| ATO 4 | Diferenciais (`#diferenciais`) | Claro | Anchor criado |
-| ATO 5 | Drywall (`#drywall`) | Claro | Anchor criado |
-| ATO 5 | Estruturas Metálicas (`#estruturas`) | Claro | Anchor criado |
-| ATO 6 | FAQ (`#faq`) | Claro | Anchor criado |
-| ATO 6 | CTA Final (`#cta-final`) | Escuro | Anchor criado |
-| ATO 6 | Contato + Formulário RHF/Zod (`#contato`) | Claro | Anchor criado |
+| ATO 3 | Comparativo Steel Frame × Construção Convencional (`#comparativo`) | Escuro | ✅ CP-019 |
+| ATO 3 | Benefícios (`#beneficios`) | Claro | ✅ CP-019 |
+| ATO 3 | Conheça a Estrutura (`#conheca-estrutura`) | Claro | ✅ CP-019 |
+| ATO 4 | Projetos — galeria (`#projetos`) | Escuro | ✅ CP-019 (placeholders — aguarda fotos reais) |
+| ATO 4 | Diferenciais (`#diferenciais`) | Claro | ✅ CP-019 |
+| ATO 5 | Drywall (`#drywall`) | Claro | ✅ CP-019 (aguarda /drywall/drywall.mp4) |
+| ATO 5 | Estruturas Metálicas (`#estruturas`) | Claro | ✅ CP-019 (aguarda /estruturas/estrutura-metalica.mp4) |
+| ATO 6 | FAQ (`#faq`) | Claro | ✅ CP-019 |
+| ATO 6 | CTA Final (`#cta-final`) | Escuro | ✅ CP-019 |
+| ATO 6 | Contato (`#contato`) | Claro | ✅ CP-019 (formulário RHF/Zod futuro; mapa placeholder) |
+| — | Formulário de contato RHF/Zod | — | Pendente |
 | — | GA4 + cookie consent (LGPD) | — | Pendente |
 | — | Content-Security-Policy | — | Pendente |
 | — | Deploy produção | — | Pendente |
