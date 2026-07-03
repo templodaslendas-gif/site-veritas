@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
 import type { FAQItem } from '@/types'
 
@@ -76,7 +77,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-lg)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 export function FAQSection() {
@@ -91,45 +92,12 @@ export function FAQSection() {
     >
       <div style={CONTAINER}>
         {/* Header */}
-        <ScrollReveal>
-          <div style={{ marginBottom: 'clamp(2rem, 5vw, 3rem)', maxWidth: '640px' }}>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-xs)',
-                letterSpacing: 'var(--vm-tracking-label)',
-                color: 'var(--vm-copper)',
-                textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-4)',
-              }}
-            >
-              Perguntas frequentes
-            </p>
-            <h2
-              style={{
-                fontFamily: 'var(--vm-font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-on-light)',
-                textTransform: 'uppercase',
-                lineHeight: 'var(--vm-leading-tight)',
-                marginBottom: 'var(--vm-space-6)',
-              }}
-            >
-              Tudo o que perguntam antes de construir.
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-lg)',
-                lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-on-light-secondary)',
-              }}
-            >
-              Respostas diretas para as dúvidas mais comuns sobre Steel Frame.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Perguntas frequentes"
+          title="Tudo o que perguntam antes de construir."
+          description="Respostas diretas para as dúvidas mais comuns sobre Steel Frame."
+          maxWidth="640px"
+        />
 
         {/* Accordion */}
         <div>
@@ -253,20 +221,13 @@ export function FAQSection() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="vm-link-copper"
               style={{
-                color: 'var(--vm-copper)',
                 textDecoration: 'none',
                 fontWeight: 600,
-                transition: `color var(--vm-dur-fast) var(--vm-ease-out)`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--vm-copper-light)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--vm-copper)'
               }}
             >
-              Pergunte direto no WhatsApp →
+              Pergunte direto no WhatsApp <span data-arrow aria-hidden="true">→</span>
             </a>
           </p>
         </ScrollReveal>

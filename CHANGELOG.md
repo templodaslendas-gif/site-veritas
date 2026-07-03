@@ -14,6 +14,60 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.11.0] — 2026-07-02 — CP-021: Polimento visual premium — carrosséis, headings animados e hover CSS
+
+### Causa raiz corrigida — hover "preso" em touch
+- Cards usavam `onMouseEnter`/`onMouseLeave` com mutação de estilo inline. Em telas touch, `mouseenter` dispara no tap e `mouseleave` nunca dispara — o card ficava permanentemente levantado/desalinhado com borda copper. Hover migrado para CSS `:hover` dentro de `@media (hover: hover) and (pointer: fine)` em `globals.css` (classes `.vm-card-lift`, `.vm-cta-copper`, `.vm-cta-ghost`, `.vm-link-copper`), personalizável por seção via custom properties `--card-*`. Aplicado em FutureSection, BenefitsSection, DifferentialsSection, ComparisonSection (linhas da tabela), ContactSection e todos os CTAs copper/ghost.
+
+### Causa raiz corrigida — extensão dupla (de novo)
+- 11 imagens novas salvas com extensão dupla: `drywall/*.jpg.png|.jpg.jfif|.jpg.jpg` e `estrutura/*.jpg.jpg|.jpg.png|.jpg.jfif`. Renomeadas para extensão única correspondente ao tipo real (verificado com `file`): `drywall-01.png`, `drywall-02..05.jpg`, `estrutura-01..04.jpg`, `estrutura-05.png`, `estrutura-06.jpg`. Pasta `estruturas/` já estava correta.
+
+### Adicionado
+**`src/components/shared/SectionHeading/index.tsx`** — cabeçalho de seção animado (GSAP + ScrollTrigger)
+- Linha copper (scaleX), eyebrow (fade+y), palavras da headline em stagger (fade + translateY), descrição (fade+y)
+- SSR renderiza tudo visível — estado hidden aplicado só client-side (padrão CP-008); `prefers-reduced-motion` mantém estático
+- Aplicado em 12 seções: Futuro, Steel Frame, Como Funciona, Comparativo, Benefícios, Estrutura, Diferenciais, Drywall, Estruturas Metálicas, FAQ e Contato (FinalCTA mantém sua própria animação de linha + reveal)
+
+**`src/components/shared/ImageCarousel/index.tsx`** — carrossel automático premium
+- Crossfade 900ms (`--vm-ease-smooth`), autoplay 4.2s pausado fora do viewport, com aba oculta e com reduced-motion
+- `object-cover` + `object-position: center`, `radius-xl`, borda e sombra premium, dots acessíveis (`aria-current`, navegação manual)
+- Fallback `MediaPlaceholder` quando a lista de imagens está vazia
+
+**Integração Lenis + ScrollTrigger** (`src/lib/lenis/LenisProvider.tsx`)
+- `lenis.on('scroll', ScrollTrigger.update)` — triggers sincronizados com o smooth scroll
+
+### Modificado
+**`ComparisonSection`** — contraste da tabela escura corrigido
+- Cabeçalhos "Critério" e "Convencional": `--vm-text-muted` (#5C5650, ~2.4:1 sobre #181818) → `--vm-text-primary` (#F5F2ED) com weight 600
+- Valores da coluna Convencional: `--vm-text-muted` → `rgba(245,242,237,0.85)` (>10:1)
+- Rótulos inline mobile ("Steel Frame:", "Convencional:") → `--vm-text-secondary`
+- Header da seção → `SectionHeading onDark`
+
+**`StructureSection` (Conheça a Estrutura)** — imagem estática → `ImageCarousel` com 6 fotos reais (`/estrutura/estrutura-01..06`), mantendo sticky + parallax leve; legenda atualizada
+
+**`DrywallSection`** — copy premium + carrossel
+- Headline: "Interiores sofisticados, execução limpa e acabamento impecável."
+- Texto: "Soluções em gesso acartonado para divisórias, forros, sancas e revestimentos internos com precisão, rapidez e acabamento profissional."
+- CTA: "Solicitar projeto em Drywall"
+- `MediaPlaceholder` → `ImageCarousel` com 5 fotos (`/drywall/drywall-01..05`)
+
+**`MetalStructuresSection`** — copy premium + carrossel
+- Headline: "Força, precisão e segurança para estruturas sob medida."
+- Texto: "Projetamos, fabricamos e montamos estruturas metálicas para obras residenciais, comerciais, industriais e rurais com padrão técnico, resistência e acabamento profissional."
+- CTA: "Solicitar estrutura metálica"
+- `MediaPlaceholder` → `ImageCarousel` com 6 fotos (`/estruturas/estrutura-metalica-01..06`)
+
+**Espaçamento vertical global** — `paddingBlock` uniformizado em `clamp(3.25rem, 6.5vw, 6rem)` (era `clamp(4rem, 8vw, 8rem)`) em todas as seções; FinalCTA `clamp(4rem, 8vw, 7.5rem)` — elimina vazios grandes entre seções mantendo o ritmo premium
+
+### Validações CP-021
+```
+npm run typecheck -> OK  |  npm run lint -> OK  |  npm run build -> OK (8/8 páginas estáticas)
+Runtime: homepage 200, 12 âncoras presentes, 3 carrosséis no HTML, todos os assets 200,
+primeiro slide visível no SSR (nenhum conteúdo invisível)
+```
+
+---
+
 ## [0.10.1] — 2026-07-01 — CP-020: Ajuste visual final e responsividade mobile
 
 ### Causa raiz corrigida — vídeos quebrados

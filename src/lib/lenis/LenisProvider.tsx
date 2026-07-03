@@ -3,6 +3,7 @@
 import { useEffect, useRef, createContext, useContext } from 'react'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
+import { registerGSAP, ScrollTrigger } from '@/lib/gsap/register'
 
 type LenisContextValue = {
   lenis: Lenis | null
@@ -30,6 +31,11 @@ export function LenisProvider({ children }: LenisProviderProps) {
     })
 
     lenisRef.current = lenis
+
+    // Integração oficial Lenis + ScrollTrigger: garante que triggers
+    // disparem em sincronia com o smooth scroll
+    registerGSAP()
+    lenis.on('scroll', ScrollTrigger.update)
 
     const rafCallback = (time: number) => lenis.raf(time * 1000)
     gsap.ticker.add(rafCallback)

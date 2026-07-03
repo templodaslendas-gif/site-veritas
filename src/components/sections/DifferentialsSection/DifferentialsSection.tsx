@@ -2,6 +2,7 @@
 
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
 
 const ICON_PROPS = {
   viewBox: '0 0 24 24',
@@ -86,7 +87,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-xl)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 export function DifferentialsSection() {
@@ -98,84 +99,31 @@ export function DifferentialsSection() {
     >
       <div style={CONTAINER}>
         {/* Header */}
-        <ScrollReveal>
-          <div style={{ marginBottom: 'clamp(2.5rem, 6vw, 4rem)', maxWidth: '680px' }}>
-            <div
-              aria-hidden="true"
-              style={{
-                width: '32px',
-                height: '2px',
-                background: 'var(--vm-copper)',
-                marginBottom: 'var(--vm-space-4)',
-              }}
-            />
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-sm)',
-                fontWeight: 600,
-                letterSpacing: 'var(--vm-tracking-label)',
-                color: 'var(--vm-copper)',
-                textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-4)',
-              }}
-            >
-              Por que escolher a Veritas Metal
-            </p>
-            <h2
-              style={{
-                fontFamily: 'var(--vm-font-display)',
-                fontSize: 'clamp(2.25rem, 6vw, 4rem)',
-                letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-on-light)',
-                textTransform: 'uppercase',
-                lineHeight: 'var(--vm-leading-tight)',
-                marginBottom: 'var(--vm-space-6)',
-              }}
-            >
-              Engenharia, equipe qualificada e garantia do início ao fim.
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-xl)',
-                lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-on-light-secondary)',
-              }}
-            >
-              Construir com a Veritas Metal é ter previsibilidade, responsabilidade
-              técnica e uma equipe que responde por cada detalhe da obra.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Por que escolher a Veritas Metal"
+          title="Engenharia, equipe qualificada e garantia do início ao fim."
+          description="Construir com a Veritas Metal é ter previsibilidade, responsabilidade técnica e uma equipe que responde por cada detalhe da obra."
+          titleSize="clamp(2.25rem, 6vw, 4rem)"
+        />
 
         {/* Grid de diferenciais */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {DIFFERENTIALS.map((item, i) => (
             <ScrollReveal key={item.title} delay={Math.min(i * 0.08, 0.4)} direction="up">
               <article
-                style={{
-                  background: 'var(--vm-card-bg)',
-                  border: '1px solid var(--vm-border-light)',
-                  borderRadius: 'var(--vm-radius-xl)',
-                  padding: 'var(--vm-space-8) var(--vm-space-8) var(--vm-space-10)',
-                  height: '100%',
-                  cursor: 'default',
-                  boxShadow: 'var(--vm-shadow-light-md)',
-                  transition: `border-color var(--vm-dur-normal) var(--vm-ease-out), transform var(--vm-dur-normal) var(--vm-ease-out), box-shadow var(--vm-dur-normal) var(--vm-ease-out)`,
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = 'var(--vm-copper)'
-                  el.style.transform = 'translateY(-6px)'
-                  el.style.boxShadow = 'var(--vm-shadow-light-lg)'
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = 'var(--vm-border-light)'
-                  el.style.transform = 'translateY(0)'
-                  el.style.boxShadow = 'var(--vm-shadow-light-md)'
-                }}
+                className="vm-card-lift"
+                style={
+                  {
+                    background: 'var(--vm-card-bg)',
+                    borderRadius: 'var(--vm-radius-xl)',
+                    padding: 'var(--vm-space-8) var(--vm-space-8) var(--vm-space-10)',
+                    height: '100%',
+                    cursor: 'default',
+                    '--card-lift': '-6px',
+                    '--card-shadow': 'var(--vm-shadow-light-md)',
+                    '--card-shadow-hover': 'var(--vm-shadow-light-lg)',
+                  } as React.CSSProperties
+                }
               >
                 <div
                   style={{

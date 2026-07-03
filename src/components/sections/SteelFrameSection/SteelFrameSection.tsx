@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
 
 const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_MESSAGES.orcamento)}`
@@ -20,7 +21,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-xl)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 function CheckIcon() {
@@ -50,59 +51,14 @@ export function SteelFrameSection() {
 
           {/* Coluna de texto — protagonista */}
           <div>
-            {/* Eyebrow */}
-            <ScrollReveal>
-              <p
-                style={{
-                  fontFamily: 'var(--vm-font-body)',
-                  fontSize: 'var(--vm-text-xs)',
-                  letterSpacing: 'var(--vm-tracking-label)',
-                  color: 'var(--vm-copper)',
-                  textTransform: 'uppercase',
-                  marginBottom: 'var(--vm-space-4)',
-                }}
-              >
-                O que é Steel Frame
-              </p>
-            </ScrollReveal>
-
-            {/* Headline */}
-            <ScrollReveal delay={0.05}>
-              <h2
-                style={{
-                  fontFamily: 'var(--vm-font-display)',
-                  fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                  letterSpacing: 'var(--vm-tracking-display)',
-                  color: 'var(--vm-text-on-light)',
-                  textTransform: 'uppercase',
-                  lineHeight: 'var(--vm-leading-tight)',
-                  marginBottom: 'var(--vm-space-6)',
-                  maxWidth: '640px',
-                }}
-              >
-                Perfis de aço.
-                <br />
-                Precisão milimétrica.
-              </h2>
-            </ScrollReveal>
-
-            {/* Intro text */}
-            <ScrollReveal delay={0.1}>
-              <p
-                style={{
-                  fontFamily: 'var(--vm-font-body)',
-                  fontSize: 'var(--vm-text-lg)',
-                  lineHeight: 'var(--vm-leading-relaxed)',
-                  color: 'var(--vm-text-on-light-secondary)',
-                  maxWidth: '640px',
-                  marginBottom: 'var(--vm-space-10)',
-                }}
-              >
-                Steel Frame é um sistema construtivo industrializado onde toda a estrutura
-                é formada por perfis leves de aço galvanizado. Leve, resistente e rápido
-                — com a precisão que a alvenaria tradicional não consegue alcançar.
-              </p>
-            </ScrollReveal>
+            {/* Eyebrow + Headline + Intro */}
+            <SectionHeading
+              eyebrow="O que é Steel Frame"
+              title="Perfis de aço. Precisão milimétrica."
+              description="Steel Frame é um sistema construtivo industrializado onde toda a estrutura é formada por perfis leves de aço galvanizado. Leve, resistente e rápido — com a precisão que a alvenaria tradicional não consegue alcançar."
+              maxWidth="640px"
+              marginBottom="var(--vm-space-10)"
+            />
 
             {/* Lista de benefícios — 2 colunas no desktop */}
             <ScrollReveal delay={0.15}>
@@ -143,15 +99,13 @@ export function SteelFrameSection() {
                   href={waUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto"
+                  className="vm-cta-copper w-full sm:w-auto"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     paddingInline: '2rem',
                     paddingBlock: '0.9rem',
-                    background: 'var(--vm-copper)',
-                    color: 'var(--vm-black)',
                     fontFamily: 'var(--vm-font-body)',
                     fontSize: 'var(--vm-text-sm)',
                     fontWeight: 600,
@@ -159,32 +113,20 @@ export function SteelFrameSection() {
                     textTransform: 'uppercase',
                     textDecoration: 'none',
                     borderRadius: 'var(--vm-radius-sm)',
-                    border: '1px solid var(--vm-copper)',
                     whiteSpace: 'nowrap',
-                    transition: `background-color var(--vm-dur-fast) var(--vm-ease-out), transform var(--vm-dur-fast) var(--vm-ease-out)`,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--vm-copper-light)'
-                    e.currentTarget.style.transform = 'translateY(-1px)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--vm-copper)'
-                    e.currentTarget.style.transform = 'translateY(0)'
                   }}
                 >
                   Solicitar orçamento
                 </a>
                 <a
                   href="#como-funciona"
-                  className="w-full sm:w-auto"
+                  className="vm-cta-ghost w-full sm:w-auto"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     paddingInline: '2rem',
                     paddingBlock: '0.9rem',
-                    background: 'transparent',
-                    color: 'var(--vm-text-on-light)',
                     fontFamily: 'var(--vm-font-body)',
                     fontSize: 'var(--vm-text-sm)',
                     fontWeight: 500,
@@ -192,19 +134,7 @@ export function SteelFrameSection() {
                     textTransform: 'uppercase',
                     textDecoration: 'none',
                     borderRadius: 'var(--vm-radius-sm)',
-                    border: '1px solid var(--vm-border-light)',
                     whiteSpace: 'nowrap',
-                    transition: `border-color var(--vm-dur-fast) var(--vm-ease-out), color var(--vm-dur-fast) var(--vm-ease-out), transform var(--vm-dur-fast) var(--vm-ease-out)`,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--vm-copper)'
-                    e.currentTarget.style.color = 'var(--vm-copper)'
-                    e.currentTarget.style.transform = 'translateY(-1px)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--vm-border-light)'
-                    e.currentTarget.style.color = 'var(--vm-text-on-light)'
-                    e.currentTarget.style.transform = 'translateY(0)'
                   }}
                 >
                   Veja como funciona

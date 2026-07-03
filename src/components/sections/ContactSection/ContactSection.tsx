@@ -2,6 +2,7 @@
 
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
 
 const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_MESSAGES.contato)}`
@@ -58,7 +59,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-xl)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 export function ContactSection() {
@@ -70,46 +71,12 @@ export function ContactSection() {
     >
       <div style={CONTAINER}>
         {/* Header */}
-        <ScrollReveal>
-          <div style={{ marginBottom: 'clamp(2.5rem, 6vw, 4rem)', maxWidth: '640px' }}>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-xs)',
-                letterSpacing: 'var(--vm-tracking-label)',
-                color: 'var(--vm-copper)',
-                textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-4)',
-              }}
-            >
-              Contato
-            </p>
-            <h2
-              style={{
-                fontFamily: 'var(--vm-font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-on-light)',
-                textTransform: 'uppercase',
-                lineHeight: 'var(--vm-leading-tight)',
-                marginBottom: 'var(--vm-space-6)',
-              }}
-            >
-              Vamos conversar sobre a sua obra.
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-lg)',
-                lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-on-light-secondary)',
-              }}
-            >
-              Atendemos Marechal Cândido Rondon e toda a região Oeste do Paraná —
-              do primeiro contato à entrega das chaves.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Contato"
+          title="Vamos conversar sobre a sua obra."
+          description="Atendemos Marechal Cândido Rondon e toda a região Oeste do Paraná — do primeiro contato à entrega das chaves."
+          maxWidth="640px"
+        />
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Canais */}
@@ -172,31 +139,16 @@ export function ContactSection() {
                 </>
               )
 
-              const cardStyle: React.CSSProperties = {
+              const cardStyle = {
                 display: 'flex',
                 gap: 'var(--vm-space-5)',
                 alignItems: 'flex-start',
                 background: 'var(--vm-card-bg)',
-                border: '1px solid var(--vm-border-light)',
                 borderRadius: 'var(--vm-radius-lg)',
                 padding: 'var(--vm-space-6)',
-                boxShadow: 'var(--vm-shadow-light-sm)',
                 textDecoration: 'none',
-                transition: `border-color var(--vm-dur-normal) var(--vm-ease-out), transform var(--vm-dur-normal) var(--vm-ease-out), box-shadow var(--vm-dur-normal) var(--vm-ease-out)`,
-              }
-
-              const hoverIn = (e: React.MouseEvent<HTMLElement>) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderColor = 'var(--vm-copper)'
-                el.style.transform = 'translateY(-2px)'
-                el.style.boxShadow = 'var(--vm-shadow-light-md)'
-              }
-              const hoverOut = (e: React.MouseEvent<HTMLElement>) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.borderColor = 'var(--vm-border-light)'
-                el.style.transform = 'translateY(0)'
-                el.style.boxShadow = 'var(--vm-shadow-light-sm)'
-              }
+                '--card-lift': '-2px',
+              } as React.CSSProperties
 
               return (
                 <ScrollReveal key={channel.title} delay={Math.min(i * 0.08, 0.25)}>
@@ -205,14 +157,13 @@ export function ContactSection() {
                       href={channel.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="vm-card-lift"
                       style={cardStyle}
-                      onMouseEnter={hoverIn}
-                      onMouseLeave={hoverOut}
                     >
                       {inner}
                     </a>
                   ) : (
-                    <div style={cardStyle} onMouseEnter={hoverIn} onMouseLeave={hoverOut}>
+                    <div className="vm-card-lift" style={cardStyle}>
                       {inner}
                     </div>
                   )}

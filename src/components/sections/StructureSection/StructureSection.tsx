@@ -1,12 +1,21 @@
 'use client'
 
 import { useRef } from 'react'
-import Image from 'next/image'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
+import { ImageCarousel } from '@/components/shared/ImageCarousel'
 
-// Quando /steel-frame/estrutura.mp4 existir, trocar a imagem pelo vídeo aqui.
+const STRUCTURE_IMAGES = [
+  { src: '/estrutura/estrutura-01.jpg', alt: 'Estrutura em Steel Frame durante a montagem' },
+  { src: '/estrutura/estrutura-02.jpg', alt: 'Perfis de aço galvanizado montados em obra' },
+  { src: '/estrutura/estrutura-03.jpg', alt: 'Esqueleto estrutural de residência em Steel Frame' },
+  { src: '/estrutura/estrutura-04.jpg', alt: 'Detalhe das camadas da parede em Steel Frame' },
+  { src: '/estrutura/estrutura-05.png', alt: 'Diagrama das camadas do sistema Steel Frame' },
+  { src: '/estrutura/estrutura-06.jpg', alt: 'Fechamento externo aplicado sobre a estrutura' },
+] as const
+
 const LAYERS = [
   {
     number: '01',
@@ -50,7 +59,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-xl)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 export function StructureSection() {
@@ -70,69 +79,23 @@ export function StructureSection() {
     >
       <div style={CONTAINER}>
         {/* Header */}
-        <ScrollReveal>
-          <div style={{ marginBottom: 'clamp(2.5rem, 6vw, 4rem)', maxWidth: '640px' }}>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-xs)',
-                letterSpacing: 'var(--vm-tracking-label)',
-                color: 'var(--vm-copper)',
-                textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-4)',
-              }}
-            >
-              Anatomia da parede
-            </p>
-            <h2
-              style={{
-                fontFamily: 'var(--vm-font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-on-light)',
-                textTransform: 'uppercase',
-                lineHeight: 'var(--vm-leading-tight)',
-                marginBottom: 'var(--vm-space-6)',
-              }}
-            >
-              Conheça a estrutura por dentro.
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-lg)',
-                lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-on-light-secondary)',
-              }}
-            >
-              Uma parede em Steel Frame é um sistema de camadas — cada uma com
-              função definida em projeto. O resultado: mais desempenho com menos
-              espessura que a alvenaria.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Anatomia da parede"
+          title="Conheça a estrutura por dentro."
+          description="Uma parede em Steel Frame é um sistema de camadas — cada uma com função definida em projeto. O resultado: mais desempenho com menos espessura que a alvenaria."
+          maxWidth="640px"
+        />
 
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
-          {/* Imagem técnica com parallax leve */}
+          {/* Carrossel de fotos com parallax leve */}
           <div ref={imageRef} className="lg:sticky lg:top-28">
             <ScrollReveal direction="right">
-              <motion.div
-                style={{
-                  y: prefersReduced ? 0 : parallaxY,
-                  position: 'relative',
-                  borderRadius: 'var(--vm-radius-xl)',
-                  overflow: 'hidden',
-                  border: '1px solid var(--vm-border-light)',
-                  boxShadow: 'var(--vm-shadow-light-lg)',
-                }}
-              >
-                <Image
-                  src="/steel-frame/estrutura.jpg"
-                  alt="Diagrama técnico das camadas de uma parede em Steel Frame"
-                  width={1600}
-                  height={900}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  style={{ width: '100%', height: 'auto', display: 'block' }}
+              <motion.div style={{ y: prefersReduced ? 0 : parallaxY }}>
+                <ImageCarousel
+                  images={STRUCTURE_IMAGES}
+                  label="Fotos da estrutura em Steel Frame"
+                  fallbackLabel="Fotos em breve"
+                  fallbackSublabel="Estrutura em Steel Frame executada pela Veritas Metal"
                 />
               </motion.div>
             </ScrollReveal>
@@ -145,7 +108,7 @@ export function StructureSection() {
                   marginTop: 'var(--vm-space-4)',
                 }}
               >
-                Composição típica de parede em Light Steel Frame — dimensionada por
+                Estrutura em Light Steel Frame — dimensionada e executada conforme
                 projeto estrutural.
               </p>
             </ScrollReveal>

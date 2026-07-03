@@ -120,6 +120,84 @@ video {
   border-radius: var(--vm-radius-md);
 }
 
+/* --------------------------------------------------------------------------
+   INTERAÇÕES HOVER — via CSS :hover, apenas em dispositivos com ponteiro real.
+   Substitui handlers JS de mouse: em telas touch, mouseenter dispara no tap e
+   mouseleave nunca dispara, deixando cards "presos" no estado hover.
+   -------------------------------------------------------------------------- */
+
+/* Card com elevação no hover. Personalizável por seção via custom properties:
+   --card-border, --card-border-hover, --card-shadow, --card-shadow-hover, --card-lift */
+.vm-card-lift {
+  border: 1px solid var(--card-border, var(--vm-border-light));
+  box-shadow: var(--card-shadow, var(--vm-shadow-light-sm));
+  transition:
+    border-color var(--vm-dur-normal) var(--vm-ease-out),
+    transform var(--vm-dur-normal) var(--vm-ease-out),
+    box-shadow var(--vm-dur-normal) var(--vm-ease-out);
+}
+
+/* CTA primário copper */
+.vm-cta-copper {
+  background-color: var(--vm-copper);
+  color: var(--vm-black);
+  border: 1px solid var(--vm-copper);
+  transition:
+    background-color var(--vm-dur-fast) var(--vm-ease-out),
+    transform var(--vm-dur-fast) var(--vm-ease-out),
+    box-shadow var(--vm-dur-fast) var(--vm-ease-out);
+}
+
+/* CTA secundário ghost/outline */
+.vm-cta-ghost {
+  background-color: transparent;
+  color: var(--ghost-color, var(--vm-text-on-light));
+  border: 1px solid var(--ghost-border, var(--vm-border-light));
+  transition:
+    border-color var(--vm-dur-fast) var(--vm-ease-out),
+    color var(--vm-dur-fast) var(--vm-ease-out),
+    transform var(--vm-dur-fast) var(--vm-ease-out);
+}
+
+/* Link copper com seta */
+.vm-link-copper {
+  color: var(--vm-copper);
+  transition: color var(--vm-dur-fast) var(--vm-ease-out);
+}
+.vm-link-copper [data-arrow] {
+  display: inline-block;
+  transition: transform var(--vm-dur-fast) var(--vm-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vm-card-lift:hover {
+    border-color: var(--card-border-hover, var(--vm-copper));
+    transform: translateY(var(--card-lift, -4px));
+    box-shadow: var(--card-shadow-hover, var(--vm-shadow-light-md));
+  }
+  .vm-cta-copper:hover {
+    background-color: var(--vm-copper-light);
+    transform: translateY(-2px);
+    box-shadow: var(--cta-glow, 0 10px 28px rgba(196, 128, 62, 0.3));
+  }
+  .vm-cta-ghost:hover {
+    border-color: var(--vm-copper);
+    color: var(--vm-copper);
+    transform: translateY(-1px);
+  }
+  .vm-link-copper:hover {
+    color: var(--vm-copper-light);
+  }
+  .vm-link-copper:hover [data-arrow] {
+    transform: translateX(4px);
+  }
+}
+
+.vm-cta-copper:active,
+.vm-cta-ghost:active {
+  transform: translateY(0);
+}
+
 /* Respeitar preferência de movimento reduzido */
 @media (prefers-reduced-motion: reduce) {
   *,

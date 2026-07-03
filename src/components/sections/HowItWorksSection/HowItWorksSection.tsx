@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
 
 const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_MESSAGES.orcamento)}`
@@ -50,7 +51,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-xl)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 export function HowItWorksSection() {
@@ -58,46 +59,12 @@ export function HowItWorksSection() {
     <SectionWrapper id="como-funciona" style={{ background: 'var(--vm-bg-primary)' }}>
       <div style={CONTAINER}>
         {/* Header */}
-        <ScrollReveal>
-          <div style={{ marginBottom: 'var(--vm-space-16)', maxWidth: '560px' }}>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-xs)',
-                letterSpacing: 'var(--vm-tracking-label)',
-                color: 'var(--vm-copper)',
-                textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-4)',
-              }}
-            >
-              Processo
-            </p>
-            <h2
-              style={{
-                fontFamily: 'var(--vm-font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-on-light)',
-                textTransform: 'uppercase',
-                lineHeight: 'var(--vm-leading-tight)',
-                marginBottom: 'var(--vm-space-6)',
-              }}
-            >
-              Da ideia à entrega — cada passo com precisão.
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-lg)',
-                lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-on-light-secondary)',
-              }}
-            >
-              Acompanhamento técnico em todas as fases, do projeto à entrega das chaves.
-              Sem surpresas, sem atrasos, sem improvisos.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Processo"
+          title="Da ideia à entrega — cada passo com precisão."
+          description="Acompanhamento técnico em todas as fases, do projeto à entrega das chaves. Sem surpresas, sem atrasos, sem improvisos."
+          maxWidth="560px"
+        />
 
         {/* Timeline */}
         <div
@@ -226,14 +193,13 @@ export function HowItWorksSection() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
+              className="vm-cta-copper w-full sm:w-auto"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 paddingInline: '2rem',
                 paddingBlock: '0.9rem',
-                background: 'var(--vm-copper)',
-                color: 'var(--vm-black)',
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'var(--vm-text-sm)',
                 fontWeight: 600,
@@ -241,17 +207,7 @@ export function HowItWorksSection() {
                 textTransform: 'uppercase',
                 textDecoration: 'none',
                 borderRadius: 'var(--vm-radius-sm)',
-                border: '1px solid var(--vm-copper)',
                 whiteSpace: 'nowrap',
-                transition: `background-color var(--vm-dur-fast) var(--vm-ease-out), transform var(--vm-dur-fast) var(--vm-ease-out)`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--vm-copper-light)'
-                e.currentTarget.style.transform = 'translateY(-1px)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--vm-copper)'
-                e.currentTarget.style.transform = 'translateY(0)'
               }}
             >
               Solicitar orçamento

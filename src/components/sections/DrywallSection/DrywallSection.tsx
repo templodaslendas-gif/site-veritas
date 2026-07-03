@@ -2,14 +2,19 @@
 
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
-import { VideoPlayer } from '@/components/shared/VideoPlayer'
-import { MediaPlaceholder } from '@/components/shared/MediaPlaceholder'
+import { SectionHeading } from '@/components/shared/SectionHeading'
+import { ImageCarousel } from '@/components/shared/ImageCarousel'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
 
 const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WA_MESSAGES.drywall)}`
 
-// Quando /drywall/drywall.mp4 existir em public/, definir o caminho aqui.
-const DRYWALL_VIDEO: string | null = null
+const DRYWALL_IMAGES = [
+  { src: '/drywall/drywall-01.png', alt: 'Ambiente interno com forro e paredes em drywall' },
+  { src: '/drywall/drywall-02.jpg', alt: 'Execução de parede em gesso acartonado' },
+  { src: '/drywall/drywall-03.jpg', alt: 'Detalhe de sanca em drywall com iluminação embutida' },
+  { src: '/drywall/drywall-04.jpg', alt: 'Montagem de estrutura para divisória em drywall' },
+  { src: '/drywall/drywall-05.jpg', alt: 'Acabamento final de forro em gesso acartonado' },
+] as const
 
 const HIGHLIGHTS = [
   'Paredes, forros e sancas com acabamento perfeito',
@@ -22,7 +27,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-xl)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 export function DrywallSection() {
@@ -33,59 +38,16 @@ export function DrywallSection() {
       style={{ background: 'var(--vm-bg-secondary)' }}
     >
       <div style={CONTAINER}>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Copy */}
           <div>
-            <ScrollReveal>
-              <div
-                aria-hidden="true"
-                style={{
-                  width: '32px',
-                  height: '2px',
-                  background: 'var(--vm-copper)',
-                  marginBottom: 'var(--vm-space-4)',
-                }}
-              />
-              <p
-                style={{
-                  fontFamily: 'var(--vm-font-body)',
-                  fontSize: 'var(--vm-text-sm)',
-                  fontWeight: 600,
-                  letterSpacing: 'var(--vm-tracking-label)',
-                  color: 'var(--vm-copper)',
-                  textTransform: 'uppercase',
-                  marginBottom: 'var(--vm-space-4)',
-                }}
-              >
-                Drywall de alto padrão
-              </p>
-              <h2
-                style={{
-                  fontFamily: 'var(--vm-font-display)',
-                  fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)',
-                  letterSpacing: 'var(--vm-tracking-display)',
-                  color: 'var(--vm-text-on-light)',
-                  textTransform: 'uppercase',
-                  lineHeight: 'var(--vm-leading-tight)',
-                  marginBottom: 'var(--vm-space-6)',
-                }}
-              >
-                Drywall para interiores rápidos, limpos e impecáveis.
-              </h2>
-              <p
-                style={{
-                  fontFamily: 'var(--vm-font-body)',
-                  fontSize: 'var(--vm-text-lg)',
-                  lineHeight: 'var(--vm-leading-relaxed)',
-                  color: 'var(--vm-text-on-light-secondary)',
-                  marginBottom: 'var(--vm-space-8)',
-                }}
-              >
-                A mesma precisão do Steel Frame aplicada aos ambientes internos.
-                Divisórias, forros e revestimentos em gesso acartonado com
-                planejamento e acabamento de alto padrão.
-              </p>
-            </ScrollReveal>
+            <SectionHeading
+              eyebrow="Drywall de alto padrão"
+              title="Interiores sofisticados, execução limpa e acabamento impecável."
+              description="Soluções em gesso acartonado para divisórias, forros, sancas e revestimentos internos com precisão, rapidez e acabamento profissional."
+              titleSize="clamp(2rem, 4.5vw, 3.25rem)"
+              marginBottom="var(--vm-space-8)"
+            />
 
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {HIGHLIGHTS.map((item, i) => (
@@ -130,6 +92,7 @@ export function DrywallSection() {
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="vm-link-copper"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -137,55 +100,28 @@ export function DrywallSection() {
                   marginTop: 'var(--vm-space-6)',
                   fontFamily: 'var(--vm-font-body)',
                   fontSize: 'var(--vm-text-sm)',
+                  fontWeight: 600,
                   letterSpacing: 'var(--vm-tracking-label)',
-                  color: 'var(--vm-copper)',
                   textDecoration: 'none',
                   textTransform: 'uppercase',
-                  transition: `color var(--vm-dur-fast) var(--vm-ease-out)`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--vm-copper-light)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--vm-copper)'
                 }}
               >
-                Orçar projeto em Drywall
-                <span aria-hidden="true">→</span>
+                Solicitar projeto em Drywall
+                <span data-arrow aria-hidden="true">
+                  →
+                </span>
               </a>
             </ScrollReveal>
           </div>
 
-          {/* Mídia */}
+          {/* Carrossel de fotos */}
           <ScrollReveal delay={0.1} direction="left">
-            {DRYWALL_VIDEO ? (
-              <div
-                style={{
-                  position: 'relative',
-                  paddingBottom: '56.25%',
-                  borderRadius: 'var(--vm-radius-xl)',
-                  overflow: 'hidden',
-                  border: '1px solid var(--vm-border-light)',
-                  boxShadow: 'var(--vm-shadow-light-lg)',
-                }}
-              >
-                <div style={{ position: 'absolute', inset: 0 }}>
-                  <VideoPlayer
-                    src={DRYWALL_VIDEO}
-                    autoPlay
-                    loop
-                    muted
-                    preload="none"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              </div>
-            ) : (
-              <MediaPlaceholder
-                label="Vídeo em breve"
-                sublabel="Execução de Drywall pela equipe Veritas Metal"
-              />
-            )}
+            <ImageCarousel
+              images={DRYWALL_IMAGES}
+              label="Fotos de projetos em Drywall executados pela Veritas Metal"
+              fallbackLabel="Fotos em breve"
+              fallbackSublabel="Execução de Drywall pela equipe Veritas Metal"
+            />
           </ScrollReveal>
         </div>
       </div>

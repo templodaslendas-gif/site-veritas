@@ -11,7 +11,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-lg)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(5rem, 10vw, 10rem)',
+  paddingBlock: 'clamp(4rem, 8vw, 7.5rem)',
   textAlign: 'center' as const,
 }
 
@@ -77,36 +77,25 @@ export function FinalCTASection() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 'var(--vm-space-3)',
-              paddingInline: '2.75rem',
-              paddingBlock: '1.1rem',
-              background: 'var(--vm-copper)',
-              color: 'var(--vm-black)',
-              fontFamily: 'var(--vm-font-body)',
-              fontSize: 'var(--vm-text-base)',
-              fontWeight: 600,
-              letterSpacing: 'var(--vm-tracking-label)',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              borderRadius: 'var(--vm-radius-sm)',
-              border: '1px solid var(--vm-copper)',
-              transition: `background-color var(--vm-dur-fast) var(--vm-ease-out), transform var(--vm-dur-fast) var(--vm-ease-out), box-shadow var(--vm-dur-fast) var(--vm-ease-out)`,
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--vm-copper-light)'
-              e.currentTarget.style.transform = 'translateY(-2px)'
-              e.currentTarget.style.boxShadow = '0 12px 32px rgba(196,128,62,0.35)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--vm-copper)'
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = 'none'
-            }}
+            className="vm-cta-copper w-full sm:w-auto"
+            style={
+              {
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'var(--vm-space-3)',
+                paddingInline: '2.75rem',
+                paddingBlock: '1.1rem',
+                fontFamily: 'var(--vm-font-body)',
+                fontSize: 'var(--vm-text-base)',
+                fontWeight: 600,
+                letterSpacing: 'var(--vm-tracking-label)',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                borderRadius: 'var(--vm-radius-sm)',
+                '--cta-glow': '0 12px 32px rgba(196,128,62,0.35)',
+              } as React.CSSProperties
+            }
           >
             <svg
               viewBox="0 0 24 24"

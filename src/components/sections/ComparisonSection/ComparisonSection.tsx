@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import { AnimatedNumber } from '@/components/shared/AnimatedNumber'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
@@ -62,7 +63,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-xl)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 const CELL_TEXT = {
@@ -80,46 +81,12 @@ export function ComparisonSection() {
     >
       <div style={CONTAINER}>
         {/* Header */}
-        <ScrollReveal>
-          <div style={{ marginBottom: 'clamp(2rem, 5vw, 3rem)', maxWidth: '680px' }}>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-xs)',
-                letterSpacing: 'var(--vm-tracking-label)',
-                color: 'var(--vm-copper)',
-                textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-4)',
-              }}
-            >
-              Comparativo
-            </p>
-            <h2
-              style={{
-                fontFamily: 'var(--vm-font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-primary)',
-                textTransform: 'uppercase',
-                lineHeight: 'var(--vm-leading-tight)',
-                marginBottom: 'var(--vm-space-6)',
-              }}
-            >
-              Steel Frame × Construção convencional.
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-lg)',
-                lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-secondary)',
-              }}
-            >
-              Os números não mentem. Veja lado a lado por que o sistema
-              industrializado supera o método tradicional em cada etapa da obra.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Comparativo"
+          title="Steel Frame × Construção convencional."
+          description="Os números não mentem. Veja lado a lado por que o sistema industrializado supera o método tradicional em cada etapa da obra."
+          onDark
+        />
 
         {/* Vídeo comparativo — destaque principal. Fonte é vertical (9:16);
             enquadrado no próprio formato nativo para nunca cortar a imagem. */}
@@ -216,7 +183,8 @@ export function ComparisonSection() {
                   letterSpacing: 'var(--vm-tracking-label)',
                   textTransform: 'uppercase',
                   fontSize: 'var(--vm-text-xs)',
-                  color: 'var(--vm-text-muted)',
+                  fontWeight: 600,
+                  color: 'var(--vm-text-primary)',
                 }}
               >
                 Critério
@@ -240,7 +208,8 @@ export function ComparisonSection() {
                   letterSpacing: 'var(--vm-tracking-label)',
                   textTransform: 'uppercase',
                   fontSize: 'var(--vm-text-xs)',
-                  color: 'var(--vm-text-muted)',
+                  fontWeight: 600,
+                  color: 'var(--vm-text-primary)',
                 }}
               >
                 Convencional
@@ -252,22 +221,21 @@ export function ComparisonSection() {
             <ScrollReveal key={row.criterion} delay={Math.min(i * 0.05, 0.3)}>
               <div
                 role="row"
-                className="grid grid-cols-1 gap-2 lg:grid-cols-[1.1fr_1fr_1fr] lg:gap-4"
-                style={{
-                  background: 'var(--vm-surface)',
-                  border: '1px solid var(--vm-border)',
-                  borderRadius: 'var(--vm-radius-md)',
-                  paddingInline: 'var(--vm-space-6)',
-                  paddingBlock: 'var(--vm-space-5)',
-                  marginBottom: 'var(--vm-space-3)',
-                  transition: 'border-color var(--vm-dur-normal) var(--vm-ease-out)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--vm-copper-dark)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--vm-border)'
-                }}
+                className="vm-card-lift grid grid-cols-1 gap-2 lg:grid-cols-[1.1fr_1fr_1fr] lg:gap-4"
+                style={
+                  {
+                    background: 'var(--vm-surface)',
+                    borderRadius: 'var(--vm-radius-md)',
+                    paddingInline: 'var(--vm-space-6)',
+                    paddingBlock: 'var(--vm-space-5)',
+                    marginBottom: 'var(--vm-space-3)',
+                    '--card-border': 'var(--vm-border)',
+                    '--card-border-hover': 'var(--vm-copper-dark)',
+                    '--card-lift': '0px',
+                    '--card-shadow': 'none',
+                    '--card-shadow-hover': 'none',
+                  } as React.CSSProperties
+                }
               >
                 <span
                   role="cell"
@@ -280,13 +248,15 @@ export function ComparisonSection() {
                   {row.criterion}
                 </span>
                 <span role="cell" style={{ ...CELL_TEXT, color: 'var(--vm-copper-light)' }}>
-                  <span className="lg:hidden" style={{ color: 'var(--vm-text-muted)' }}>
+                  <span className="lg:hidden" style={{ color: 'var(--vm-text-secondary)' }}>
                     Steel Frame:{' '}
                   </span>
                   {row.steelFrame}
                 </span>
-                <span role="cell" style={{ ...CELL_TEXT, color: 'var(--vm-text-muted)' }}>
-                  <span className="lg:hidden">Convencional: </span>
+                <span role="cell" style={{ ...CELL_TEXT, color: 'rgba(245, 242, 237, 0.85)' }}>
+                  <span className="lg:hidden" style={{ color: 'var(--vm-text-secondary)' }}>
+                    Convencional:{' '}
+                  </span>
                   {row.conventional}
                 </span>
               </div>
@@ -326,15 +296,13 @@ export function ComparisonSection() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto"
+              className="vm-cta-copper w-full sm:w-auto"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 paddingInline: '2rem',
                 paddingBlock: '0.9rem',
-                background: 'var(--vm-copper)',
-                color: 'var(--vm-black)',
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'var(--vm-text-sm)',
                 fontWeight: 600,
@@ -342,18 +310,8 @@ export function ComparisonSection() {
                 textTransform: 'uppercase',
                 textDecoration: 'none',
                 borderRadius: 'var(--vm-radius-sm)',
-                border: '1px solid var(--vm-copper)',
                 whiteSpace: 'nowrap',
                 flexShrink: 0,
-                transition: `background-color var(--vm-dur-fast) var(--vm-ease-out), transform var(--vm-dur-fast) var(--vm-ease-out)`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--vm-copper-light)'
-                e.currentTarget.style.transform = 'translateY(-1px)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--vm-copper)'
-                e.currentTarget.style.transform = 'translateY(0)'
               }}
             >
               Tirar minhas dúvidas

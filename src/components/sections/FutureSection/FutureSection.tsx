@@ -2,6 +2,7 @@
 
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
 
 const CARDS = [
   {
@@ -66,7 +67,7 @@ const CONTAINER = {
   maxWidth: 'var(--vm-container-xl)',
   marginInline: 'auto',
   paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-  paddingBlock: 'clamp(4rem, 8vw, 8rem)',
+  paddingBlock: 'clamp(3.25rem, 6.5vw, 6rem)',
 }
 
 export function FutureSection() {
@@ -74,74 +75,25 @@ export function FutureSection() {
     <SectionWrapper id="futuro" style={{ background: 'var(--vm-bg-primary)' }}>
       <div style={CONTAINER}>
         {/* Header */}
-        <ScrollReveal>
-          <div style={{ marginBottom: 'var(--vm-space-16)', maxWidth: '640px' }}>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-xs)',
-                letterSpacing: 'var(--vm-tracking-label)',
-                color: 'var(--vm-copper)',
-                textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-4)',
-              }}
-            >
-              Evolução
-            </p>
-            <h2
-              style={{
-                fontFamily: 'var(--vm-font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                letterSpacing: 'var(--vm-tracking-display)',
-                color: 'var(--vm-text-on-light)',
-                textTransform: 'uppercase',
-                lineHeight: 'var(--vm-leading-tight)',
-                marginBottom: 'var(--vm-space-6)',
-              }}
-            >
-              O futuro da construção já chegou.
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--vm-font-body)',
-                fontSize: 'var(--vm-text-lg)',
-                lineHeight: 'var(--vm-leading-relaxed)',
-                color: 'var(--vm-text-on-light-secondary)',
-              }}
-            >
-              Steel Frame não é tendência. É a forma como as melhores construtoras do
-              mundo já constroem há décadas — agora disponível em Marechal Rondon, com
-              a qualidade e o acompanhamento que o seu projeto merece.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Evolução"
+          title="O futuro da construção já chegou."
+          description="Steel Frame não é tendência. É a forma como as melhores construtoras do mundo já constroem há décadas — agora disponível em Marechal Rondon, com a qualidade e o acompanhamento que o seu projeto merece."
+          maxWidth="640px"
+        />
 
         {/* Cards */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {CARDS.map((card, i) => (
             <ScrollReveal key={card.title} delay={i * 0.1} direction="up">
               <article
+                className="vm-card-lift"
                 style={{
                   background: 'var(--vm-card-bg)',
-                  border: '1px solid var(--vm-border-light)',
                   borderRadius: 'var(--vm-radius-lg)',
                   padding: 'var(--vm-space-8)',
                   height: '100%',
                   cursor: 'default',
-                  boxShadow: 'var(--vm-shadow-light-sm)',
-                  transition: `border-color var(--vm-dur-normal) var(--vm-ease-out), transform var(--vm-dur-normal) var(--vm-ease-out), box-shadow var(--vm-dur-normal) var(--vm-ease-out)`,
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = 'var(--vm-copper)'
-                  el.style.transform = 'translateY(-4px)'
-                  el.style.boxShadow = 'var(--vm-shadow-light-md)'
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = 'var(--vm-border-light)'
-                  el.style.transform = 'translateY(0)'
-                  el.style.boxShadow = 'var(--vm-shadow-light-sm)'
                 }}
               >
                 <div
@@ -187,6 +139,7 @@ export function FutureSection() {
           <div style={{ marginTop: 'var(--vm-space-12)', textAlign: 'center' }}>
             <a
               href="#steel-frame"
+              className="vm-link-copper"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -194,20 +147,12 @@ export function FutureSection() {
                 fontFamily: 'var(--vm-font-body)',
                 fontSize: 'var(--vm-text-sm)',
                 letterSpacing: 'var(--vm-tracking-label)',
-                color: 'var(--vm-copper)',
                 textDecoration: 'none',
                 textTransform: 'uppercase',
-                transition: `color var(--vm-dur-fast) var(--vm-ease-out)`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--vm-copper-light)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--vm-copper)'
               }}
             >
               Entenda o sistema construtivo
-              <span aria-hidden="true" style={{ fontFamily: 'var(--vm-font-body)' }}>→</span>
+              <span data-arrow aria-hidden="true" style={{ fontFamily: 'var(--vm-font-body)' }}>→</span>
             </a>
           </div>
         </ScrollReveal>

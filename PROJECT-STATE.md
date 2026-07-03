@@ -2,10 +2,10 @@
 
 ## Estado Atual
 
-- **Fase:** Ajuste visual final e revisão de responsividade mobile — seção Projetos removida; Drywall, Estruturas Metálicas e Diferenciais reforçados visualmente; vídeo comparativo corrigido (era retrato 9:16, forçado em caixa 16:9)
+- **Fase:** Polimento visual premium — carrosséis de fotos reais (Estrutura, Drywall, Estruturas Metálicas), headings animados via GSAP ScrollTrigger em todas as seções, hover de cards migrado para CSS (corrige estado "preso" no touch), contraste da tabela comparativa corrigido, espaçamentos verticais reduzidos e uniformizados
 - **Próxima:** Macrofase 6 — Infraestrutura (GA4, cookie consent LGPD, CSP, deploy produção) + formulário de contato RHF/Zod (opcional)
-- **Checkpoint:** CP-020 ✅
-- **Última atualização:** 2026-07-01
+- **Checkpoint:** CP-021 ✅
+- **Última atualização:** 2026-07-02
 
 ---
 
@@ -33,6 +33,7 @@
 | CP-018 | Corrige arquitetura visual: SteelFrameSection vira secao educativa texto+imagem tecnica lateral (nao mais video/imagem protagonista); VideoReplaySection ganha titulo/subtitulo; comparativo.mp4.mp4 -> comparativo.mp4 | ✅ | ✅ | ✅ | Entregue |
 | CP-019 | Home completa — 10 seções dos Atos 3–6 implementadas com cinematic motion (Comparativo com comparativo.mp4, Benefícios, Estrutura, Projetos, Diferenciais, Drywall, Estruturas Metálicas, FAQ, CTA Final, Contato) | ✅ | ✅ | ✅ | Entregue |
 | CP-020 | Ajuste visual final: remove Projetos, reforça Drywall/Estruturas/Diferenciais, corrige vídeo comparativo (retrato 9:16 mal enquadrado em caixa 16:9) e renomeia arquivos com extensão dupla, revisão de responsividade mobile | ✅ | ✅ | ✅ | Entregue |
+| CP-021 | Polimento premium: ImageCarousel (3 seções com fotos reais), SectionHeading GSAP (12 seções), hover CSS `@media (hover:hover)` (fix touch), contraste tabela Comparativo, espaçamento vertical uniforme `clamp(3.25rem, 6.5vw, 6rem)`, assets extensão dupla renomeados (11 arquivos) | ✅ | ✅ | ✅ | Entregue |
 
 ---
 
@@ -63,6 +64,8 @@
 - `MediaPlaceholder/index.tsx` — **CP-019**: placeholder premium (malha técnica + ícone copper) para mídia inexistente; variantes light/dark; nunca referencia arquivo ausente
 - `ScrollReveal/index.tsx` — **Reescrito em CP-008**: sem Framer Motion; máquina de estado `idle|waiting|entered`; SSR renderiza conteúdo visível (nenhum opacity:0 no HTML); animação CSS pura como enhancement opcional
 - `VideoPlayer/index.tsx` — Player com fallback; suporta array `sources`
+- `SectionHeading/index.tsx` — **CP-021**: cabeçalho de seção com reveal GSAP + ScrollTrigger (linha copper scaleX, eyebrow fade+y, palavras da headline em stagger, descrição fade+y); SSR visível (hidden só client-side); variantes onDark/align/titleSize; reduced-motion respeitado. Usado em 12 seções
+- `ImageCarousel/index.tsx` — **CP-021**: carrossel automático com crossfade 900ms; pausa fora do viewport (IntersectionObserver), com aba oculta e reduced-motion; object-cover center, radius-xl, sombra premium, dots acessíveis; fallback MediaPlaceholder quando sem imagens
 
 ### components/sections/
 - `IntroSection/IntroSection.tsx` — Intro cinematográfica: cobre a tela (z:200), barra de progresso 2400ms, skip, AnimatePresence exit slideUp. Mostrada 1× por sessão (sessionStorage)
