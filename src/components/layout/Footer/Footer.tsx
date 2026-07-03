@@ -16,6 +16,9 @@ const LEGAL_LINKS = [
   { label: 'Política de Cookies', href: '/politica-privacidade#cookies' },
 ]
 
+const FFR_WHATSAPP_URL =
+  'https://wa.me/5545920022510?text=Vim%20pelo%20site%20da%20Veritas%20Metal%20e%20preciso%20de%20atendimento%20para%20site%2C%20app%20ou%20automa%C3%A7%C3%A3o.'
+
 const CONTACT_LINKS = [
   {
     label: 'WhatsApp: (45) 9200-2510',
@@ -131,6 +134,56 @@ export function Footer() {
           >
             Steel Frame · Drywall · Estruturas Metálicas
           </p>
+        </div>
+
+        <div
+          style={{
+            borderTop: '1px solid var(--vm-border)',
+            marginTop: 'var(--vm-space-6)',
+            paddingTop: 'var(--vm-space-6)',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <style>{`
+            @keyframes ffr-credit-pulse {
+              0%, 100% { box-shadow: 0 0 0 0 rgba(196, 128, 62, 0.35); }
+              50%      { box-shadow: 0 0 0 6px rgba(196, 128, 62, 0); }
+            }
+            .ffr-credit {
+              animation: ffr-credit-pulse 2.4s ease-in-out infinite;
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .ffr-credit { animation: none; }
+            }
+          `}</style>
+          <a
+            href={FFR_WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ffr-credit"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 'var(--vm-space-2)',
+              paddingInline: 'var(--vm-space-5)',
+              paddingBlock: 'var(--vm-space-2)',
+              borderRadius: 'var(--vm-radius-full)',
+              border: '1px solid var(--vm-copper-dark)',
+              background: 'rgba(196, 128, 62, 0.08)',
+              color: 'var(--vm-copper-light)',
+              fontFamily: 'var(--vm-font-body)',
+              fontSize: 'var(--vm-text-xs)',
+              fontWeight: 600,
+              letterSpacing: 'var(--vm-tracking-label)',
+              textTransform: 'uppercase' as const,
+              textDecoration: 'none',
+              transition: `background-color var(--vm-dur-fast) var(--vm-ease-out), border-color var(--vm-dur-fast) var(--vm-ease-out)`,
+            }}
+          >
+            <span aria-hidden="true">🇧🇷</span>
+            Produzido por FFR DO BRASIL
+          </a>
         </div>
       </div>
     </footer>

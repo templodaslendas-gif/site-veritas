@@ -2,9 +2,9 @@
 
 ## Estado Atual
 
-- **Fase:** Polimento visual premium — carrosséis de fotos reais (Estrutura, Drywall, Estruturas Metálicas), headings animados via GSAP ScrollTrigger em todas as seções, hover de cards migrado para CSS (corrige estado "preso" no touch), contraste da tabela comparativa corrigido, espaçamentos verticais reduzidos e uniformizados
+- **Fase:** Polimento cinematográfico + correções mobile — Hero mobile reequilibrada (overlay, enquadramento de vídeo, espaçamento, CTAs), "Ver mais" removido, ícones do Contato corrigidos (bug de SVG sem tamanho em flex no Safari mobile), autoplay dos carrosséis corrigido no desktop (bug de interval reiniciado por flicker do IntersectionObserver), parallax leve no vídeo de replay, crédito FFR no footer
 - **Próxima:** Macrofase 6 — Infraestrutura (GA4, cookie consent LGPD, CSP, deploy produção) + formulário de contato RHF/Zod (opcional)
-- **Checkpoint:** CP-021 ✅
+- **Checkpoint:** CP-022 ✅
 - **Última atualização:** 2026-07-02
 
 ---
@@ -34,6 +34,7 @@
 | CP-019 | Home completa — 10 seções dos Atos 3–6 implementadas com cinematic motion (Comparativo com comparativo.mp4, Benefícios, Estrutura, Projetos, Diferenciais, Drywall, Estruturas Metálicas, FAQ, CTA Final, Contato) | ✅ | ✅ | ✅ | Entregue |
 | CP-020 | Ajuste visual final: remove Projetos, reforça Drywall/Estruturas/Diferenciais, corrige vídeo comparativo (retrato 9:16 mal enquadrado em caixa 16:9) e renomeia arquivos com extensão dupla, revisão de responsividade mobile | ✅ | ✅ | ✅ | Entregue |
 | CP-021 | Polimento premium: ImageCarousel (3 seções com fotos reais), SectionHeading GSAP (12 seções), hover CSS `@media (hover:hover)` (fix touch), contraste tabela Comparativo, espaçamento vertical uniforme `clamp(3.25rem, 6.5vw, 6rem)`, assets extensão dupla renomeados (11 arquivos) | ✅ | ✅ | ✅ | Entregue |
+| CP-022 | Polimento cinematográfico mobile: Hero reequilibrada (overlay/vídeo/espaçamento/CTAs via classes CSS responsivas), remove "Ver mais", corrige ícones Contato (SVG sem width/height), corrige autoplay dos carrosséis no desktop (interval desacoplado de state flicker), Ken Burns sutil nos carrosséis, parallax no VideoReplaySection, WhatsAppFloat reduzido no mobile, crédito FFR no footer | ✅ | ✅ | ✅ | Entregue |
 
 ---
 
@@ -65,12 +66,11 @@
 - `ScrollReveal/index.tsx` — **Reescrito em CP-008**: sem Framer Motion; máquina de estado `idle|waiting|entered`; SSR renderiza conteúdo visível (nenhum opacity:0 no HTML); animação CSS pura como enhancement opcional
 - `VideoPlayer/index.tsx` — Player com fallback; suporta array `sources`
 - `SectionHeading/index.tsx` — **CP-021**: cabeçalho de seção com reveal GSAP + ScrollTrigger (linha copper scaleX, eyebrow fade+y, palavras da headline em stagger, descrição fade+y); SSR visível (hidden só client-side); variantes onDark/align/titleSize; reduced-motion respeitado. Usado em 12 seções
-- `ImageCarousel/index.tsx` — **CP-021**: carrossel automático com crossfade 900ms; pausa fora do viewport (IntersectionObserver), com aba oculta e reduced-motion; object-cover center, radius-xl, sombra premium, dots acessíveis; fallback MediaPlaceholder quando sem imagens
+- `ImageCarousel/index.tsx` — **CP-021**: carrossel automático com crossfade + Ken Burns sutil; object-cover center, radius-xl, sombra premium, dots acessíveis; fallback MediaPlaceholder quando sem imagens. **CP-022**: autoplay reescrito — interval único criado no mount, lido por refs (`inView`/hover/reduced-motion) em vez de recriado por mudança de state (causa raiz do autoplay travado no desktop); pausa por hover restrita a `(hover:hover) and (pointer:fine)`; intervalo padrão 3400ms (era 4200ms)
 
 ### components/sections/
 - `IntroSection/IntroSection.tsx` — Intro cinematográfica: cobre a tela (z:200), barra de progresso 2400ms, skip, AnimatePresence exit slideUp. Mostrada 1× por sessão (sessionStorage)
-- `HeroSection/HeroSection.tsx` — Hero fullscreen 100dvh: 1 source mp4, 2 overlays reforçados (95%→55%), text-shadow para contraste. **CP-008**: `itemVariants.hidden` sem opacity (apenas y:16) — SSR renderiza copy sempre visível; animação apenas desloca Y
-- `HeroSection/HeroScrollIndicator.tsx` — Seta bounce animada → `#futuro`
+- `HeroSection/HeroSection.tsx` — Hero fullscreen 100dvh: 1 source mp4, overlay via classe `.vm-hero-overlay-1` (reduzida no mobile por media query), text-shadow para contraste. **CP-008**: `itemVariants.hidden` sem opacity (apenas y:16) — SSR renderiza copy sempre visível; animação apenas desloca Y. **CP-022**: conteúdo posicionado via classe `.vm-hero-content` (centralizado no desktop, ancorado no topo com `padding-top:20vh` no mobile); espaçamentos internos e CTAs em `clamp()`; `HeroScrollIndicator` ("Ver mais") removido
 - `FutureSection/FutureSection.tsx` — 3 cards (60% mais rápido, Estrutura de aço, 90% menos entulho), hover copper via onMouseEnter, ScrollReveal por bloco
 - `SteelFrameSection/SteelFrameSection.tsx` — Grid 2 colunas: copy + 6 benefícios + CTAs | VideoPlaceholder 16:9; background `--vm-black`
 - `HowItWorksSection/HowItWorksSection.tsx` — 6 passos em timeline: badge número + conector + content. Conector corrigido (amount:0.8→0.2). CTA WhatsApp ao final

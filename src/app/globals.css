@@ -198,6 +198,72 @@ video {
   transform: translateY(0);
 }
 
+/* --------------------------------------------------------------------------
+   HERO — overlay, enquadramento de vídeo e posicionamento de conteúdo
+   ajustados por media query (inline style não suporta breakpoints).
+   -------------------------------------------------------------------------- */
+.vm-hero-video {
+  object-position: center 42%;
+}
+
+.vm-hero-overlay-1 {
+  background: linear-gradient(
+    160deg,
+    rgba(8, 8, 8, 0.95) 0%,
+    rgba(8, 8, 8, 0.78) 50%,
+    rgba(8, 8, 8, 0.55) 100%
+  );
+}
+
+.vm-hero-content {
+  justify-content: center;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 767px) {
+  .vm-hero-video {
+    object-position: center 30%;
+  }
+
+  .vm-hero-overlay-1 {
+    background: linear-gradient(
+      165deg,
+      rgba(8, 8, 8, 0.74) 0%,
+      rgba(8, 8, 8, 0.62) 50%,
+      rgba(8, 8, 8, 0.46) 100%
+    );
+  }
+
+  .vm-hero-content {
+    justify-content: flex-start;
+    padding-top: 20vh;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   IMAGE CAROUSEL — crossfade + Ken Burns sutil na imagem ativa.
+   -------------------------------------------------------------------------- */
+.vm-carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1100ms var(--vm-ease-smooth);
+}
+
+.vm-carousel-slide.is-active {
+  opacity: 1;
+}
+
+.vm-carousel-img {
+  transform: scale(1);
+  transition: transform 6000ms linear;
+}
+
+.vm-carousel-slide.is-active .vm-carousel-img {
+  transform: scale(1.06);
+}
+
 /* Respeitar preferência de movimento reduzido */
 @media (prefers-reduced-motion: reduce) {
   *,

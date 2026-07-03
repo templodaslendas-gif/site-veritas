@@ -20,51 +20,67 @@ interface ImageCarouselProps {
   fallbackSublabel?: string
 }
 
-// Carrossel automático de fotos com crossfade suave.
-// - autoplay pausado fora do viewport, com aba oculta e com reduced-motion
-// - object-fit cover + object-position center — enquadramento correto em
-//   qualquer proporção de origem
-// - fallback premium (MediaPlaceholder) quando não há imagens
-// - dots acessíveis para navegação manual
+// Carrossel automático de fotos com crossfade + Ken Burns sutil.
+//
+// O autoplay usa UM único setInterval criado no mount (dependências estáveis:
+// images.length, intervalMs) que lê refs a cada tick — nunca é recriado por
+// mudanças de estado. A primeira versão deste componente recriava o interval
+// sempre que `inView` (vindo de IntersectionObserver) mudava; em layouts
+// desktop com sticky/parallax e o scroll suave do Lenis recalculando a
+// posição a cada frame, a razão de interseção oscilava perto do threshold e
+// derrubava o interval antes de completar um ciclo — o carrossel nunca
+// avançava. Pausa por viewport/hover/aba oculta/reduced-motion agora é lida
+// por refs no tick, não mais um gatilho de recriação do timer.
 export function ImageCarousel({
   images,
   label,
   aspectRatio = '4 / 3',
   dark = false,
-  intervalMs = 4200,
+  intervalMs = 3400,
   sizes = '(max-width: 1024px) 100vw, 50vw',
   fallbackLabel = 'Fotos em breve',
   fallbackSublabel,
 }: ImageCarouselProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const [index, setIndex] = useState(0)
-  const [inView, setInView] = useState(false)
-  const [reduced, setReduced] = useState(false)
+
+  const inViewRef = useRef(true)
+  const hoverPausedRef = useRef(false)
+  const reducedRef = useRef(false)
+  const hoverCapableRef = useRef(false)
 
   useEffect(() => {
-    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    reducedRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    hoverCapableRef.current = window.matchMedia('(hover: hover) and (pointer: fine)').matches
   }, [])
 
   useEffect(() => {
     const el = rootRef.current
     if (!el) return
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.25 }
+      ([entry]) => {
+        inViewRef.current = entry.isIntersecting
+      },
+      { threshold: 0.1 }
     )
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
-    if (!inView || reduced || images.length < 2) return
+    if (images.length < 2) return
     const id = window.setInterval(() => {
-      if (!document.hidden) {
+      if (
+        !document.hidden &&
+        inViewRef.current &&
+        !hoverPausedRef.current &&
+        !reducedRef.current
+      ) {
         setIndex((current) => (current + 1) % images.length)
       }
     }, intervalMs)
     return () => window.clearInterval(id)
-  }, [inView, reduced, images.length, intervalMs])
+  }, [images.length, intervalMs])
 
   if (images.length === 0) {
     return (
@@ -78,6 +94,12 @@ export function ImageCarousel({
       role="region"
       aria-roledescription="carrossel"
       aria-label={label}
+      onMouseEnter={() => {
+        if (hoverCapableRef.current) hoverPausedRef.current = true
+      }}
+      onMouseLeave={() => {
+        if (hoverCapableRef.current) hoverPausedRef.current = false
+      }}
       style={{
         position: 'relative',
         aspectRatio,
@@ -92,19 +114,14 @@ export function ImageCarousel({
         <div
           key={image.src}
           aria-hidden={i !== index}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            opacity: i === index ? 1 : 0,
-            transition: 'opacity 900ms var(--vm-ease-smooth)',
-          }}
+          className={i === index ? 'vm-carousel-slide is-active' : 'vm-carousel-slide'}
         >
           <Image
             src={image.src}
             alt={image.alt}
             fill
             sizes={sizes}
-            className="object-cover"
+            className="object-cover vm-carousel-img"
             style={{ objectPosition: 'center' }}
           />
         </div>

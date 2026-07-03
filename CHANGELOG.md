@@ -14,6 +14,45 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [0.12.0] — 2026-07-02 — CP-022: Polimento cinematográfico mobile + correções de root cause
+
+### Causa raiz corrigida — ícones invisíveis no Contato (mobile)
+Os três ícones SVG de `ContactSection` (WhatsApp, Instagram, Atendimento) não tinham `width`/`height` explícitos — apenas `viewBox`. Dentro de um container `display:flex` de tamanho fixo (44×44px), um SVG sem dimensão intrínseca depende do algoritmo de sizing de replaced elements do navegador; no Safari mobile esse cálculo frequentemente resulta em tamanho 0, fazendo o ícone desaparecer (bug conhecido e recorrente do WebKit em iOS). Em outros navegadores/desktop o fallback de 300×300 ou o cálculo de flex-shrink mascarava o problema. Corrigido adicionando `width={22} height={22}` explícitos aos três SVGs.
+
+### Causa raiz corrigida — carrosséis não avançavam no desktop
+O autoplay usava `useEffect(() => { setInterval(...) }, [inView, reduced, images.length, intervalMs])`, onde `inView` vinha de um `IntersectionObserver`. Em layouts desktop com `sticky`/parallax (Framer Motion) e o smooth scroll contínuo do Lenis recalculando a posição a cada frame, a razão de interseção oscilava perto do threshold (0.25), alternando `inView` repetidamente — cada alternância destruía e recriava o `setInterval`, que nunca completava um ciclo antes de ser cancelado. Corrigido: `ImageCarousel` agora cria um único `setInterval` no mount (dependências estáveis) e lê refs (`inViewRef`, `hoverPausedRef`, `reducedRef`) a cada tick, sem nunca recriar o timer.
+
+### Adicionado
+**Hero mobile** (`src/components/sections/HeroSection/HeroSection.tsx`, `src/app/globals.css`)
+- Removido completamente `HeroScrollIndicator` ("Ver mais") — arquivo deletado, import e uso removidos, sem espaço vazio no lugar
+- Overlay escuro (`.vm-hero-overlay-1`) reduzido no mobile via media query (`rgba(...,0.95/0.78/0.55)` → `rgba(...,0.74/0.62/0.46)`) — vídeo/marca mais visíveis sem perder contraste do texto
+- Vídeo ganhou classe `.vm-hero-video` com `object-position` ajustável por breakpoint (`center 42%` desktop → `center 30%` mobile)
+- Conteúdo posicionado via `.vm-hero-content`: `justify-content:center` no desktop (mantido) → `justify-content:flex-start` + `padding-top:20vh` no mobile (headline não fica mais "baixa demais")
+- Espaçamentos internos (eyebrow/headline/reforço) e padding dos CTAs convertidos para `clamp()` — menos espaço vazio e CTAs mais compactos no mobile
+
+**`WhatsAppFloat`** (`src/components/layout/WhatsAppFloat/WhatsAppFloat.tsx`)
+- Botão reduzido de 56px para 46px e posição de 24px para 16px das bordas em telas ≤480px — não cobre mais os CTAs da Hero
+
+**Parallax** (`src/components/sections/VideoReplaySection/VideoReplaySection.tsx`)
+- Vídeo de replay ganhou parallax leve (`useScroll`/`useTransform`, ±20px), mesmo padrão do `StructureSection`; respeita `prefers-reduced-motion`
+
+**Ken Burns nos carrosséis** (`src/app/globals.css`, `.vm-carousel-slide`/`.vm-carousel-img`)
+- Zoom sutil (scale 1 → 1.06) na imagem ativa durante a exibição — efeito cinematográfico contínuo; neutralizado automaticamente por `prefers-reduced-motion` (regra global já existente)
+- Intervalo padrão do carrossel reduzido de 4200ms para 3400ms (mais rápido, conforme solicitado)
+- Pausa por hover restrita a dispositivos com `(hover:hover) and (pointer:fine)` — evita o mesmo bug de "hover preso" em touch corrigido em CP-021 para os cards
+
+**Footer** (`src/components/layout/Footer/Footer.tsx`)
+- Novo bloco de crédito "🇧🇷 Produzido por FFR DO BRASIL": pill copper com pulso discreto (`box-shadow` via `@keyframes`, neutralizado em `prefers-reduced-motion`), link para `https://wa.me/5545920022510?text=...` (WhatsApp da FFR, mensagem própria — mesmo número do WhatsApp da Veritas mas contexto diferente, conforme solicitado), `target="_blank"` + `rel="noopener noreferrer"`
+
+### Validações CP-022
+```
+npm run typecheck -> OK  |  npm run lint -> OK  |  npm run build -> OK (8/8 páginas estáticas)
+Runtime: homepage 200, "Ver mais" ausente do HTML, crédito FFR presente com href correto,
+3 ícones do Contato com width="22" no HTML, 17 vm-carousel-slide renderizados (3 carrosséis)
+```
+
+---
+
 ## [0.11.0] — 2026-07-02 — CP-021: Polimento visual premium — carrosséis, headings animados e hover CSS
 
 ### Causa raiz corrigida — hover "preso" em touch

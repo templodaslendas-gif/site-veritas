@@ -1,5 +1,7 @@
 'use client'
 
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
 
@@ -11,6 +13,14 @@ const CONTAINER = {
 }
 
 export function VideoReplaySection() {
+  const videoRef = useRef<HTMLDivElement>(null)
+  const prefersReduced = useReducedMotion()
+  const { scrollYProgress } = useScroll({
+    target: videoRef,
+    offset: ['start end', 'end start'],
+  })
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [-20, 20])
+
   return (
     <section
       aria-label="Construção completa em Steel Frame — do início ao fim"
@@ -45,8 +55,10 @@ export function VideoReplaySection() {
           </div>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
-          <div
+          <motion.div
+            ref={videoRef}
             style={{
+              y: prefersReduced ? 0 : parallaxY,
               position: 'relative',
               paddingBottom: '56.25%',
               borderRadius: 'var(--vm-radius-xl)',
@@ -65,7 +77,7 @@ export function VideoReplaySection() {
                 className="h-full w-full object-cover"
               />
             </div>
-          </div>
+          </motion.div>
         </ScrollReveal>
       </div>
     </section>

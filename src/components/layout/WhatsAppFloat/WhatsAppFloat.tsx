@@ -37,9 +37,28 @@ export function WhatsAppFloat() {
           outline-offset: 4px;
           border-radius: 9999px;
         }
+        .wa-float-wrapper {
+          bottom: 24px;
+          right: 24px;
+        }
+        .wa-btn {
+          width: 56px;
+          height: 56px;
+        }
+        @media (max-width: 480px) {
+          .wa-float-wrapper {
+            bottom: 16px;
+            right: 16px;
+          }
+          .wa-btn {
+            width: 46px;
+            height: 46px;
+          }
+        }
       `}</style>
 
       <motion.div
+        className="wa-float-wrapper"
         initial={shouldReduceMotion ? false : { opacity: 0, y: 20, scale: 0.85 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={
@@ -49,8 +68,6 @@ export function WhatsAppFloat() {
         }
         style={{
           position: 'fixed',
-          bottom: '24px',
-          right: '24px',
           zIndex: 40,
         }}
       >
@@ -61,8 +78,6 @@ export function WhatsAppFloat() {
           aria-label="Fale conosco pelo WhatsApp"
           className="wa-btn"
           style={{
-            width: '56px',
-            height: '56px',
             borderRadius: 'var(--vm-radius-full)',
             background: '#25D366',
             color: '#fff',

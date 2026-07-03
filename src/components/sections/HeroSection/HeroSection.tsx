@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '@/components/shared/SectionWrapper'
 import { VideoPlayer } from '@/components/shared/VideoPlayer'
-import { HeroScrollIndicator } from './HeroScrollIndicator'
 import { WHATSAPP_NUMBER, WA_MESSAGES } from '@/lib/messages'
 
 const HERO_VIDEO = {
@@ -38,19 +37,15 @@ export function HeroSection() {
           sources={HERO_VIDEO.sources}
           poster={HERO_VIDEO.poster}
           preload="metadata"
+          className="vm-hero-video"
         />
       </div>
 
-      {/* Primary gradient overlay */}
+      {/* Primary gradient overlay — reduzido no mobile via media query (globals.css) */}
       <div
         aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 1,
-          background:
-            'linear-gradient(160deg, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.78) 50%, rgba(8,8,8,0.55) 100%)',
-        }}
+        className="vm-hero-overlay-1"
+        style={{ position: 'absolute', inset: 0, zIndex: 1 }}
       />
 
       {/* Bottom vignette — smooths transition to next section */}
@@ -67,17 +62,16 @@ export function HeroSection() {
         }}
       />
 
-      {/* Content */}
+      {/* Content — justify-content e padding vertical ajustados no mobile via classe (globals.css) */}
       <div
+        className="vm-hero-content"
         style={{
           position: 'relative',
           zIndex: 2,
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
           paddingInline: 'clamp(1.5rem, 5vw, 5rem)',
-          paddingBottom: '5rem',
         }}
       >
         <div style={{ maxWidth: '740px' }}>
@@ -96,7 +90,7 @@ export function HeroSection() {
                 letterSpacing: 'var(--vm-tracking-label)',
                 color: 'var(--vm-copper)',
                 textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-4)',
+                marginBottom: 'clamp(0.5rem, 2vw, 1rem)',
               }}
             >
               Marechal Cândido Rondon · Oeste do Paraná
@@ -112,7 +106,7 @@ export function HeroSection() {
                 letterSpacing: 'var(--vm-tracking-display)',
                 color: 'var(--vm-text-primary)',
                 textTransform: 'uppercase',
-                marginBottom: 'var(--vm-space-6)',
+                marginBottom: 'clamp(0.75rem, 3vw, 1.5rem)',
                 textShadow: '0 2px 24px rgba(0,0,0,0.7)',
               }}
             >
@@ -146,7 +140,7 @@ export function HeroSection() {
                 fontSize: 'var(--vm-text-sm)',
                 lineHeight: 'var(--vm-leading-relaxed)',
                 color: 'var(--vm-text-muted)',
-                marginBottom: 'var(--vm-space-10)',
+                marginBottom: 'clamp(1.25rem, 4vw, 2.5rem)',
                 maxWidth: '500px',
                 textShadow: '0 1px 8px rgba(0,0,0,0.5)',
               }}
@@ -169,8 +163,8 @@ export function HeroSection() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  paddingInline: '2rem',
-                  paddingBlock: '0.9rem',
+                  paddingInline: 'clamp(1.25rem, 5vw, 2rem)',
+                  paddingBlock: 'clamp(0.7rem, 2.5vw, 0.9rem)',
                   background: 'var(--vm-copper)',
                   color: 'var(--vm-black)',
                   fontFamily: 'var(--vm-font-body)',
@@ -206,8 +200,8 @@ export function HeroSection() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  paddingInline: '2rem',
-                  paddingBlock: '0.9rem',
+                  paddingInline: 'clamp(1.25rem, 5vw, 2rem)',
+                  paddingBlock: 'clamp(0.7rem, 2.5vw, 0.9rem)',
                   background: 'transparent',
                   color: 'var(--vm-text-primary)',
                   fontFamily: 'var(--vm-font-body)',
@@ -238,8 +232,6 @@ export function HeroSection() {
           </motion.div>
         </div>
       </div>
-
-      <HeroScrollIndicator />
     </SectionWrapper>
   )
 }
